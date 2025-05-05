@@ -1,0 +1,25 @@
+import 'package:intl/intl.dart';
+import 'package:tzwad_mobile/core/util/constants.dart';
+
+extension StringExtension on String {
+  String createMask(int visibleLength) {
+    if (isEmpty) return '';
+    int maskLength = length - visibleLength;
+    return substring(maskLength) + '*' * maskLength;
+  }
+
+  String getFormatNumber() {
+    final numberFormatter = NumberFormat.decimalPattern('en_US');
+    return numberFormatter.format(num.parse(this));
+  }
+}
+
+extension NonNullStringExtension on String? {
+  String orEmpty() {
+    if (this == null) {
+      return Constants.empty;
+    } else {
+      return this!;
+    }
+  }
+}

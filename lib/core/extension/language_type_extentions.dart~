@@ -1,0 +1,12 @@
+// import 'package:passport/core/util/resource/language_manager.dart';
+//
+// extension LanguageTypeExtension on LanguageType {
+//   String getValue() {
+//     switch (this) {
+//       case LanguageType.english:
+//         return english;
+//       case LanguageType.arabic:
+//         return arabic;
+//     }
+//   }
+// }
