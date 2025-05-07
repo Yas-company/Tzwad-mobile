@@ -10,11 +10,11 @@ class UnDefinedRouteView extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffoldWidget(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'AppStrings.strNoRouteFound.tr(context)',
         ),
       ),
-      body: UnDefinedRouteViewBody(),
+      body: const UnDefinedRouteViewBody(),
     );
   }
 }

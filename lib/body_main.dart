@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/services/app_prefs/app_preferences.dart';
+import 'core/services/app_prefs/app_preferences_provider.dart';
 import 'features/generic/ui/main/view/main_app.dart';
 
 Future<void> bodyMain() async {
@@ -17,9 +20,19 @@ Future<void> bodyMain() async {
       statusBarIconBrightness: Brightness.dark,
     ),
   );
+
+  final prefs = await SharedPreferences.getInstance();
+  final prefsService = AppPreferences(prefs);
+  final container = ProviderContainer(
+    overrides: [
+      appPreferencesProvider.overrideWithValue(prefsService),
+    ],
+  );
+
   runApp(
-    const ProviderScope(
-      child: MainApp(),
+    UncontrolledProviderScope(
+      container: container,
+      child: const MainApp(),
     ),
   );
 }

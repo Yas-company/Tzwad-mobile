@@ -11,6 +11,7 @@ class AppScaffoldWidget extends StatelessWidget {
     this.floatingActionButton,
     this.floatingActionButtonLocation,
     this.bottomNavigationBar,
+    this.userSafeArea = true,
   });
 
   final bool canPop;
@@ -21,6 +22,7 @@ class AppScaffoldWidget extends StatelessWidget {
   final Widget? floatingActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Widget? bottomNavigationBar;
+  final bool userSafeArea;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,11 @@ class AppScaffoldWidget extends StatelessWidget {
         floatingActionButton: floatingActionButton,
         floatingActionButtonLocation: floatingActionButtonLocation,
         appBar: appBar,
-        body: body == null ? body : SafeArea(child: body!),
+        body: body == null
+            ? body
+            : userSafeArea
+                ? SafeArea(child: body!)
+                : body,
         bottomNavigationBar: bottomNavigationBar,
       ),
     );

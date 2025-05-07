@@ -4,10 +4,13 @@ import 'package:tzwad_mobile/core/network/error_handler.dart';
 import 'package:tzwad_mobile/core/network/failure.dart';
 
 class AuthRepository extends ApiService {
-  Future<Either<Failure, String>> login() async {
+  Future<Either<Failure, String>> login({
+    required String phoneNumber,
+    required String password,
+  }) async {
     try {
-      await Future.delayed(const Duration(seconds: 2));
-      return Right('result');
+      await Future.delayed(const Duration(seconds: 10));
+      return const Right('result');
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
     }
@@ -16,7 +19,7 @@ class AuthRepository extends ApiService {
   Future<Either<Failure, String>> register() async {
     try {
       await Future.delayed(const Duration(seconds: 2));
-      return Right('result');
+      return const Right('result');
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
     }

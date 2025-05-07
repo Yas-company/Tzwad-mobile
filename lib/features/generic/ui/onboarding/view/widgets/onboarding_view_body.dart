@@ -6,9 +6,12 @@ import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_dot_indicator_widgets.dart';
 import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
+import 'package:tzwad_mobile/core/resource/language_manager.dart';
+import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/features/generic/models/onboarding_model.dart';
+import 'package:tzwad_mobile/features/generic/ui/onboarding/controller/onboarding_controller.dart';
 import 'package:tzwad_mobile/features/generic/ui/onboarding/hooks/onboarding_page_controller_hook.dart';
 import 'package:tzwad_mobile/features/generic/ui/onboarding/providers/onboarding_controller_provider.dart';
 
@@ -19,8 +22,11 @@ class OnboardingViewBody extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = useOnboardingPageController(
+    final pageController = useOnboardingPageController(
       ref: ref,
+    );
+    final controller = ref.watch(
+      onboardingControllerProvider.notifier,
     );
     // final currentIndex = ref.watch(
     //   onboardingControllerProvider.select(
@@ -40,17 +46,17 @@ class OnboardingViewBody extends HookConsumerWidget {
         children: [
           Expanded(
             child: PageView.builder(
-              controller: controller,
+              controller: pageController,
               itemBuilder: (context, index) => ItemOnboarding(
-                onBoarding: onboardingList[index],
+                onBoarding: onboardingList(context)[index],
               ),
-              itemCount: onboardingList.length,
+              itemCount: onboardingList(context).length,
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              for (int index = 0; index < onboardingList.length; index++)
+              for (int index = 0; index < onboardingList(context).length; index++)
                 AppDotIndicatorWidgets(
                   currentPage: currentPage,
                   index: index,
@@ -59,7 +65,7 @@ class OnboardingViewBody extends HookConsumerWidget {
                 ),
             ],
           ),
-          Gap(
+          const Gap(
             AppPadding.p16,
           ),
           Row(
@@ -67,19 +73,17 @@ class OnboardingViewBody extends HookConsumerWidget {
               Expanded(
                 child: AppButtonWidget(
                   label: 'Skip',
-                  onPressed: () => _onPressedSkipButton(context),
-                  isExpanded: true,
+                  onPressed: () => _onPressedSkipButton(context, controller),
                   buttonType: ButtonType.outline,
                 ),
               ),
-              Gap(
+              const Gap(
                 AppPadding.p16,
               ),
               Expanded(
                 child: AppButtonWidget(
                   label: 'Continue',
-                  onPressed: () => _onPressedContinueButton(context, currentPage.toInt(), controller),
-                  isExpanded: true,
+                  onPressed: () => _onPressedContinueButton(context, currentPage.toInt(), pageController, controller),
                 ),
               ),
             ],
@@ -89,36 +93,38 @@ class OnboardingViewBody extends HookConsumerWidget {
     );
   }
 
-  List<OnBoardingModel> get onboardingList => [
+  List<OnBoardingModel> onboardingList(context) => [
         OnBoardingModel(
           imagePath: AssetsManager.imgOnboarding1,
-          title: 'Save up to 30% off',
-          description: 'Save up to 30% off many groceries, this over will be end very soon . So buy you food quickly',
+          title: AppStrings.strPage1Title.tr(context),
+          description: AppStrings.strPage1Desc.tr(context),
         ),
         OnBoardingModel(
           imagePath: AssetsManager.imgOnboarding2,
-          title: 'Fresh Groceries',
-          description: 'Buy  fresh  Groceries and organic food from us.We have so many groceries in our Store',
+          title: AppStrings.strPage2Title.tr(context),
+          description: AppStrings.strPage2Desc.tr(context),
         ),
         OnBoardingModel(
           imagePath: AssetsManager.imgOnboarding3,
-          title: 'Easy Shopping',
-          description: 'Save up to 30% off many groceries, this over will be end very soon . So buy you food quickly',
+          title: AppStrings.strPage3Title.tr(context),
+          description: AppStrings.strPage3Desc.tr(context),
         ),
       ];
 
-  _onPressedSkipButton(BuildContext context) {
-    context.go(AppRoutes.loginRoute);
+  _onPressedSkipButton(BuildContext context, OnboardingController controller) {
+    controller.setOnBoardingScreenViewed();
+    context.pushReplacementNamed(AppRoutes.loginRoute);
   }
 
-  _onPressedContinueButton(BuildContext context, int index, PageController controller) {
-    if (index < onboardingList.length - 1) {
-      controller.nextPage(
+  _onPressedContinueButton(BuildContext context, int index, PageController pageController, OnboardingController controller) {
+    if (index < onboardingList(context).length - 1) {
+      pageController.nextPage(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeIn,
       );
     } else {
-      context.go(AppRoutes.loginRoute);
+      controller.setOnBoardingScreenViewed();
+      context.pushReplacementNamed(AppRoutes.loginRoute);
     }
   }
 }

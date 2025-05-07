@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_image_asset_widget.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_text_field_widget.dart';
+import 'package:tzwad_mobile/core/extension/widget_extension.dart';
+import 'package:tzwad_mobile/core/resource/assets_manager.dart';
+import 'package:tzwad_mobile/core/resource/color_manager.dart';
+import 'package:tzwad_mobile/core/resource/font_manager.dart';
+import 'package:tzwad_mobile/core/resource/language_manager.dart';
+import 'package:tzwad_mobile/core/resource/string_manager.dart';
+import 'package:tzwad_mobile/core/resource/style_manager.dart';
+import 'package:tzwad_mobile/core/resource/values_manager.dart';
+import 'package:tzwad_mobile/features/auth/ui/login/hooks/login_phone_number_hook.dart';
+import 'package:tzwad_mobile/features/auth/ui/login/providers/login_controller_provider.dart';
+
+class LoginPhoneNumberWidget extends HookConsumerWidget {
+  const LoginPhoneNumberWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final errorText = ref.watch(
+      loginControllerProvider.select(
+        (value) => value.phoneNumberValidationMessage,
+      ),
+    );
+    final phoneNumberController = useLoginPhoneNumberController(
+      ref: ref,
+      initialText: '',
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppStrings.strPhoneNumber.tr(context),
+          style: StyleManager.getMediumStyle(
+            color: ColorManager.greytitle,
+            fontSize: FontSize.s16,
+          ),
+        ).marginOnly(
+          bottom: AppPadding.p8,
+        ),
+        AppTextFieldWidget(
+          controller: phoneNumberController,
+          hintText: AppStrings.strPhoneNumber.tr(context),
+          keyboardType: TextInputType.phone,
+          textInputAction: TextInputAction.next,
+          prefixIcon: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 25,
+                child: AppImageAssetWidget(
+                  imagePath: AssetsManager.icMail,
+                ),
+              ),
+            ],
+          ),
+          errorText: errorText,
+          helperText: ' ',
+        )
+      ],
+    );
+  }
+}

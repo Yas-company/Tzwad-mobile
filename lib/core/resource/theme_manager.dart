@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'color_manager.dart';
+import 'font_manager.dart';
+import 'style_manager.dart';
 import 'values_manager.dart';
 
 abstract class MainThemeApp {
@@ -21,10 +23,10 @@ class LightModeTheme implements MainThemeApp {
       primaryColor: ColorManager.colorPrimary,
       // cardColor: Palette.colorCardLight,
       scaffoldBackgroundColor: ColorManager.colorBackground,
-      textSelectionTheme: const TextSelectionThemeData(
+      textSelectionTheme: TextSelectionThemeData(
         cursorColor: ColorManager.colorPrimary,
         selectionHandleColor: ColorManager.colorPrimary,
-        selectionColor: ColorManager.colorPrimary,
+        selectionColor: ColorManager.colorPrimary.withValues(alpha: 0.2),
       ),
       disabledColor: ColorManager.colorDisable,
       splashColor: ColorManager.colorPrimary,
@@ -83,7 +85,7 @@ class LightModeTheme implements MainThemeApp {
         ),
       ),
 
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         // centerTitle: false,
         // elevation: 0,
         backgroundColor: ColorManager.colorPureWhite,
@@ -153,68 +155,67 @@ class LightModeTheme implements MainThemeApp {
       //   thickness: WidgetStateProperty.all(8), // Scrollbar thickness
       // ),
 
-      buttonTheme: ButtonThemeData(
+      buttonTheme: const ButtonThemeData(
         buttonColor: ColorManager.colorPrimary,
       ),
 
       // input decoration theme (text form field)
-      // inputDecorationTheme: InputDecorationTheme(
-      //   filled: true,
-      //   fillColor: ColorManager.colorWhite1,
-      //   contentPadding: const EdgeInsets.symmetric(
-      //     horizontal: AppPadding.p16,
-      //     vertical: AppPadding.p8,
-      //   ),
-      //
-      //   // hint style
-      //   hintStyle: StyleManager.getRegularStyle(
-      //     color: ColorManager.colorGrey1,
-      //   ),
-      //
-      //   // labelStyle: Styles.getRegularStyle(color: Palette.black4, fontSize: FontSize.s14),
-      //   // error style
-      //   errorStyle: StyleManager.getRegularStyle(
-      //     color: ColorManager.colorRed,
-      //     fontSize: FontSize.s12,
-      //   ),
-      //
-      //   // helper style
-      //   helperStyle: StyleManager.getRegularStyle(
-      //     color: ColorManager.colorRed,
-      //     fontSize: FontSize.s12,
-      //   ),
-      //
-      //   // enabled border style
-      //   enabledBorder: const OutlineInputBorder(
-      //     borderSide: BorderSide(color: ColorManager.colorGrey1, width: AppSize.s1),
-      //     borderRadius: BorderRadius.all(Radius.circular(AppSize.s8)),
-      //   ),
-      //
-      //   // disable border style
-      //   disabledBorder: const OutlineInputBorder(
-      //     borderSide: BorderSide(color: ColorManager.colorDisable, width: AppSize.s1),
-      //     borderRadius: BorderRadius.all(Radius.circular(AppSize.s8)),
-      //   ),
-      //
-      //   // focused border style
-      //   focusedBorder: const OutlineInputBorder(
-      //     borderSide: BorderSide(color: ColorManager.colorPrimary, width: AppSize.s1),
-      //     borderRadius: BorderRadius.all(
-      //       Radius.circular(AppSize.s8),
-      //     ),
-      //   ),
-      //
-      //   // error border style
-      //   errorBorder: const OutlineInputBorder(
-      //     borderSide: BorderSide(color: ColorManager.colorRed, width: AppSize.s1),
-      //     borderRadius: BorderRadius.all(Radius.circular(AppSize.s8)),
-      //   ),
-      //   // focused border style
-      //   focusedErrorBorder: const OutlineInputBorder(
-      //     borderSide: BorderSide(color: ColorManager.colorRed, width: AppSize.s1),
-      //     borderRadius: BorderRadius.all(Radius.circular(AppSize.s8)),
-      //   ),
-      // ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: ColorManager.colorPureWhite,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppPadding.p8,
+          vertical: AppPadding.p16,
+        ),
+
+        // hint style
+        hintStyle: StyleManager.getRegularStyle(
+          color: ColorManager.greyTextFieldLebel,
+        ),
+
+        // error style
+        errorStyle: StyleManager.getRegularStyle(
+          color: ColorManager.orange,
+          fontSize: FontSize.s12,
+        ),
+
+        // helper style
+        helperStyle: StyleManager.getRegularStyle(
+          color: ColorManager.orange,
+          fontSize: FontSize.s12,
+        ),
+
+        // enabled border style
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: ColorManager.greyBorder, width: AppSize.s1),
+          borderRadius: BorderRadius.all(Radius.circular(AppSize.s10)),
+        ),
+
+        // disable border style
+        disabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: ColorManager.colorDisable, width: AppSize.s1),
+          borderRadius: BorderRadius.all(Radius.circular(AppSize.s10)),
+        ),
+
+        // focused border style
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: ColorManager.colorPrimary, width: AppSize.s2),
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppSize.s8),
+          ),
+        ),
+
+        // error border style
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: ColorManager.orange, width: AppSize.s1),
+          borderRadius: BorderRadius.all(Radius.circular(AppSize.s10)),
+        ),
+        // focused border style
+        focusedErrorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: ColorManager.orange, width: AppSize.s1),
+          borderRadius: BorderRadius.all(Radius.circular(AppSize.s10)),
+        ),
+      ),
     );
   }
 }

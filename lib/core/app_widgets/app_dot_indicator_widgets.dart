@@ -23,7 +23,7 @@ class AppDotIndicatorWidgets extends StatelessWidget {
     double width = lerpDouble(AppSize.s10, AppSize.s20, 1 - distance)!;
     Color color = Color.lerp(colorUnFocus, colorFocus, 1 - distance)!;
     return AnimatedContainer(
-      duration: Duration(milliseconds: 150),
+      duration: const Duration(milliseconds: 150),
       height: AppSize.s10,
       width: width,
       margin: const EdgeInsets.only(right: AppPadding.p4),

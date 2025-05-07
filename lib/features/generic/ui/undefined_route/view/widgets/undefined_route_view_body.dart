@@ -5,12 +5,12 @@ class UnDefinedRouteViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           'AppStrings.strNoRouteFound.tr(context)',
-          style: const TextStyle(
+          style: TextStyle(
             color: Color(0xFFA0A0A0),
             fontSize: 14,
             fontWeight: FontWeight.w500,

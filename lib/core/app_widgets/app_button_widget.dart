@@ -4,6 +4,9 @@ import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 
+import 'app_loading_widget.dart';
+import 'app_svg_picture_widget.dart';
+
 enum ButtonSize { small, large }
 
 enum ButtonType { solid, outline }
@@ -16,11 +19,12 @@ class AppButtonWidget extends StatelessWidget {
     this.buttonType = ButtonType.solid,
     this.buttonSize = ButtonSize.large,
     this.assetsIcon,
-    this.isExpanded = false,
+    this.isExpanded = true,
     this.backgroundColor,
     this.textColor,
     this.borderColor,
     this.height,
+    this.isLoading = false,
   });
 
   final String label;
@@ -33,6 +37,7 @@ class AppButtonWidget extends StatelessWidget {
   final Color? textColor;
   final Color? borderColor;
   final double? height;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -69,35 +74,39 @@ class AppButtonWidget extends StatelessWidget {
                     )
                   : null,
             ),
-            child: Row(
-              mainAxisSize: isExpanded ? MainAxisSize.max : MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // if (assetsIcon != null) ...{
-                //   AppSvgPictureWidget(
-                //     assetName: assetsIcon!,
-                //     width: AppSize.s20,
-                //     height: AppSize.s20,
-                //   ).marginOnly(
-                //     end: AppPadding.p4,
-                //   ),
-                // },
-                Flexible(
-                  child: Text(
-                    label,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: StyleManager.getSemiBoldStyle(
-                      color: mTextColor,
-                    ),
-                    textAlign: TextAlign.center,
+            child: isLoading
+                ? AppLoadingWidget(
+                    color: mTextColor,
+                  )
+                : Row(
+                    mainAxisSize: isExpanded ? MainAxisSize.max : MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (assetsIcon != null) ...{
+                        AppSvgPictureWidget(
+                          assetName: assetsIcon!,
+                          width: AppSize.s24,
+                          height: AppSize.s24,
+                        ).marginOnly(
+                          end: AppPadding.p4,
+                        ),
+                      },
+                      Flexible(
+                        child: Text(
+                          label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: StyleManager.getSemiBoldStyle(
+                            color: mTextColor,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ).marginSymmetric(
+                    horizontal: isExpanded ? 0 : AppPadding.p8,
                   ),
-                ),
-              ],
-            ).marginSymmetric(
-              horizontal: isExpanded ? 0 : AppPadding.p8,
-            ),
           ),
         ),
       ),

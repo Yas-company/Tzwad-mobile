@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tzwad_mobile/core/services/app_prefs/app_preferences_provider.dart';
 import 'onboarding_state.dart';
 
 class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
@@ -32,5 +33,10 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
     state = state.copyWith(
       index: state.index - 1,
     );
+  }
+
+  void setOnBoardingScreenViewed() {
+    final appPrefs = ref.read(appPreferencesProvider);
+    appPrefs.setOnBoardingScreenViewed();
   }
 }

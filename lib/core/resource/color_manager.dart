@@ -17,6 +17,13 @@ class ColorManager {
   // White
   static const Color colorPureWhite = Color(0xffFFFFFF);
   static const Color colorGreyDots = Color(0xffD8D8D8);
+  static const Color greyBorder = Color.fromARGB(255, 215, 215, 215);
+  static const Color greyBorder2 = Color(0xffEAECF0);
+  static const Color orange = Color(0xffFF7325);
+  static const Color greyTextFieldLebel = Color.fromARGB(255, 169, 168, 168);
+  static const Color greytitle = Color(0xff818181);
+  static const Color greyParagraph = Color(0xff666666);
+  static const Color greyHint = Color(0xff818181);
 
   // Color Grey
   static const Color colorGrey1 = Color(0XFFB8B8B8);
