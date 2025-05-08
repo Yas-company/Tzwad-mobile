@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:tzwad_mobile/core/app_widgets/app_svg_picture_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
-import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
+import 'package:tzwad_mobile/core/resource/language_manager.dart';
+import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 
-import 'form_otp_section.dart';
+import 'form_forget_password_section.dart';
 
-class OtpViewBody extends StatelessWidget {
-  const OtpViewBody({super.key});
+class ForgetPasswordViewBody extends StatelessWidget {
+  const ForgetPasswordViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,35 +19,29 @@ class OtpViewBody extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.p16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Gap(
               AppPadding.p50,
             ),
-            const AppSvgPictureWidget(
-              assetName: AssetsManager.imgVerifyOtp,
-              height: 200,
-            ).marginOnly(
-              bottom: AppPadding.p20,
-            ),
             Text(
-              'Write your code',
-              style: StyleManager.getBoldStyle(
+              AppStrings.strForgetPassword.tr(context),
+              style: StyleManager.getSemiBoldStyle(
                 color: ColorManager.colorTitleTexts,
-                fontSize: FontSize.s22,
+                fontSize: FontSize.s18,
               ),
             ).marginOnly(
-              bottom: AppPadding.p4,
+              bottom: AppPadding.p8,
             ),
             Text(
-              'We have sent a code to your phone number 05775657',
-              textAlign: TextAlign.center,
-              style: StyleManager.getRegularStyle(
-                color: ColorManager.greytitle,
+              AppStrings.strResetInstructions.tr(context),
+              style: StyleManager.getMediumStyle(
+                color: ColorManager.greyParagraph,
               ),
             ).marginOnly(
               bottom: AppPadding.p20,
             ),
-            const FormOtpSection(),
+            const FormForgetPasswordSection(),
           ],
         ),
       ),

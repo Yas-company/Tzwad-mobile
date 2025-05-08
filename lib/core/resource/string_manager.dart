@@ -15,6 +15,9 @@ class AppStrings {
   static const String strHintPassword = "hint_password";
   static const String strWelcomeBack = "welcome_back";
   static const String strLogin = "login";
+  static const String strRegisterPrompt = "register_prompt";
+  static const String strForgotPassword = "forgot_password";
+  static const String strResetInstructions = "reset_instructions";
 
   // error handler
   static const String strSuccess = "success";

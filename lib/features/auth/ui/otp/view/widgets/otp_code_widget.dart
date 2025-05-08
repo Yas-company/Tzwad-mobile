@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pinput/pinput.dart';
+import 'package:tzwad_mobile/core/resource/color_manager.dart';
+import 'package:tzwad_mobile/core/resource/style_manager.dart';
+import 'package:tzwad_mobile/features/auth/ui/login/providers/login_controller_provider.dart';
+import 'package:tzwad_mobile/features/auth/ui/otp/hooks/otp_code_hook.dart';
+
+class OtpCodeWidget extends HookConsumerWidget {
+  const OtpCodeWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final errorText = ref.watch(
+      loginControllerProvider.select(
+        (value) => value.phoneNumberValidationMessage,
+      ),
+    );
+    final controller = useOtpCodeController(
+      ref: ref,
+      initialText: '',
+    );
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Pinput(
+        autofocus: true,
+        controller: controller,
+        length: 4,
+        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+        defaultPinTheme: defaultPinTheme,
+        focusedPinTheme: focusedPinTheme,
+        submittedPinTheme: focusedPinTheme,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        errorText: errorText.isEmpty ? null : errorText,
+        onCompleted: (otp) {},
+      ),
+    );
+  }
+
+  PinTheme get defaultPinTheme => PinTheme(
+        width: 50,
+        height: 50,
+        textStyle: StyleManager.getMediumStyle(
+          color: ColorManager.colorTitleTexts,
+        ),
+        decoration: BoxDecoration(
+          color: ColorManager.colorPureWhite,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: ColorManager.greyBorder, width: 1),
+        ),
+      );
+
+  PinTheme get focusedPinTheme => PinTheme(
+        width: 50,
+        height: 50,
+        textStyle: StyleManager.getMediumStyle(
+          color: ColorManager.colorPureWhite,
+        ),
+        decoration: BoxDecoration(
+          color: ColorManager.colorPrimary,
+          borderRadius: BorderRadius.circular(8),
+          // border: Border.all(color: ColorManager.colorPrimary, width: 2),
+        ),
+      );
+}

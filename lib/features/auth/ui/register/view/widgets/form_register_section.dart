@@ -30,7 +30,7 @@ class FormRegisterSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Register to join us',
+          AppStrings.strRegisterPrompt.tr(context),
           style: StyleManager.getSemiBoldStyle(
             color: ColorManager.colorTitleTexts,
             fontSize: FontSize.s18,

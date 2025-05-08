@@ -6,6 +6,7 @@ import 'package:tzwad_mobile/features/auth/ui/forget_password/view/forget_passwo
 import 'package:tzwad_mobile/features/auth/ui/login/view/login_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/otp/view/otp_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/register/view/register_view.dart';
+import 'package:tzwad_mobile/features/auth/ui/reset_password/reset_password_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/onboarding/view/onboarding_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/splash/view/splash_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/trems_conditions/view/trems_conditions_view.dart';
@@ -38,6 +39,10 @@ class RouterManager {
         screen: const ForgetPasswordView(),
       ),
       AppRouter(
+        route: AppRoutes.resetPasswordRoute,
+        screen: const ResetPasswordView(),
+      ),
+      AppRouter(
         route: AppRoutes.otpRoute,
         screen: const OtpView(),
       ),
@@ -45,6 +50,10 @@ class RouterManager {
         route: AppRoutes.registerRoute,
         screen: const RegisterView(),
       ),
+      // ShellRoute(
+      //   builder: (context, state, child) => NavBarView(child: child),
+      //   routes: [],
+      // )
       AppRouter(
         route: AppRoutes.navBarRoute,
         screen: const NavBarView(),

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tzwad_mobile/core/app_widgets/app_image_asset_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_text_field_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
-import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/language_manager.dart';

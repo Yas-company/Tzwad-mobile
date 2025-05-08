@@ -14,4 +14,6 @@ class AssetsManager {
   static const icPassword = 'assets/icons/ic_password.png';
   static const imgElements = 'assets/images/img_elements.png';
   static const imgAuthHeader = 'assets/images/img_auth_header.png';
+  static const imgVerifyOtp = 'assets/images/img_verify_otp.svg';
+  static const imgEmail = 'assets/images/img_email.png';
 }

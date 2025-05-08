@@ -61,6 +61,17 @@ extension ValidationExtension on String {
     return '';
   }
 
+  String get validateOtpCode {
+    // final context = AppContext.context;
+    if (isEmpty) {
+      return 'The otp code cannot be empty';
+    }
+    if (length < 4) {
+      return 'The otp code must be 4 digits';
+    }
+    return '';
+  }
+
   bool isValidSaudiPhone() {
     final regex = RegExp(r'^05[0-9]{8}$');
     return regex.hasMatch(this);

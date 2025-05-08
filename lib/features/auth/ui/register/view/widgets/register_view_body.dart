@@ -29,29 +29,6 @@ class RegisterViewBody extends StatelessWidget {
                 const FormRegisterSection().marginOnly(
                   bottom: AppPadding.p16,
                 ),
-                // Text.rich(
-                //   TextSpan(
-                //     text: AppStrings.strDontHaveAccount.tr(context),
-                //     style: StyleManager.getRegularStyle(
-                //       color: ColorManager.greyParagraph,
-                //     ),
-                //     children: [
-                //       WidgetSpan(
-                //         child: AppRippleWidget(
-                //           // onTap: () => _onPressedRegisterButton(context),
-                //           child: Text(
-                //             AppStrings.strRegister.tr(context),
-                //             style: StyleManager.getBoldStyle(
-                //               color: ColorManager.colorPrimary,
-                //             ),
-                //           ),
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ).marginOnly(
-                //   bottom: AppPadding.p16,
-                // ),
                 const HorizontalDividerSection().marginOnly(
                   bottom: AppPadding.p16,
                 ),

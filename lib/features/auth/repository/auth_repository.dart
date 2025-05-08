@@ -30,4 +30,50 @@ class AuthRepository extends ApiService {
       return Left(ErrorHandler.handle(error).failure);
     }
   }
+
+  Future<Either<Failure, String>> generateOtp({
+    required String phoneNumber,
+  }) async {
+    try {
+      await Future.delayed(const Duration(seconds: 2));
+      return const Right('');
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Either<Failure, UserModel>> verifyOtp({
+    required String phoneNumber,
+    required String otp,
+  }) async {
+    try {
+      await Future.delayed(const Duration(seconds: 2));
+      return Right(UserModel.fake());
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Either<Failure, String>> forgetPassword({
+    required String phoneNumber,
+  }) async {
+    try {
+      await Future.delayed(const Duration(seconds: 2));
+      return const Right('');
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Either<Failure, String>> resetPassword({
+    required String phoneNumber,
+    required String newPassword,
+  }) async {
+    try {
+      await Future.delayed(const Duration(seconds: 2));
+      return const Right('');
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
 }
