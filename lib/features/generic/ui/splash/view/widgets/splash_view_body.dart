@@ -56,7 +56,7 @@ class _SplashViewBodyState extends ConsumerState<SplashViewBody> {
     } else if (!appPrefs.isUserLogged()) {
       context.pushReplacementNamed(AppRoutes.loginRoute);
     } else {
-      context.pushReplacementNamed(AppRoutes.loginRoute);
+      context.pushReplacementNamed(AppRoutes.navBarRoute);
     }
   }
 }

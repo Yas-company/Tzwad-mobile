@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FontConstants {
-  static const String fontCairo = "Cairo";
+  // static const String fontCairo = "Cairo";
+  static const String fontDMSans = "DMSans";
 }
 
 class FontWeightManager {

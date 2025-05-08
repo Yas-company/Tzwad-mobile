@@ -52,7 +52,7 @@ class AppButtonWidget extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: onPressed,
+          onTap: isLoading ? null : onPressed,
           borderRadius: BorderRadius.circular(AppSize.s10),
           child: Ink(
             decoration: BoxDecoration(

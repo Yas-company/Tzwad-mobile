@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'package:tzwad_mobile/core/util/constants.dart';
 
@@ -11,6 +12,12 @@ extension StringExtension on String {
   String getFormatNumber() {
     final numberFormatter = NumberFormat.decimalPattern('en_US');
     return numberFormatter.format(num.parse(this));
+  }
+
+  void log() {
+    if (kDebugMode) {
+      print(this);
+    }
   }
 }
 

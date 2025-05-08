@@ -10,20 +10,20 @@ import 'package:tzwad_mobile/core/resource/language_manager.dart';
 import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
-import 'package:tzwad_mobile/features/auth/ui/login/hooks/login_phone_number_hook.dart';
-import 'package:tzwad_mobile/features/auth/ui/login/providers/login_controller_provider.dart';
+import 'package:tzwad_mobile/features/auth/ui/register/hooks/register_phone_number_hook.dart';
+import 'package:tzwad_mobile/features/auth/ui/register/providers/register_controller_provider.dart';
 
-class LoginPhoneNumberWidget extends HookConsumerWidget {
-  const LoginPhoneNumberWidget({super.key});
+class RegisterPhoneNumberWidget extends HookConsumerWidget {
+  const RegisterPhoneNumberWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final errorText = ref.watch(
-      loginControllerProvider.select(
+      registerControllerProvider.select(
         (value) => value.phoneNumberValidationMessage,
       ),
     );
-    final phoneNumberController = useLoginPhoneNumberController(
+    final phoneNumberController = useRegisterPhoneNumberController(
       ref: ref,
       initialText: '',
     );

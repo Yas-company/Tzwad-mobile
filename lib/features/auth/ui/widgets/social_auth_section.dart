@@ -8,7 +8,12 @@ import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 
 class SocialAuthSection extends StatelessWidget {
-  const SocialAuthSection({super.key});
+  const SocialAuthSection({
+    super.key,
+    this.isRegister = false,
+  });
+
+  final bool isRegister;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,7 @@ class SocialAuthSection extends StatelessWidget {
         if (Platform.isAndroid) ...{
           AppButtonWidget(
             height: AppSize.s44,
-            label: 'Login with Google',
+            label: isRegister ? 'Register with Google' : 'Login with Google',
             onPressed: () {},
             buttonType: ButtonType.outline,
             borderColor: ColorManager.greyBorder,
@@ -30,7 +35,7 @@ class SocialAuthSection extends StatelessWidget {
         if (Platform.isIOS) ...{
           AppButtonWidget(
             height: AppSize.s44,
-            label: 'Login with Apple',
+            label: isRegister ? 'Register with Apple' : 'Login with Apple',
             onPressed: () {},
             buttonType: ButtonType.outline,
             borderColor: ColorManager.greyBorder,
@@ -42,7 +47,7 @@ class SocialAuthSection extends StatelessWidget {
         },
         AppButtonWidget(
           height: AppSize.s44,
-          label: 'Login with Facebook',
+          label: isRegister ? 'Register with Facebook' : 'Login with Facebook',
           onPressed: () {},
           buttonType: ButtonType.outline,
           borderColor: ColorManager.greyBorder,

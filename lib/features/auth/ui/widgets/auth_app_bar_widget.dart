@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 
-class AppBarLoginWidget extends StatelessWidget {
-  const AppBarLoginWidget({super.key});
+class AuthAppBarWidget extends StatelessWidget {
+  const AuthAppBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

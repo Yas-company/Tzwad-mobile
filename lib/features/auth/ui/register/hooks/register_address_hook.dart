@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tzwad_mobile/features/auth/ui/login/providers/login_controller_provider.dart';
+import 'package:tzwad_mobile/features/auth/ui/register/providers/register_controller_provider.dart';
 
-TextEditingController useLoginPhoneNumberController({
+TextEditingController useRegisterAddressController({
   required WidgetRef ref,
   String initialText = '',
 }) {
   return use(
-    _LoginPhoneNumberControllerHook(
+    _RegisterAddressControllerHook(
       ref: ref,
       initialText: initialText,
     ),
   );
 }
 
-class _LoginPhoneNumberControllerHook extends Hook<TextEditingController> {
+class _RegisterAddressControllerHook extends Hook<TextEditingController> {
   final WidgetRef ref;
   final String initialText;
 
-  const _LoginPhoneNumberControllerHook({
+  const _RegisterAddressControllerHook({
     required this.ref,
     required this.initialText,
   });
 
   @override
-  HookState<TextEditingController, Hook<TextEditingController>> createState() => _LoginPhoneNumberControllerHookState();
+  HookState<TextEditingController, Hook<TextEditingController>> createState() => _RegisterAddressControllerHookState();
 }
 
-class _LoginPhoneNumberControllerHookState extends HookState<TextEditingController, _LoginPhoneNumberControllerHook> {
+class _RegisterAddressControllerHookState extends HookState<TextEditingController, _RegisterAddressControllerHook> {
   late final TextEditingController _controller;
 
   @override
@@ -48,7 +48,7 @@ class _LoginPhoneNumberControllerHookState extends HookState<TextEditingControll
   }
 
   @override
-  void didUpdateHook(_LoginPhoneNumberControllerHook oldHook) {
+  void didUpdateHook(_RegisterAddressControllerHook oldHook) {
     super.didUpdateHook(oldHook);
   }
 
@@ -63,7 +63,7 @@ class _LoginPhoneNumberControllerHookState extends HookState<TextEditingControll
   }
 
   void listener() {
-    hook.ref.read(loginControllerProvider.notifier).changePhoneNumber(
+    hook.ref.read(registerControllerProvider.notifier).changeAddress(
           _controller.text,
         );
   }

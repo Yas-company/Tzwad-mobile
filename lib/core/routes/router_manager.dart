@@ -8,6 +8,7 @@ import 'package:tzwad_mobile/features/auth/ui/otp/view/otp_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/register/view/register_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/onboarding/view/onboarding_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/splash/view/splash_view.dart';
+import 'package:tzwad_mobile/features/generic/ui/trems_conditions/view/trems_conditions_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/undefined_route/view/undefined_route_view.dart';
 import 'package:tzwad_mobile/features/nav_bar/ui/view/nav_bar_view.dart';
 
@@ -23,6 +24,10 @@ class RouterManager {
       AppRouter(
         route: AppRoutes.onboardingRoute,
         screen: const OnboardingView(),
+      ),
+      AppRouter(
+        route: AppRoutes.termsConditionsRoute,
+        screen: const TermsConditionsView(),
       ),
       AppRouter(
         route: AppRoutes.loginRoute,

@@ -4,31 +4,29 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
-import 'package:tzwad_mobile/core/resource/language_manager.dart';
-import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
-import 'package:tzwad_mobile/features/auth/ui/login/providers/login_controller_provider.dart';
+import 'package:tzwad_mobile/features/auth/ui/register/providers/register_controller_provider.dart';
 
-class RememberForgetSection extends ConsumerWidget {
-  const RememberForgetSection({super.key});
+class AcceptTermsConditionsSection extends ConsumerWidget {
+  const AcceptTermsConditionsSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isRememberMe = ref.watch(
-      loginControllerProvider.select(
-        (value) => value.isRememberMe,
+    final isAccept = ref.watch(
+      registerControllerProvider.select(
+        (value) => value.isAcceptTerms,
       ),
     );
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // Remember Me
         Flexible(
           child: AppRippleWidget(
             radius: AppSize.s4,
-            onTap: () => _onPressedRememberMeButton(ref),
+            onTap: () {
+              ref.read(registerControllerProvider.notifier).changeAcceptTerms();
+            },
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -36,8 +34,8 @@ class RememberForgetSection extends ConsumerWidget {
                   width: AppSize.s24,
                   height: AppSize.s24,
                   decoration: BoxDecoration(
-                    color: isRememberMe ? ColorManager.colorPrimary : null,
-                    border: isRememberMe ? null : Border.all(color: ColorManager.greyBorder),
+                    color: isAccept ? ColorManager.colorPrimary : null,
+                    border: isAccept ? null : Border.all(color: ColorManager.greyBorder),
                     borderRadius: BorderRadius.circular(AppSize.s8),
                   ),
                   alignment: Alignment.center,
@@ -51,25 +49,26 @@ class RememberForgetSection extends ConsumerWidget {
                   AppPadding.p4,
                 ),
                 Text(
-                  AppStrings.strRememberMe.tr(context),
-                  style: StyleManager.getMediumStyle(
-                    color: ColorManager.greyHint,
+                  'Accept all',
+                  style: StyleManager.getSemiBoldStyle(
+                    color: ColorManager.greyParagraph,
                   ),
                 ),
               ],
             ),
           ),
         ),
-
-        // Forget Password
         Flexible(
           child: AppRippleWidget(
             radius: AppSize.s4,
-            onTap: () => _onPressedForgetPasswordButton(context),
-            child: Text(
-              AppStrings.strForgetPassword.tr(context),
-              style: StyleManager.getSemiBoldStyle(
-                color: ColorManager.greyParagraph,
+            onTap: () => _onPressedTermsConditionsButton(context),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p4),
+              child: Text(
+                'Terms and Conditions',
+                style: StyleManager.getSemiBoldStyle(
+                  color: ColorManager.colorPrimary,
+                ),
               ),
             ),
           ),
@@ -78,11 +77,7 @@ class RememberForgetSection extends ConsumerWidget {
     );
   }
 
-  _onPressedRememberMeButton(WidgetRef ref) {
-    ref.read(loginControllerProvider.notifier).changeRememberMe();
-  }
-
-  _onPressedForgetPasswordButton(BuildContext context) {
-    context.pushNamed(AppRoutes.forgetPasswordRoute);
+  _onPressedTermsConditionsButton(BuildContext context) {
+    context.pushNamed(AppRoutes.termsConditionsRoute);
   }
 }

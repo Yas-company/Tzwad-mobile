@@ -11,8 +11,8 @@ String keyIsUserLoggedIn = "KEY_IS_USER_LOGGED_IN";
 String keyOnBoardingScreenViewed = "KEY_ON_BOARDING_SCREEN_VIEWED";
 
 // user data key
-// String keyLoginInfo = "KEY_LOGIN_INFO$versionSaveCash";
-// String keyToken = "KEY_TOKEN$versionSaveCash";
+String keyLoginInfo = "KEY_LOGIN_INFO";
+String keyToken = "KEY_TOKEN";
 // String keyRefreshToken = "KEY_REFRESH_TOKEN$versionSaveCash";
 // String keyPassword = "KEY_PASSWORD$versionSaveCash";
 // String keyIsBiometricEnabled = "KEY_IS_BIOMETRIC_ENABLED$versionSaveCash";
@@ -75,6 +75,14 @@ class AppPreferences {
 
   bool isUserLogged() {
     return _sharedPreferences.getBool(keyIsUserLoggedIn) ?? false;
+  }
+
+  Future<void> setToken(String token) async {
+    _sharedPreferences.setString(keyToken, token);
+  }
+
+  String getToken() {
+    return _sharedPreferences.getString(keyToken) ?? '';
   }
 
 //endregion

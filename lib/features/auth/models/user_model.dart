@@ -1,18 +1,20 @@
+import 'package:faker/faker.dart';
+
 class UserModel {
-  final int id;
-  final String name;
-  final String email;
-  final String phone;
-  final String image;
-  final String token;
+  final int? id;
+  final String? name;
+  final String? email;
+  final String? phone;
+  final String? image;
+  final String? token;
 
   UserModel({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.phone,
-    required this.image,
-    required this.token,
+    this.id,
+    this.name,
+    this.email,
+    this.phone,
+    this.image,
+    this.token,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -35,5 +37,24 @@ class UserModel {
       'image': image,
       'token': token,
     };
+  }
+
+  factory UserModel.fake({int id = 0}) {
+    final faker = Faker();
+    return UserModel(
+      id: id,
+      name: faker.person.name(),
+      email: faker.internet.email(),
+      phone: faker.phoneNumber.toString(),
+      image: '',
+      token: faker.guid.guid(),
+    );
+  }
+
+  static List<UserModel> generateFakeList({int count = 10}) {
+    return List.generate(
+      count,
+      (index) => UserModel.fake(id: index),
+    );
   }
 }

@@ -6,11 +6,13 @@ class AppStrings {
   static const String strPage2Desc = "page2_desc";
   static const String strPage3Desc = "page3_desc";
   static const String strRememberMe = "remember_me";
-  static const String strForgetpassword = "forget_password";
+  static const String strForgetPassword = "forget_password";
   static const String strDontHaveAccount = "dont_have_account";
   static const String strRegister = "register";
   static const String strPhoneNumber = "phone_number";
+  static const String strHintPhoneNumber = "hint_phone_number";
   static const String strPassword = "password";
+  static const String strHintPassword = "hint_password";
   static const String strWelcomeBack = "welcome_back";
   static const String strLogin = "login";
 

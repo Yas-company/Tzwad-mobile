@@ -11,7 +11,7 @@ import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/features/auth/ui/widgets/horizontal_divider_section.dart';
 import 'package:tzwad_mobile/features/auth/ui/widgets/social_auth_section.dart';
 
-import 'app_bar_login_widget.dart';
+import '../../../widgets/auth_app_bar_widget.dart';
 import 'form_login_section.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -26,7 +26,7 @@ class LoginViewBody extends StatelessWidget {
           pinned: false,
           expandedHeight: AppSize.s220,
           flexibleSpace: FlexibleSpaceBar(
-            background: AppBarLoginWidget(),
+            background: AuthAppBarWidget(),
           ),
         ),
         SliverToBoxAdapter(

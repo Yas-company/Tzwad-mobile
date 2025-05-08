@@ -1,23 +1,36 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/extension/validation_extension.dart';
-import 'package:tzwad_mobile/core/services/app_prefs/app_preferences_provider.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/auth/providers/auth_repository_provider.dart';
-import 'login_state.dart';
+import 'register_state.dart';
 
-class LoginController extends AutoDisposeNotifier<LoginState> {
+class RegisterController extends AutoDisposeNotifier<RegisterState> {
   @override
-  LoginState build() {
+  RegisterState build() {
     state = _onInit();
     return state;
   }
 
-  LoginState _onInit() => LoginState();
+  RegisterState _onInit() => RegisterState();
+
+  void changeName(String name) {
+    state = state.copyWith(
+      name: name,
+      nameValidationMessage: name.validateName,
+    );
+  }
 
   void changePhoneNumber(String phoneNumber) {
     state = state.copyWith(
       phoneNumber: phoneNumber,
       phoneNumberValidationMessage: phoneNumber.validatePhoneNumber,
+    );
+  }
+
+  void changeAddress(String address) {
+    state = state.copyWith(
+      address: address,
+      addressValidationMessage: address.validateAddress,
     );
   }
 
@@ -34,43 +47,47 @@ class LoginController extends AutoDisposeNotifier<LoginState> {
     );
   }
 
-  void changeRememberMe() {
+  void changeAcceptTerms() {
     state = state.copyWith(
-      isRememberMe: !state.isRememberMe,
+      isAcceptTerms: !state.isAcceptTerms,
     );
   }
 
-  void login() async {
+  void register() async {
     final repository = ref.read(authRepositoryProvider);
-    final appPrefs = ref.read(appPreferencesProvider);
+    // final appPrefs = ref.read(appPreferencesProvider);
+    final nameValidationMessage = state.name.validateName;
     final phoneNumberValidationMessage = state.phoneNumber.validatePhoneNumber;
+    final addressValidationMessage = state.address.validateAddress;
     final passwordValidationMessage = state.password.validatePassword;
-    if (phoneNumberValidationMessage.isNotEmpty || passwordValidationMessage.isNotEmpty) {
+    if (nameValidationMessage.isNotEmpty || phoneNumberValidationMessage.isNotEmpty || addressValidationMessage.isNotEmpty || passwordValidationMessage.isNotEmpty) {
       state = state.copyWith(
+        nameValidationMessage: nameValidationMessage,
         phoneNumberValidationMessage: phoneNumberValidationMessage,
+        addressValidationMessage: addressValidationMessage,
         passwordValidationMessage: passwordValidationMessage,
       );
       return;
     }
     state = state.copyWith(
-      submitLoginDataState: DataState.loading,
+      submitRegisterDataState: DataState.loading,
     );
-    final result = await repository.login(
+    final result = await repository.register(
+      name: state.name,
       phoneNumber: state.phoneNumber,
+      address: state.address,
       password: state.password,
     );
     result.fold(
       (l) => state = state.copyWith(
-        submitLoginDataState: DataState.failure,
+        submitRegisterDataState: DataState.failure,
         failure: l,
       ),
       (r) {
-        if (state.isRememberMe) {
-          appPrefs.setUserLogged();
-        }
-        appPrefs.setToken(r.token ?? '');
+        // appPrefs.setUserLogged();
+        // appPrefs.setToken(r.token ?? '');
         state = state.copyWith(
-          submitLoginDataState: DataState.success,
+          submitRegisterDataState: DataState.success,
           user: r,
         );
       },

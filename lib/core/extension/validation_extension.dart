@@ -1,23 +1,69 @@
 extension ValidationExtension on String {
-  String? get validatePhoneNumber {
+  String get validatePhoneNumber {
     // final context = AppContext.context;
     if (isEmpty) {
       return 'The phone number cannot be empty';
     }
-    if (length < 11) {
+    if (!startsWith('05')) {
+      return 'Phone number must start with "05"';
+    }
+    if (length < 10) {
+      return 'Phone number must be exactly 10 digits';
+    }
+    if (!isValidSaudiPhone()) {
       return 'Invalid phone number';
     }
-    return null;
+    return '';
   }
 
-  String? get validatePassword {
+  String get validatePassword {
+    // final context = AppContext.context;
     if (isEmpty) {
       return 'The password cannot be empty';
     }
-    if (length < 6) {
-      return 'The password must be at least 6 characters';
+    if (length < 8) {
+      return 'The password must be at least 8 characters';
     }
-    return null;
+    List<String> errors = [];
+
+    if (!RegExp(r'[A-Z]').hasMatch(this)) {
+      errors.add('an uppercase letter');
+    }
+    if (!RegExp(r'[a-z]').hasMatch(this)) {
+      errors.add('a lowercase letter');
+    }
+    if (!RegExp(r'[0-9]').hasMatch(this)) {
+      errors.add('a number');
+    }
+    if (!RegExp(r'[!@#\$&*~%^()\-_=+{};:,<.>]').hasMatch(this)) {
+      errors.add('a special character');
+    }
+
+    if (errors.isNotEmpty) {
+      return 'Password must contain ${errors.join(', ')}.';
+    }
+    return '';
+  }
+
+  String get validateName {
+    // final context = AppContext.context;
+    if (isEmpty) {
+      return 'The name cannot be empty';
+    }
+    return '';
+  }
+
+  String get validateAddress {
+    // final context = AppContext.context;
+    if (isEmpty) {
+      return 'The address cannot be empty';
+    }
+    return '';
+  }
+
+  bool isValidSaudiPhone() {
+    final regex = RegExp(r'^05[0-9]{8}$');
+    return regex.hasMatch(this);
   }
 
   bool isValidEmail() {
@@ -25,7 +71,8 @@ extension ValidationExtension on String {
   }
 
   bool isValidPassword() {
-    return contains(RegExp(r'\d')) && contains(RegExp(r'[a-zA-Z]'));
+    final regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~%^()\-_=+{};:,<.>]).{8,}$');
+    return contains(regex);
   }
 
   bool isValidIban() {

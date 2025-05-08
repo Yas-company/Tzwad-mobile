@@ -17,7 +17,7 @@ class AppTextFieldWidget extends StatelessWidget {
     this.suffixIcon,
     this.suffixText,
     this.helperText,
-    this.errorText,
+    this.errorText = '',
     this.keyboardType,
     this.textInputAction,
     this.onChanged,
@@ -42,7 +42,7 @@ class AppTextFieldWidget extends StatelessWidget {
   final Widget? prefix;
   final Widget? prefixIcon;
   final String? prefixText;
-  final String? errorText;
+  final String errorText;
   final String? helperText;
   final bool obscureText;
   final TextInputType? keyboardType;
@@ -63,7 +63,7 @@ class AppTextFieldWidget extends StatelessWidget {
     return TextFormField(
       controller: controller,
       style: StyleManager.getMediumStyle(
-        color: ColorManager.greyTextFieldLebel,
+        color: ColorManager.colorTitleTexts,
       ),
       inputFormatters: inputFormatters,
       decoration: InputDecoration(
@@ -76,7 +76,9 @@ class AppTextFieldWidget extends StatelessWidget {
         suffixIcon: suffixIcon,
         suffixText: suffixText,
         helperText: helperText,
-        errorText: errorText,
+        errorText: errorText.isEmpty ? null : errorText,
+        errorMaxLines: 3,
+        counterText: '',
       ),
       keyboardType: keyboardType,
       obscureText: obscureText,
