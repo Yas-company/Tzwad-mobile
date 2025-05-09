@@ -45,6 +45,13 @@ extension ValidationExtension on String {
     return '';
   }
 
+  String validateRePassword(String password) {
+    if (this != password) {
+      return 'Password does not match';
+    }
+    return '';
+  }
+
   String get validateName {
     // final context = AppContext.context;
     if (isEmpty) {

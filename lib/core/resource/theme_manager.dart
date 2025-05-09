@@ -86,7 +86,7 @@ class LightModeTheme implements MainThemeApp {
       ),
 
       appBarTheme: const AppBarTheme(
-        // centerTitle: false,
+        centerTitle: true,
         // elevation: 0,
         backgroundColor: ColorManager.colorPureWhite,
         // iconTheme: const IconThemeData(

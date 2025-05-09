@@ -9,6 +9,7 @@ import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
+import 'package:tzwad_mobile/features/auth/models/otp_flow_type.dart';
 import 'package:tzwad_mobile/features/auth/ui/forget_password/controller/forget_password_state.dart';
 import 'package:tzwad_mobile/features/auth/ui/forget_password/providers/forget_password_controller_provider.dart';
 
@@ -57,7 +58,13 @@ class FormForgetPasswordSection extends StatelessWidget {
       if (next.submitForgetPasswordDataState == DataState.failure) {
         'Error: ${next.failure?.message ?? ''}'.log();
       } else if (next.submitForgetPasswordDataState == DataState.success) {
-        context.pushNamed(AppRoutes.otpRoute);
+        context.pushNamed(
+          AppRoutes.otpRoute,
+          extra: {
+            'phoneNumber': next.phoneNumber,
+            'otpFlowType': OtpFlowType.forgetPassword,
+          },
+        );
       }
     }
   }

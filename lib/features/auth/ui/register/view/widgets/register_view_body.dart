@@ -13,9 +13,13 @@ class RegisterViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(
+        SliverAppBar(
           automaticallyImplyLeading: false,
-          pinned: false,
+          leading: IconButton(
+            onPressed: () => _onPressedSkipButton(context),
+            icon: const Icon(Icons.close),
+          ),
+          pinned: true,
           expandedHeight: AppSize.s220,
           flexibleSpace: FlexibleSpaceBar(
             background: AuthAppBarWidget(),
@@ -43,5 +47,9 @@ class RegisterViewBody extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  _onPressedSkipButton(BuildContext context) {
+    // context.pop();
   }
 }

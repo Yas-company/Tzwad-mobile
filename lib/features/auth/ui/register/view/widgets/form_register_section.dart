@@ -12,6 +12,7 @@ import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
+import 'package:tzwad_mobile/features/auth/models/otp_flow_type.dart';
 import 'package:tzwad_mobile/features/auth/ui/register/controller/register_state.dart';
 import 'package:tzwad_mobile/features/auth/ui/register/providers/register_controller_provider.dart';
 
@@ -83,7 +84,13 @@ class FormRegisterSection extends StatelessWidget {
       if (next.submitRegisterDataState == DataState.failure) {
         'Error: ${next.failure?.message ?? ''}'.log();
       } else if (next.submitRegisterDataState == DataState.success) {
-        context.pushNamed(AppRoutes.otpRoute);
+        context.pushNamed(
+          AppRoutes.otpRoute,
+          extra: {
+            'phoneNumber': next.phoneNumber,
+            'otpFlowType': OtpFlowType.register,
+          },
+        );
       }
     }
   }

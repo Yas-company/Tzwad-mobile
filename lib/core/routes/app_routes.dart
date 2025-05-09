@@ -10,7 +10,7 @@ class AppRoutes {
   // static const String navBarRoute = "/nav_bar";
   static const String homeRoute = "/home";
   static const String searchRoute = "/search";
-  static const String favoriteRoute = "/favorite";
+  static const String favoriteProductsRoute = "/favorite_products";
   static const String cartRoute = "/cart";
   static const String settingsRoute = "/settings";
 }

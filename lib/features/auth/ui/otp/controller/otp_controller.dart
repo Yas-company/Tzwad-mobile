@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/extension/validation_extension.dart';
 import 'package:tzwad_mobile/core/services/app_prefs/app_preferences_provider.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
+import 'package:tzwad_mobile/features/auth/models/otp_flow_type.dart';
 import 'package:tzwad_mobile/features/auth/providers/auth_repository_provider.dart';
 import 'otp_state.dart';
 
@@ -29,7 +30,7 @@ class OtpController extends AutoDisposeNotifier<OtpState> {
     );
   }
 
-  void verifyOtp() async {
+  void verifyOtp(String phoneNumber, OtpFlowType otpFlowType) async {
     final repository = ref.read(authRepositoryProvider);
     final appPrefs = ref.read(appPreferencesProvider);
     final otpValidationMessage = state.otp.validateOtpCode;
@@ -43,7 +44,7 @@ class OtpController extends AutoDisposeNotifier<OtpState> {
       submitVerifyOtpDataState: DataState.loading,
     );
     final result = await repository.verifyOtp(
-      phoneNumber: '',
+      phoneNumber: phoneNumber,
       otp: state.otp,
     );
     result.fold(
@@ -52,7 +53,9 @@ class OtpController extends AutoDisposeNotifier<OtpState> {
         failure: l,
       ),
       (r) {
-        appPrefs.setUserLogged();
+        if (otpFlowType == OtpFlowType.register) {
+          appPrefs.setUserLogged();
+        }
         appPrefs.setToken(r.token ?? '');
         state = state.copyWith(
           submitVerifyOtpDataState: DataState.success,

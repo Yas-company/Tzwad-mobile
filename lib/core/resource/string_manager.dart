@@ -18,6 +18,13 @@ class AppStrings {
   static const String strRegisterPrompt = "register_prompt";
   static const String strForgotPassword = "forgot_password";
   static const String strResetInstructions = "reset_instructions";
+  static const String strWriteYourCode = "write_your_code";
+  static const String strCodeSentNotice = "code_sent_notice";
+  static const String strVerify = "verify";
+  static const String strResetPassword = "reset_password";
+  static const String strNewPassword = "new_password";
+  static const String strConfirmNewPassword = "confirm_new_password";
+  static const String strResetPasswordDescription = "reset_password_description";
 
   // error handler
   static const String strSuccess = "success";

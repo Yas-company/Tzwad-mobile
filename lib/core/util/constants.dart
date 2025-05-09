@@ -9,4 +9,5 @@ class Constants {
   static const String dot = "●";
   static const int pageSize = 15;
   static const String currency = "SAR"; //ر.س // SAR
+  static const String termsConditionsUrl = "https://grenmart.xgenious.com/api/v1/terms-and-condition-page";
 }

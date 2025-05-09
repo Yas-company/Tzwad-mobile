@@ -4,9 +4,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
 import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
+import 'package:tzwad_mobile/core/resource/language_manager.dart';
+import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
+import 'package:tzwad_mobile/core/routes/app_args.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
+import 'package:tzwad_mobile/features/auth/models/otp_flow_type.dart';
 import 'package:tzwad_mobile/features/auth/ui/otp/controller/otp_state.dart';
 import 'package:tzwad_mobile/features/auth/ui/otp/providers/otp_controller_provider.dart';
 
@@ -36,7 +40,7 @@ class FormOtpSection extends StatelessWidget {
               ),
             );
             return AppButtonWidget(
-              label: 'Verify',
+              label: AppStrings.strVerify.tr(context),
               onPressed: () => _onPressedVerifyButton(ref),
               isLoading: isLoading,
             );
@@ -49,16 +53,19 @@ class FormOtpSection extends StatelessWidget {
   }
 
   _onPressedVerifyButton(WidgetRef ref) {
-    ref.read(otpControllerProvider.notifier).verifyOtp();
+    final phoneNumber = appArgs(AppRoutes.otpRoute)['phoneNumber'];
+    final otpFlowType = appArgs(AppRoutes.otpRoute)['otpFlowType'] as OtpFlowType;
+    ref.read(otpControllerProvider.notifier).verifyOtp(phoneNumber, otpFlowType);
   }
 
   void submitVerifyOtpListener(BuildContext context, OtpState? previous, OtpState next) {
+    final otpFlowType = appArgs(AppRoutes.otpRoute)['otpFlowType'] as OtpFlowType;
     if (previous?.submitVerifyOtpDataState != next.submitVerifyOtpDataState) {
       'State: ${next.submitVerifyOtpDataState}'.log();
       if (next.submitVerifyOtpDataState == DataState.failure) {
         'Error: ${next.failure?.message ?? ''}'.log();
       } else if (next.submitVerifyOtpDataState == DataState.success) {
-        context.go(AppRoutes.homeRoute);
+        otpFlowType == OtpFlowType.register ? context.pushNamed(AppRoutes.homeRoute) : context.pushNamed(AppRoutes.resetPasswordRoute);
       }
     }
   }

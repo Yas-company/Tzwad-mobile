@@ -7,18 +7,41 @@ class AppRouter extends GoRoute {
   final String route;
   final Widget screen;
   final List<GoRoute> mRoutes;
+  final bool withAnimation;
 
   AppRouter({
     required this.route,
     required this.screen,
     this.mRoutes = const [],
+    this.withAnimation = false,
   }) : super(
           path: route,
           name: route,
           routes: mRoutes,
           builder: (context, state) {
-            setArgs(route, state.pathParameters);
+            final args = _extractArgs(state);
+            setArgs(route, args);
+            if (withAnimation) {
+              CustomTransitionPage(
+                key: state.pageKey,
+                child: screen,
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(opacity: animation, child: screen);
+                },
+                transitionDuration: const Duration(milliseconds: 1000),
+              );
+            }
             return screen;
           },
         );
+
+  static Map<String, dynamic> _extractArgs(GoRouterState state) {
+    final args = <String, dynamic>{};
+    args.addAll(state.pathParameters);
+    args.addAll(state.uri.queryParameters);
+    if (state.extra is Map<String, dynamic>) {
+      args.addAll(state.extra as Map<String, dynamic>);
+    }
+    return args;
+  }
 }
