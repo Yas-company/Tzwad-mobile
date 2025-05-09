@@ -7,6 +7,10 @@ class AppRoutes {
   static const String resetPasswordRoute = "/reset_password";
   static const String otpRoute = "/otp";
   static const String registerRoute = "/register";
-  static const String navBarRoute = "/nav_bar";
+  // static const String navBarRoute = "/nav_bar";
   static const String homeRoute = "/home";
+  static const String searchRoute = "/search";
+  static const String favoriteRoute = "/favorite";
+  static const String cartRoute = "/cart";
+  static const String settingsRoute = "/settings";
 }

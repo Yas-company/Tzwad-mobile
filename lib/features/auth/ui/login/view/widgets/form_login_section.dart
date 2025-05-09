@@ -75,7 +75,7 @@ class FormLoginSection extends StatelessWidget {
       if (next.submitLoginDataState == DataState.failure) {
         'Error: ${next.failure?.message ?? ''}'.log();
       } else if (next.submitLoginDataState == DataState.success) {
-        context.pushReplacementNamed(AppRoutes.navBarRoute);
+        context.pushReplacementNamed(AppRoutes.homeRoute);
       }
     }
   }

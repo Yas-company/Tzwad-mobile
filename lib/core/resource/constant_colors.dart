@@ -7,7 +7,7 @@ class ConstantColors {
   static const Color greyFive = Color(0xffD0D5DD);
   static const Color whiteGrey = Color(0xffF9F9F9);
   static const Color borderColor = Color(0xffEAECF0);
-  static const Color blackColor = Color(0xff333333);
+  // static const Color blackColor = Color(0xff333333);
   // static const Color greyHint = Color(0xff818181);
   static const Color cardGreyHint = Color(0xff9F9F9F);
   // static const Color orange = Color(0xffFF7325);

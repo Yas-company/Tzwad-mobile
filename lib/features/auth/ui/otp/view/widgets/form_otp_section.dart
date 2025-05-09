@@ -58,7 +58,7 @@ class FormOtpSection extends StatelessWidget {
       if (next.submitVerifyOtpDataState == DataState.failure) {
         'Error: ${next.failure?.message ?? ''}'.log();
       } else if (next.submitVerifyOtpDataState == DataState.success) {
-        context.go(AppRoutes.navBarRoute);
+        context.go(AppRoutes.homeRoute);
       }
     }
   }
