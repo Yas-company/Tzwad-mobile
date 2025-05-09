@@ -24,7 +24,7 @@
   "reset_password": "Reset Password",
   "new_password": "New Password",
   "confirm_new_password": "Confirm New Password",
-  "reset_password_description": "Enter a new password to reset your account. Make sure it’s strong and secure — using a mix of letters, numbers, and symbols is recommended. Once updated, you’ll be able to log in with your new credentials.",sure it’s strong and secure — using a mix of letters, numbers, and symbols is recommended. Once updated, you’ll be able to log in with your new credentials.",
+  "reset_password_description": "Enter a new password to reset your account. Make sure it’s strong and secure — using a mix of letters, numbers, and symbols is recommended.",
   "success": "Success",
   "bad_request_error": "Bad request. Try again later",
   "no_content": "No content. Try again later",

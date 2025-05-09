@@ -15,32 +15,35 @@ class ResetPasswordViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppPadding.p16),
-      child: Column(
-        children: [
-          const Gap(
-            AppPadding.p50,
-          ),
-          Text(
-            AppStrings.strResetPassword.tr(context),
-            style: StyleManager.getSemiBoldStyle(
-              color: ColorManager.colorTitleTexts,
-              fontSize: FontSize.s18,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(AppPadding.p16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Gap(
+              AppPadding.p50,
             ),
-          ).marginOnly(
-            bottom: AppPadding.p8,
-          ),
-          Text(
-            AppStrings.strResetPasswordDescription.tr(context),
-            style: StyleManager.getMediumStyle(
-              color: ColorManager.greyParagraph,
+            Text(
+              AppStrings.strResetPassword.tr(context),
+              style: StyleManager.getSemiBoldStyle(
+                color: ColorManager.colorTitleTexts,
+                fontSize: FontSize.s18,
+              ),
+            ).marginOnly(
+              bottom: AppPadding.p8,
             ),
-          ).marginOnly(
-            bottom: AppPadding.p20,
-          ),
-          const FormResetPasswordSection(),
-        ],
+            Text(
+              AppStrings.strResetPasswordDescription.tr(context),
+              style: StyleManager.getMediumStyle(
+                color: ColorManager.greyParagraph,
+              ),
+            ).marginOnly(
+              bottom: AppPadding.p20,
+            ),
+            const FormResetPasswordSection(),
+          ],
+        ),
       ),
     );
   }

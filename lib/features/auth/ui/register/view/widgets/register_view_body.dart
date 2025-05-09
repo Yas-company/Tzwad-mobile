@@ -21,7 +21,7 @@ class RegisterViewBody extends StatelessWidget {
           ),
           pinned: true,
           expandedHeight: AppSize.s220,
-          flexibleSpace: FlexibleSpaceBar(
+          flexibleSpace: const FlexibleSpaceBar(
             background: AuthAppBarWidget(),
           ),
         ),
