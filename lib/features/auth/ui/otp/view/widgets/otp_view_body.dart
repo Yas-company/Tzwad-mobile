@@ -10,7 +10,6 @@ import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_args.dart';
-import 'package:tzwad_mobile/core/routes/app_routes.dart';
 
 import 'form_otp_section.dart';
 
@@ -19,7 +18,7 @@ class OtpViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final phoneNumber = appArgs(AppRoutes.otpRoute)['phoneNumber'];
+    final phoneNumber = appArgs['phoneNumber'];
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.p16),

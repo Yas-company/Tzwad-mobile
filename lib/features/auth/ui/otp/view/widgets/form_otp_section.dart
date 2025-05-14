@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
-import 'package:tzwad_mobile/core/extension/string_extension.dart';
+import 'package:tzwad_mobile/core/extension/context_extension.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/language_manager.dart';
 import 'package:tzwad_mobile/core/resource/string_manager.dart';
@@ -53,19 +53,27 @@ class FormOtpSection extends StatelessWidget {
   }
 
   _onPressedVerifyButton(WidgetRef ref) {
-    final phoneNumber = appArgs(AppRoutes.otpRoute)['phoneNumber'];
-    final otpFlowType = appArgs(AppRoutes.otpRoute)['otpFlowType'] as OtpFlowType;
+    final phoneNumber = appArgs['phoneNumber'];
+    final otpFlowType = appArgs['otpFlowType'] as OtpFlowType;
     ref.read(otpControllerProvider.notifier).verifyOtp(phoneNumber, otpFlowType);
   }
 
   void submitVerifyOtpListener(BuildContext context, OtpState? previous, OtpState next) {
-    final otpFlowType = appArgs(AppRoutes.otpRoute)['otpFlowType'] as OtpFlowType;
+    final otpFlowType = appArgs['otpFlowType'] as OtpFlowType;
     if (previous?.submitVerifyOtpDataState != next.submitVerifyOtpDataState) {
-      'State: ${next.submitVerifyOtpDataState}'.log();
       if (next.submitVerifyOtpDataState == DataState.failure) {
-        'Error: ${next.failure?.message ?? ''}'.log();
+        context.showMessage(
+          message: next.failure?.message ?? '',
+        );
       } else if (next.submitVerifyOtpDataState == DataState.success) {
-        otpFlowType == OtpFlowType.register ? context.pushNamed(AppRoutes.homeRoute) : context.pushNamed(AppRoutes.resetPasswordRoute);
+        otpFlowType == OtpFlowType.register
+            ? context.pushNamed(AppRoutes.homeRoute)
+            : context.pushNamed(
+                AppRoutes.resetPasswordRoute,
+                extra: {
+                  'phoneNumber': appArgs['phoneNumber'],
+                },
+              );
       }
     }
   }

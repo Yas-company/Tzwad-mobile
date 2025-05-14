@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_adaptive_widget.dart';
+import 'package:tzwad_mobile/core/resource/color_manager.dart';
+import 'package:tzwad_mobile/core/resource/values_manager.dart';
 
 enum MessageType { error, success, info }
 
@@ -22,65 +27,65 @@ extension ContextExtension on BuildContext {
 
   bool get isDesktop => getWidth >= 800;
 
-  // AdaptiveEnum getAdaptive() {
-  //   if (isDesktop) {
-  //     return AdaptiveEnum.desktop;
-  //   }
-  //   if (isTablet) {
-  //     return AdaptiveEnum.tablet;
-  //   }
-  //   return AdaptiveEnum.mobile;
-  // }
+  AdaptiveEnum getAdaptive() {
+    if (isDesktop) {
+      return AdaptiveEnum.desktop;
+    }
+    if (isTablet) {
+      return AdaptiveEnum.tablet;
+    }
+    return AdaptiveEnum.mobile;
+  }
 
-  // void showMessage({
-  //   required String message,
-  //   MessageType messageType = MessageType.error,
-  // }) {
-  //   final padding = EdgeInsets.symmetric(
-  //     horizontal: isDesktop ? getWidth * 0.3 : AppPadding.p20,
-  //   );
-  //   const displayDuration = Duration(milliseconds: 1000);
-  //   const snackBarPosition = SnackBarPosition.top;
-  //
-  //   switch (messageType) {
-  //     case MessageType.error:
-  //       showTopSnackBar(
-  //         Overlay.of(this),
-  //         padding: padding,
-  //         displayDuration: displayDuration,
-  //         snackBarPosition: snackBarPosition,
-  //         CustomSnackBar.error(
-  //           message: message,
-  //           backgroundColor: ColorManager.colorRed,
-  //           icon: const SizedBox(),
-  //         ),
-  //       );
-  //       break;
-  //     case MessageType.success:
-  //       showTopSnackBar(
-  //         Overlay.of(this),
-  //         padding: padding,
-  //         displayDuration: displayDuration,
-  //         snackBarPosition: snackBarPosition,
-  //         CustomSnackBar.success(
-  //           message: message,
-  //           icon: const SizedBox(),
-  //         ),
-  //       );
-  //       break;
-  //     case MessageType.info:
-  //       showTopSnackBar(
-  //         Overlay.of(this),
-  //         padding: padding,
-  //         displayDuration: displayDuration,
-  //         snackBarPosition: snackBarPosition,
-  //         CustomSnackBar.info(
-  //           message: message,
-  //           backgroundColor: ColorManager.colorPrimary,
-  //           icon: const SizedBox(),
-  //         ),
-  //       );
-  //       break;
-  //   }
-  // }
+  void showMessage({
+    required String message,
+    MessageType messageType = MessageType.error,
+  }) {
+    final padding = EdgeInsets.symmetric(
+      horizontal: isDesktop ? getWidth * 0.3 : AppPadding.p20,
+    );
+    const displayDuration = Duration(milliseconds: 1000);
+    const snackBarPosition = SnackBarPosition.top;
+
+    switch (messageType) {
+      case MessageType.error:
+        showTopSnackBar(
+          Overlay.of(this),
+          padding: padding,
+          displayDuration: displayDuration,
+          snackBarPosition: snackBarPosition,
+          CustomSnackBar.error(
+            message: message,
+            backgroundColor: ColorManager.colorRed,
+            icon: const SizedBox(),
+          ),
+        );
+        break;
+      case MessageType.success:
+        showTopSnackBar(
+          Overlay.of(this),
+          padding: padding,
+          displayDuration: displayDuration,
+          snackBarPosition: snackBarPosition,
+          CustomSnackBar.success(
+            message: message,
+            icon: const SizedBox(),
+          ),
+        );
+        break;
+      case MessageType.info:
+        showTopSnackBar(
+          Overlay.of(this),
+          padding: padding,
+          displayDuration: displayDuration,
+          snackBarPosition: snackBarPosition,
+          CustomSnackBar.info(
+            message: message,
+            backgroundColor: ColorManager.colorPrimary,
+            icon: const SizedBox(),
+          ),
+        );
+        break;
+    }
+  }
 }

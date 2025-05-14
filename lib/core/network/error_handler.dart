@@ -50,7 +50,10 @@ class ErrorHandler implements Exception {
           return DataSource.notFound.getFailure();
         default:
           message = _extractErrorMessage(error.response?.data);
-          return Failure(code, message);
+          return Failure(
+            code: code,
+            message: message,
+          );
       }
     } catch (e) {
       return DataSource.defaultError.getFailure();
@@ -60,23 +63,28 @@ class ErrorHandler implements Exception {
   _handleDefaultError(DioException error) {
     if (error.response?.statusCode == ResponseCode.noInternetConnection) {
       return DataSource.noInternetConnection.getFailure();
+    } else if (error.response?.statusCode == ResponseCode.unSuccess) {
+      return Failure(
+        code: error.response?.statusCode ?? 0,
+        message: error.response?.statusMessage ?? '',
+      );
     } else {
       return DataSource.defaultError.getFailure();
     }
   }
 
   String _extractErrorMessage(dynamic data) {
-    String message = '';
-    data.forEach((key, value) {
-      if (value is List) {
-        message += value.join('\n');
-      } else if (value is String) {
-        message += value;
-      } else {
-        message += value.toString();
-      }
-    });
-    return message;
+    // String message = '';
+    // data.forEach((key, value) {
+    //   if (value is List) {
+    //     message += value.join('\n');
+    //   } else if (value is String) {
+    //     message += value;
+    //   } else {
+    //     message += value.toString();
+    //   }
+    // });
+    return data['message'];
   }
 }
 
@@ -103,40 +111,41 @@ extension DataSourceExtension on DataSource {
     final context = AppContext.context;
     switch (this) {
       case DataSource.success:
-        return Failure(ResponseCode.success, ResponseMessage.success.tr(context));
+        return Failure(code: ResponseCode.success, message: ResponseMessage.success.tr(context));
       case DataSource.noContent:
-        return Failure(ResponseCode.noContent, ResponseMessage.noContent.tr(context));
+        return Failure(code: ResponseCode.noContent, message: ResponseMessage.noContent.tr(context));
       case DataSource.badRequest:
-        return Failure(ResponseCode.badRequest, ResponseMessage.badRequest.tr(context));
+        return Failure(code: ResponseCode.badRequest, message: ResponseMessage.badRequest.tr(context));
       case DataSource.forbidden:
-        return Failure(ResponseCode.forbidden, ResponseMessage.forbidden.tr(context));
+        return Failure(code: ResponseCode.forbidden, message: ResponseMessage.forbidden.tr(context));
       case DataSource.unauthorised:
-        return Failure(ResponseCode.unauthorised, ResponseMessage.unauthorised.tr(context));
+        return Failure(code: ResponseCode.unauthorised, message: ResponseMessage.unauthorised.tr(context));
       case DataSource.notFound:
-        return Failure(ResponseCode.notFound, ResponseMessage.notFound.tr(context));
+        return Failure(code: ResponseCode.notFound, message: ResponseMessage.notFound.tr(context));
       case DataSource.internetServerError:
-        return Failure(ResponseCode.internalServerError, ResponseMessage.internalServerError.tr(context));
+        return Failure(code: ResponseCode.internalServerError, message: ResponseMessage.internalServerError.tr(context));
       case DataSource.connectTimeout:
-        return Failure(ResponseCode.connectTimeout, ResponseMessage.connectTimeout.tr(context));
+        return Failure(code: ResponseCode.connectTimeout, message: ResponseMessage.connectTimeout.tr(context));
       case DataSource.connectionError:
-        return Failure(ResponseCode.connectionError, ResponseMessage.connectionError.tr(context));
+        return Failure(code: ResponseCode.connectionError, message: ResponseMessage.connectionError.tr(context));
       case DataSource.cancel:
-        return Failure(ResponseCode.cancel, ResponseMessage.cancel.tr(context));
+        return Failure(code: ResponseCode.cancel, message: ResponseMessage.cancel.tr(context));
       case DataSource.receiveTimeout:
-        return Failure(ResponseCode.receiveTimeout, ResponseMessage.receiveTimeout.tr(context));
+        return Failure(code: ResponseCode.receiveTimeout, message: ResponseMessage.receiveTimeout.tr(context));
       case DataSource.sendTimeout:
-        return Failure(ResponseCode.sendTimeout, ResponseMessage.sendTimeout.tr(context));
+        return Failure(code: ResponseCode.sendTimeout, message: ResponseMessage.sendTimeout.tr(context));
       case DataSource.cacheError:
-        return Failure(ResponseCode.cacheError, ResponseMessage.cacheError.tr(context));
+        return Failure(code: ResponseCode.cacheError, message: ResponseMessage.cacheError.tr(context));
       case DataSource.noInternetConnection:
-        return Failure(ResponseCode.noInternetConnection, ResponseMessage.noInternetConnection.tr(context));
+        return Failure(code: ResponseCode.noInternetConnection, message: ResponseMessage.noInternetConnection.tr(context));
       case DataSource.defaultError:
-        return Failure(ResponseCode.defaultError, ResponseMessage.defaultError.tr(context));
+        return Failure(code: ResponseCode.defaultError, message: ResponseMessage.defaultError.tr(context));
     }
   }
 }
 
 class ResponseCode {
+  static const int unSuccess = -200; // success with data
   static const int success = 200; // success with data
   static const int noContent = 201; // success with no data (no content)
   static const int badRequest = 400; // failure, API rejected request

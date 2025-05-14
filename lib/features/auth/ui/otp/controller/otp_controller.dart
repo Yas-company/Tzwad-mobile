@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/extension/validation_extension.dart';
-import 'package:tzwad_mobile/core/services/app_prefs/app_preferences_provider.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/auth/models/otp_flow_type.dart';
 import 'package:tzwad_mobile/features/auth/providers/auth_repository_provider.dart';
@@ -10,7 +9,6 @@ class OtpController extends AutoDisposeNotifier<OtpState> {
   @override
   OtpState build() {
     state = _onInit();
-    generateOtp();
     return state;
   }
 
@@ -23,16 +21,8 @@ class OtpController extends AutoDisposeNotifier<OtpState> {
     );
   }
 
-  void generateOtp() async {
-    final repository = ref.read(authRepositoryProvider);
-    final result = await repository.generateOtp(
-      phoneNumber: '',
-    );
-  }
-
   void verifyOtp(String phoneNumber, OtpFlowType otpFlowType) async {
     final repository = ref.read(authRepositoryProvider);
-    final appPrefs = ref.read(appPreferencesProvider);
     final otpValidationMessage = state.otp.validateOtpCode;
     if (otpValidationMessage.isNotEmpty) {
       state = state.copyWith(
@@ -46,22 +36,16 @@ class OtpController extends AutoDisposeNotifier<OtpState> {
     final result = await repository.verifyOtp(
       phoneNumber: phoneNumber,
       otp: state.otp,
+      otpFlowType: otpFlowType,
     );
     result.fold(
       (l) => state = state.copyWith(
         submitVerifyOtpDataState: DataState.failure,
         failure: l,
       ),
-      (r) {
-        if (otpFlowType == OtpFlowType.register) {
-          appPrefs.setUserLogged();
-        }
-        appPrefs.setToken(r.token ?? '');
-        state = state.copyWith(
-          submitVerifyOtpDataState: DataState.success,
-          user: r,
-        );
-      },
+      (r) => state = state.copyWith(
+        submitVerifyOtpDataState: DataState.success,
+      ),
     );
   }
 }

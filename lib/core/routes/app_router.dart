@@ -6,23 +6,23 @@ import 'app_args.dart';
 class AppRouter extends GoRoute {
   final String route;
   final Widget screen;
-  final List<GoRoute> mRoutes;
+  final List<GoRoute> subRoutes;
   final bool withAnimation;
 
   AppRouter({
     required this.route,
     required this.screen,
-    this.mRoutes = const [],
+    this.subRoutes = const [],
     this.withAnimation = false,
   }) : super(
           path: route,
           name: route,
-          routes: mRoutes,
-          builder: (context, state) {
+          routes: subRoutes,
+          pageBuilder: (context, state) {
             final args = _extractArgs(state);
             setArgs(route, args);
             if (withAnimation) {
-              CustomTransitionPage(
+              return CustomTransitionPage(
                 key: state.pageKey,
                 child: screen,
                 transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -31,7 +31,9 @@ class AppRouter extends GoRoute {
                 transitionDuration: const Duration(milliseconds: 1000),
               );
             }
-            return screen;
+            return NoTransitionPage(
+              child: screen,
+            );
           },
         );
 

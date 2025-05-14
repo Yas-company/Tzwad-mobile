@@ -7,6 +7,7 @@ import 'package:tzwad_mobile/features/auth/ui/login/view/login_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/otp/view/otp_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/register/view/register_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/reset_password/view/reset_password_view.dart';
+import 'package:tzwad_mobile/features/product/ui/cart/view/cart_view.dart';
 import 'package:tzwad_mobile/features/product/ui/favorite_products/view/favorite_products_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/onboarding/view/onboarding_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/settings/view/settings_view.dart';
@@ -67,7 +68,7 @@ class RouterManager {
           ),
           AppRouter(
             route: AppRoutes.cartRoute,
-            screen: const FavoriteProductsView(),
+            screen: const CartView(),
           ),
           AppRouter(
             route: AppRoutes.favoriteProductsRoute,

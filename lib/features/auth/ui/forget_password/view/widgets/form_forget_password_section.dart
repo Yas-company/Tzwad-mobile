@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
-import 'package:tzwad_mobile/core/extension/string_extension.dart';
+import 'package:tzwad_mobile/core/extension/context_extension.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/language_manager.dart';
 import 'package:tzwad_mobile/core/resource/string_manager.dart';
@@ -54,9 +54,10 @@ class FormForgetPasswordSection extends StatelessWidget {
 
   void submitForgetPasswordListener(BuildContext context, ForgetPasswordState? previous, ForgetPasswordState next) {
     if (previous?.submitForgetPasswordDataState != next.submitForgetPasswordDataState) {
-      'State: ${next.submitForgetPasswordDataState}'.log();
       if (next.submitForgetPasswordDataState == DataState.failure) {
-        'Error: ${next.failure?.message ?? ''}'.log();
+        context.showMessage(
+          message: next.failure?.message ?? '',
+        );
       } else if (next.submitForgetPasswordDataState == DataState.success) {
         context.pushNamed(
           AppRoutes.otpRoute,

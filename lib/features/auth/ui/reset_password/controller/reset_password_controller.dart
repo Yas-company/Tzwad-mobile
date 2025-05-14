@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/extension/validation_extension.dart';
-import 'package:tzwad_mobile/core/services/app_prefs/app_preferences_provider.dart';
+import 'package:tzwad_mobile/core/local_data/app_preferences_provider.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/auth/providers/auth_repository_provider.dart';
 import 'reset_password_state.dart';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorManager {
   static const Color colorPrimary = Color(0xff00B106);
+  static const Color colorPrimary1 = Color(0x4200b106);
   static const Color colorLightPrimary = Color(0xffE3FFE5);
   static const Color colorLightPrimary2 = Color(0xffBAEDBF);
   static const Color colorLightPrimary3 = Color(0xffDDEFDE);
@@ -28,6 +29,8 @@ class ColorManager {
 
   // Color Grey
   static const Color colorGrey1 = Color(0XFFB8B8B8);
+
+  static const Color colorRed = Color(0xffff0000);
 
   static const genericBoxShadow = BoxShadow(
     color: Color(0x14000000),

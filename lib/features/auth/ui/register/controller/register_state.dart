@@ -1,12 +1,12 @@
 import 'package:tzwad_mobile/core/network/failure.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
-import 'package:tzwad_mobile/features/auth/models/user_model.dart';
 
 class RegisterState {
   final DataState submitRegisterDataState;
-  final UserModel? user;
   final String name;
   final String nameValidationMessage;
+  final String businessName;
+  final String businessNameValidationMessage;
   final String phoneNumber;
   final String phoneNumberValidationMessage;
   final String address;
@@ -19,9 +19,10 @@ class RegisterState {
 
   RegisterState({
     this.submitRegisterDataState = DataState.initial,
-    this.user,
     this.name = '',
     this.nameValidationMessage = '',
+    this.businessName = '',
+    this.businessNameValidationMessage = '',
     this.phoneNumber = '',
     this.phoneNumberValidationMessage = '',
     this.address = '',
@@ -35,9 +36,10 @@ class RegisterState {
 
   RegisterState copyWith({
     DataState? submitRegisterDataState,
-    UserModel? user,
     String? name,
     String? nameValidationMessage,
+    String? businessName,
+    String? businessNameValidationMessage,
     String? phoneNumber,
     String? phoneNumberValidationMessage,
     String? address,
@@ -50,9 +52,10 @@ class RegisterState {
   }) {
     return RegisterState(
       submitRegisterDataState: submitRegisterDataState ?? this.submitRegisterDataState,
-      user: user ?? this.user,
       name: name ?? this.name,
       nameValidationMessage: nameValidationMessage ?? this.nameValidationMessage,
+      businessName: businessName ?? this.businessName,
+      businessNameValidationMessage: businessNameValidationMessage ?? this.businessNameValidationMessage,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       phoneNumberValidationMessage: phoneNumberValidationMessage ?? this.phoneNumberValidationMessage,
       address: address ?? this.address,

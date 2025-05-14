@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_image_asset_widget.dart';
 import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
-import 'package:tzwad_mobile/core/services/app_prefs/app_preferences_provider.dart';
+import 'package:tzwad_mobile/core/local_data/app_preferences_provider.dart';
 
 class SplashViewBody extends ConsumerStatefulWidget {
   const SplashViewBody({super.key});

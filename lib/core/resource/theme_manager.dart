@@ -29,7 +29,7 @@ class LightModeTheme implements MainThemeApp {
         selectionColor: ColorManager.colorPrimary.withValues(alpha: 0.2),
       ),
       disabledColor: ColorManager.colorDisable,
-      splashColor: ColorManager.colorPrimary,
+      splashColor: ColorManager.colorPrimary.withValues(alpha: 0.2),
       dialogBackgroundColor: ColorManager.colorBackground,
 
       // Text color
@@ -59,20 +59,20 @@ class LightModeTheme implements MainThemeApp {
       //   errorColor: ColorManager.colorRed,
       // ),
 
-      // bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      //   backgroundColor: ColorManager.colorBackground,
-      //   type: BottomNavigationBarType.fixed,
-      //   selectedItemColor: ColorManager.colorPrimary,
-      //   unselectedItemColor: ColorManager.colorBlack1,
-      //   selectedLabelStyle: StyleManager.getRegularStyle(
-      //     fontSize: FontSize.s12,
-      //     color: ColorManager.colorPrimary,
-      //   ),
-      //   unselectedLabelStyle: StyleManager.getRegularStyle(
-      //     fontSize: FontSize.s12,
-      //     color: ColorManager.colorBlack1,
-      //   ),
-      // ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: ColorManager.blackColor,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: ColorManager.colorPrimary,
+        unselectedItemColor: ColorManager.colorPureWhite,
+        selectedLabelStyle: StyleManager.getRegularStyle(
+          fontSize: FontSize.s12,
+          color: ColorManager.colorPrimary,
+        ),
+        unselectedLabelStyle: StyleManager.getRegularStyle(
+          fontSize: FontSize.s12,
+          color: ColorManager.colorPureWhite,
+        ),
+      ),
 
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: ColorManager.colorBackground,

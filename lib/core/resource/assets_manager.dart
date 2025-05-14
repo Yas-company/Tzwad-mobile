@@ -18,6 +18,14 @@ class AssetsManager {
   static const imgEmail = 'assets/images/img_email.png';
 
   // NavBar
-  static const icHome = 'assets/icons/ic_home.svg';
-  static const icHomeSelected = 'assets/icons/ic_home_selected.svg';
+  static const icTabHomeUnSelected = 'assets/icons/ic_tab_home_unselected.svg';
+  static const icTabHomeSelected = 'assets/icons/ic_tab_home_selected.svg';
+  static const icTabSearchUnSelected = 'assets/icons/ic_tab_search_unselected.svg';
+  static const icTabSearchSelected = 'assets/icons/ic_tab_search_selected.svg';
+  static const icTabCartUnSelected = 'assets/icons/ic_tab_cart_unselected.svg';
+  static const icTabCartSelected = 'assets/icons/ic_tab_cart_selected.svg';
+  static const icTabFavoriteUnSelected = 'assets/icons/ic_tab_favorite_unselected.svg';
+  static const icTabFavoriteSelected = 'assets/icons/ic_tab_favorite_selected.svg';
+  static const icTabSettingUnSelected = 'assets/icons/ic_tab_setting_unselected.svg';
+  static const icTabSettingSelected = 'assets/icons/ic_tab_setting_selected.svg';
 }

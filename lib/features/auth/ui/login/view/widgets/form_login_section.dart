@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
-import 'package:tzwad_mobile/core/extension/string_extension.dart';
+import 'package:tzwad_mobile/core/extension/context_extension.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
@@ -71,9 +71,10 @@ class FormLoginSection extends StatelessWidget {
 
   void submitLoginListener(BuildContext context, LoginState? previous, LoginState next) {
     if (previous?.submitLoginDataState != next.submitLoginDataState) {
-      'State: ${next.submitLoginDataState}'.log();
       if (next.submitLoginDataState == DataState.failure) {
-        'Error: ${next.failure?.message ?? ''}'.log();
+        context.showMessage(
+          message: next.failure?.message ?? '',
+        );
       } else if (next.submitLoginDataState == DataState.success) {
         context.pushReplacementNamed(AppRoutes.homeRoute);
       }

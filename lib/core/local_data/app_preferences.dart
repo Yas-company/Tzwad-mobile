@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tzwad_mobile/core/extension/language_type_extentions.dart';
 import 'package:tzwad_mobile/core/resource/language_manager.dart';
+import 'package:tzwad_mobile/features/auth/models/user_model.dart';
 
 String keyLang = "KEY_LANG";
 String keyFontSize = "KEY_FONT_SIZE";
@@ -31,7 +33,7 @@ class AppPreferences {
       return language;
     } else {
       // return default lang
-      return LanguageType.arabic.getValue();
+      return LanguageType.english.getValue();
     }
   }
 
@@ -83,6 +85,18 @@ class AppPreferences {
 
   String getToken() {
     return _sharedPreferences.getString(keyToken) ?? '';
+  }
+
+  Future<void> setUserInfo(UserModel userModel, String token) async {
+    setToken(token);
+    final userInfo = userModel.toJson();
+    _sharedPreferences.setString(keyLoginInfo, jsonEncode(userInfo));
+  }
+
+  UserModel getUserInfo() {
+    final jsonEncode = _sharedPreferences.getString(keyLoginInfo) ?? "";
+    final userInfo = json.decode(jsonEncode);
+    return UserModel.fromJson(userInfo);
   }
 
 //endregion

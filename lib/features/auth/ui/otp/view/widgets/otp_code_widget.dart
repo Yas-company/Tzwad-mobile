@@ -26,7 +26,7 @@ class OtpCodeWidget extends HookConsumerWidget {
       child: Pinput(
         autofocus: true,
         controller: controller,
-        length: 4,
+        length: 6,
         inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
         defaultPinTheme: defaultPinTheme,
         focusedPinTheme: focusedPinTheme,

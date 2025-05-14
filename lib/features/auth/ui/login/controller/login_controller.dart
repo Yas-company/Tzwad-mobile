@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/extension/validation_extension.dart';
-import 'package:tzwad_mobile/core/services/app_prefs/app_preferences_provider.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/auth/providers/auth_repository_provider.dart';
 import 'login_state.dart';
@@ -42,7 +41,6 @@ class LoginController extends AutoDisposeNotifier<LoginState> {
 
   void login() async {
     final repository = ref.read(authRepositoryProvider);
-    final appPrefs = ref.read(appPreferencesProvider);
     final phoneNumberValidationMessage = state.phoneNumber.validatePhoneNumber;
     final passwordValidationMessage = state.password.validatePassword;
     if (phoneNumberValidationMessage.isNotEmpty || passwordValidationMessage.isNotEmpty) {
@@ -58,22 +56,16 @@ class LoginController extends AutoDisposeNotifier<LoginState> {
     final result = await repository.login(
       phoneNumber: state.phoneNumber,
       password: state.password,
+      isRememberMe: state.isRememberMe,
     );
     result.fold(
       (l) => state = state.copyWith(
         submitLoginDataState: DataState.failure,
         failure: l,
       ),
-      (r) {
-        if (state.isRememberMe) {
-          appPrefs.setUserLogged();
-        }
-        appPrefs.setToken(r.token ?? '');
-        state = state.copyWith(
-          submitLoginDataState: DataState.success,
-          user: r,
-        );
-      },
+      (r) => state = state.copyWith(
+        submitLoginDataState: DataState.success,
+      ),
     );
   }
 }

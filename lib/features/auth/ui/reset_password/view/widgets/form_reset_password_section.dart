@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
-import 'package:tzwad_mobile/core/extension/string_extension.dart';
+import 'package:tzwad_mobile/core/extension/context_extension.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/language_manager.dart';
 import 'package:tzwad_mobile/core/resource/string_manager.dart';
@@ -53,15 +53,16 @@ class FormResetPasswordSection extends StatelessWidget {
   }
 
   _onPressedResetPasswordButton(WidgetRef ref) {
-    final phoneNumber = appArgs(AppRoutes.otpRoute)['phoneNumber'];
+    final phoneNumber = appArgs['phoneNumber'];
     ref.read(resetPasswordControllerProvider.notifier).resetPassword(phoneNumber);
   }
 
   void submitResetPasswordListener(BuildContext context, ResetPasswordState? previous, ResetPasswordState next) {
     if (previous?.submitResetPasswordDataState != next.submitResetPasswordDataState) {
-      'State: ${next.submitResetPasswordDataState}'.log();
       if (next.submitResetPasswordDataState == DataState.failure) {
-        'Error: ${next.failure?.message ?? ''}'.log();
+        context.showMessage(
+          message: next.failure?.message ?? '',
+        );
       } else if (next.submitResetPasswordDataState == DataState.success) {
         context.pushNamed(AppRoutes.homeRoute);
       }

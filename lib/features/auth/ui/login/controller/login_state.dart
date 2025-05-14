@@ -1,10 +1,8 @@
 import 'package:tzwad_mobile/core/network/failure.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
-import 'package:tzwad_mobile/features/auth/models/user_model.dart';
 
 class LoginState {
   final DataState submitLoginDataState;
-  final UserModel? user;
   final String phoneNumber;
   final String phoneNumberValidationMessage;
   final String password;
@@ -15,7 +13,6 @@ class LoginState {
 
   LoginState({
     this.submitLoginDataState = DataState.initial,
-    this.user,
     this.phoneNumber = '',
     this.phoneNumberValidationMessage = '',
     this.password = '',
@@ -27,7 +24,6 @@ class LoginState {
 
   LoginState copyWith({
     DataState? submitLoginDataState,
-    UserModel? user,
     String? phoneNumber,
     String? phoneNumberValidationMessage,
     String? password,
@@ -38,7 +34,6 @@ class LoginState {
   }) {
     return LoginState(
       submitLoginDataState: submitLoginDataState ?? this.submitLoginDataState,
-      user: user ?? this.user,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       phoneNumberValidationMessage: phoneNumberValidationMessage ?? this.phoneNumberValidationMessage,
       password: password ?? this.password,

@@ -20,6 +20,13 @@ class RegisterController extends AutoDisposeNotifier<RegisterState> {
     );
   }
 
+  void changeBusinessName(String businessName) {
+    state = state.copyWith(
+      businessName: businessName,
+      businessNameValidationMessage: businessName.validateBusinessName,
+    );
+  }
+
   void changePhoneNumber(String phoneNumber) {
     state = state.copyWith(
       phoneNumber: phoneNumber,
@@ -57,12 +64,18 @@ class RegisterController extends AutoDisposeNotifier<RegisterState> {
     final repository = ref.read(authRepositoryProvider);
     // final appPrefs = ref.read(appPreferencesProvider);
     final nameValidationMessage = state.name.validateName;
+    final businessNameValidationMessage = state.businessName.validateBusinessName;
     final phoneNumberValidationMessage = state.phoneNumber.validatePhoneNumber;
     final addressValidationMessage = state.address.validateAddress;
     final passwordValidationMessage = state.password.validatePassword;
-    if (nameValidationMessage.isNotEmpty || phoneNumberValidationMessage.isNotEmpty || addressValidationMessage.isNotEmpty || passwordValidationMessage.isNotEmpty) {
+    if (nameValidationMessage.isNotEmpty ||
+        businessNameValidationMessage.isNotEmpty ||
+        phoneNumberValidationMessage.isNotEmpty ||
+        addressValidationMessage.isNotEmpty ||
+        passwordValidationMessage.isNotEmpty) {
       state = state.copyWith(
         nameValidationMessage: nameValidationMessage,
+        businessNameValidationMessage: businessNameValidationMessage,
         phoneNumberValidationMessage: phoneNumberValidationMessage,
         addressValidationMessage: addressValidationMessage,
         passwordValidationMessage: passwordValidationMessage,
@@ -75,6 +88,7 @@ class RegisterController extends AutoDisposeNotifier<RegisterState> {
     final result = await repository.register(
       name: state.name,
       phoneNumber: state.phoneNumber,
+      businessName: state.businessName,
       address: state.address,
       password: state.password,
     );
@@ -83,14 +97,9 @@ class RegisterController extends AutoDisposeNotifier<RegisterState> {
         submitRegisterDataState: DataState.failure,
         failure: l,
       ),
-      (r) {
-        // appPrefs.setUserLogged();
-        // appPrefs.setToken(r.token ?? '');
-        state = state.copyWith(
-          submitRegisterDataState: DataState.success,
-          user: r,
-        );
-      },
+      (r) => state = state.copyWith(
+        submitRegisterDataState: DataState.success,
+      ),
     );
   }
 }

@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tzwad_mobile/core/resource/color_manager.dart';
 
-import 'core/services/app_prefs/app_preferences.dart';
-import 'core/services/app_prefs/app_preferences_provider.dart';
+import 'core/local_data/app_preferences.dart';
+import 'core/local_data/app_preferences_provider.dart';
 import 'features/generic/ui/main/view/main_app.dart';
 
 Future<void> bodyMain() async {
@@ -14,7 +15,7 @@ Future<void> bodyMain() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      // systemNavigationBarColor: Colors.black,
+      systemNavigationBarColor: ColorManager.blackColor,
       // systemNavigationBarIconBrightness: Brightness.light,
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,

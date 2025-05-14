@@ -52,6 +52,14 @@ extension ValidationExtension on String {
     return '';
   }
 
+  String get validateBusinessName {
+    // final context = AppContext.context;
+    if (isEmpty) {
+      return 'The business name cannot be empty';
+    }
+    return '';
+  }
+
   String get validateName {
     // final context = AppContext.context;
     if (isEmpty) {
@@ -73,7 +81,7 @@ extension ValidationExtension on String {
     if (isEmpty) {
       return 'The otp code cannot be empty';
     }
-    if (length < 4) {
+    if (length < 6) {
       return 'The otp code must be 4 digits';
     }
     return '';
