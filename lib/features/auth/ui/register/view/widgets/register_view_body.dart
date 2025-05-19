@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/features/auth/ui/register/view/widgets/form_register_section.dart';
@@ -16,8 +17,8 @@ class RegisterViewBody extends StatelessWidget {
         SliverAppBar(
           automaticallyImplyLeading: false,
           leading: IconButton(
-            onPressed: () => _onPressedSkipButton(context),
-            icon: const Icon(Icons.close),
+            onPressed: () => _onPressedBackButton(context),
+            icon: const Icon(Icons.arrow_back_ios),
           ),
           pinned: true,
           expandedHeight: AppSize.s220,
@@ -49,7 +50,7 @@ class RegisterViewBody extends StatelessWidget {
     );
   }
 
-  _onPressedSkipButton(BuildContext context) {
-    // context.pop();
+  _onPressedBackButton(BuildContext context) {
+    context.pop();
   }
 }

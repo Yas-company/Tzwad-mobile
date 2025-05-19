@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_image_asset_widget.dart';
 import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
-import 'package:tzwad_mobile/core/local_data/app_preferences_provider.dart';
+import 'package:tzwad_mobile/features/generic/providers/setting_local_data_provider.dart';
 
 class SplashViewBody extends ConsumerStatefulWidget {
   const SplashViewBody({super.key});
@@ -48,12 +48,14 @@ class _SplashViewBodyState extends ConsumerState<SplashViewBody> {
   }
 
   void _goNext() async {
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
-    final appPrefs = ref.read(appPreferencesProvider);
-    if (!appPrefs.isOnBoardingScreenViewed()) {
+    final settingLocalData = ref.read(
+      settingLocalDataProvider,
+    );
+    if (!settingLocalData.isOnBoardingScreenViewed()) {
       context.pushReplacementNamed(AppRoutes.onboardingRoute);
-    } else if (!appPrefs.isUserLogged()) {
+    } else if (!settingLocalData.isUserLogged()) {
       context.pushReplacementNamed(AppRoutes.loginRoute);
     } else {
       context.pushReplacementNamed(AppRoutes.homeRoute);

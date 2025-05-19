@@ -2,7 +2,6 @@ import 'package:tzwad_mobile/core/network/api_service.dart';
 import 'package:tzwad_mobile/core/network/constants_api.dart';
 import 'package:tzwad_mobile/core/network/error_handler.dart';
 import 'package:tzwad_mobile/core/network/failure.dart';
-import 'package:tzwad_mobile/core/local_data/app_preferences.dart';
 import 'package:tzwad_mobile/core/util/state_render/result.dart';
 import 'package:tzwad_mobile/core/util/unit.dart';
 import 'package:tzwad_mobile/features/auth/models/login_model.dart';
@@ -10,14 +9,18 @@ import 'package:tzwad_mobile/features/auth/models/otp_flow_type.dart';
 import 'package:tzwad_mobile/features/auth/models/register_model.dart';
 import 'package:tzwad_mobile/features/auth/models/user_model.dart';
 import 'package:tzwad_mobile/features/auth/models/verify_otp_model.dart';
+import 'package:tzwad_mobile/features/auth/local_data/user_local_data.dart';
+import 'package:tzwad_mobile/features/generic/local_data/setting_local_data.dart';
 
 class AuthRepository {
   final ApiService apiService;
-  final AppPreferences appPrefs;
+  final UserLocalData userLocalData;
+  final SettingLocalData settingLocalData;
 
   AuthRepository({
     required this.apiService,
-    required this.appPrefs,
+    required this.userLocalData,
+    required this.settingLocalData,
   });
 
   Future<Result<Failure, Unit>> login({
@@ -34,13 +37,11 @@ class AuthRepository {
         },
         fromJsonT: LoginModel.fromJson,
       );
-      if (response != null) {
-        _saveData(
-          user: response.user,
-          token: response.token,
-          isRememberMe: isRememberMe,
-        );
-      }
+      _saveData(
+        user: response.data?.user,
+        token: response.data?.token,
+        isRememberMe: isRememberMe,
+      );
       return const Right(unit);
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
@@ -93,10 +94,10 @@ class AuthRepository {
         },
         fromJsonT: otpFlowType == OtpFlowType.register ? VerifyOtpModel.fromJson : null,
       );
-      if (otpFlowType == OtpFlowType.register && response != null) {
+      if (otpFlowType == OtpFlowType.register) {
         _saveData(
-          user: response.user,
-          token: response.token,
+          user: response.data?.user,
+          token: response.data?.token,
         );
       }
       return const Right(unit);
@@ -140,19 +141,31 @@ class AuthRepository {
     }
   }
 
+  Future<Result<Failure, Unit>> logout() async {
+    try {
+      await apiService.post<Unit>(
+        url: ConstantsApi.logoutUrl,
+      );
+      _clearData();
+      return const Right(unit);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
   void _saveData({
     required UserModel? user,
     required String? token,
     bool isRememberMe = true,
   }) {
     if (user != null || token != null) {
-      appPrefs.setUserInfo(
-        user!,
-        token ?? '',
-      );
+      userLocalData.setUserInfo(user!);
+      settingLocalData.setToken(token!);
     }
     if (isRememberMe) {
-      appPrefs.setUserLogged();
+      settingLocalData.setUserLogged();
     }
   }
+
+  void _clearData() {}
 }

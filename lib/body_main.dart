@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 
-import 'core/local_data/app_preferences.dart';
-import 'core/local_data/app_preferences_provider.dart';
+import 'core/local_data/app_hive_adapter_enum.dart';
 import 'features/generic/ui/main/view/main_app.dart';
 
 Future<void> bodyMain() async {
@@ -22,18 +20,11 @@ Future<void> bodyMain() async {
     ),
   );
 
-  final prefs = await SharedPreferences.getInstance();
-  final prefsService = AppPreferences(prefs);
-  final container = ProviderContainer(
-    overrides: [
-      appPreferencesProvider.overrideWithValue(prefsService),
-    ],
-  );
+  await initHive();
 
   runApp(
-    UncontrolledProviderScope(
-      container: container,
-      child: const MainApp(),
+    const ProviderScope(
+      child: MainApp(),
     ),
   );
 }

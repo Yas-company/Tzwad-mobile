@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tzwad_mobile/core/local_data/app_preferences_provider.dart';
+import 'package:tzwad_mobile/features/generic/providers/setting_local_data_provider.dart';
 import 'onboarding_state.dart';
 
 class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
@@ -36,7 +36,10 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
   }
 
   void setOnBoardingScreenViewed() {
-    final appPrefs = ref.read(appPreferencesProvider);
-    appPrefs.setOnBoardingScreenViewed();
+    final settingLocalData = ref.read(
+      settingLocalDataProvider,
+    );
+
+    settingLocalData.setOnBoardingScreenViewed();
   }
 }

@@ -5,13 +5,6 @@ class FavoriteProductsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Text('FavoriteProductsView'),
-        Text('FavoriteProductsView'),
-        Text('FavoriteProductsView'),
-        Text('FavoriteProductsView'),
-      ],
-    );
+    return const Center(child: Text('Favorite Products View'));
   }
 }

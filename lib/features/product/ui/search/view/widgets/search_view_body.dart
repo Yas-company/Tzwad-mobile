@@ -5,14 +5,6 @@ class SearchViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Text('data'),
-        Text('data'),
-        Text('data'),
-        Text('data'),
-        Text('data'),
-      ],
-    );
+    return const Center(child: Text('Search View'));
   }
 }

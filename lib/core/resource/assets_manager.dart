@@ -28,4 +28,12 @@ class AssetsManager {
   static const icTabFavoriteSelected = 'assets/icons/ic_tab_favorite_selected.svg';
   static const icTabSettingUnSelected = 'assets/icons/ic_tab_setting_unselected.svg';
   static const icTabSettingSelected = 'assets/icons/ic_tab_setting_selected.svg';
+
+  //Products
+  static const imgProductPlaceHolder = 'assets/images/img_product_palce_holder.png';
+
+  // cart
+  static const imgCartEmpty = 'assets/images/img_cart_empty.png';
+  static const icMinus = 'assets/icons/minus.svg';
+  static const icAdd = 'assets/icons/ic_add.svg';
 }

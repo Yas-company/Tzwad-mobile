@@ -16,7 +16,9 @@ class ConstantsApi {
 
   //Api Category
   static String getCategoriesUrl = "categories";
+  static String getCategoryDetailsUrl(int id) => "categories/$id";
 
   // Api Product
-  static String productsUrl = "products";
+  static String getProductsUrl = "products";
+  static String getProductDetailsUrl(int id) => "products/$id";
 }

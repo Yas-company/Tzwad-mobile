@@ -14,8 +14,10 @@ import 'package:tzwad_mobile/features/generic/ui/settings/view/settings_view.dar
 import 'package:tzwad_mobile/features/generic/ui/splash/view/splash_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/trems_conditions/view/trems_conditions_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/undefined_route/view/undefined_route_view.dart';
-import 'package:tzwad_mobile/features/home/ui/home_view.dart';
+import 'package:tzwad_mobile/features/home/ui/view/home_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/nav_bar/view/nav_bar_view.dart';
+import 'package:tzwad_mobile/features/product/ui/product_details/view/product_details_view.dart';
+import 'package:tzwad_mobile/features/product/ui/products/view/products_view.dart';
 import 'package:tzwad_mobile/features/product/ui/search/view/search_view.dart';
 
 class RouterManager {
@@ -55,6 +57,14 @@ class RouterManager {
         route: AppRoutes.registerRoute,
         screen: const RegisterView(),
       ),
+      AppRouter(
+        route: AppRoutes.productsRoute,
+        screen: const ProductsView(),
+      ),
+      AppRouter(
+        route: AppRoutes.productDetailsRoute,
+        screen: const ProductDetailsView(),
+      ),
       ShellRoute(
         builder: (context, state, child) => NavBarView(child: child),
         routes: [
@@ -79,7 +89,7 @@ class RouterManager {
             screen: const SettingsView(),
           ),
         ],
-      )
+      ),
     ],
     errorBuilder: (context, state) => const UnDefinedRouteView(),
   );

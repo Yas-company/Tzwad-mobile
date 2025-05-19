@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/network/api_service_provider.dart';
-import 'package:tzwad_mobile/core/local_data/app_preferences_provider.dart';
+import 'package:tzwad_mobile/features/auth/providers/user_local_data_provider.dart';
 import 'package:tzwad_mobile/features/auth/repository/auth_repository.dart';
+import 'package:tzwad_mobile/features/generic/providers/setting_local_data_provider.dart';
 
 final authRepositoryProvider = Provider.autoDispose<AuthRepository>(
   (ref) {
@@ -9,13 +10,18 @@ final authRepositoryProvider = Provider.autoDispose<AuthRepository>(
       apiServiceProvider,
     );
 
-    final appPrefs = ref.read(
-      appPreferencesProvider,
+    final userLocalData = ref.read(
+      userLocalDataProvider,
+    );
+
+    final settingLocalData = ref.read(
+      settingLocalDataProvider,
     );
 
     return AuthRepository(
       apiService: apiService,
-      appPrefs: appPrefs,
+      userLocalData: userLocalData,
+      settingLocalData: settingLocalData,
     );
   },
 );

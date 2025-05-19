@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/extension/validation_extension.dart';
-import 'package:tzwad_mobile/core/local_data/app_preferences_provider.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/auth/providers/auth_repository_provider.dart';
 import 'reset_password_state.dart';
@@ -43,7 +42,6 @@ class ResetPasswordController extends AutoDisposeNotifier<ResetPasswordState> {
 
   void resetPassword(String phoneNumber) async {
     final repository = ref.read(authRepositoryProvider);
-    final appPrefs = ref.read(appPreferencesProvider);
     final passwordValidationMessage = state.password.validatePassword;
     final rePasswordValidationMessage = state.rePassword.validateRePassword(state.password);
     if (passwordValidationMessage.isNotEmpty || rePasswordValidationMessage.isNotEmpty) {
@@ -65,12 +63,9 @@ class ResetPasswordController extends AutoDisposeNotifier<ResetPasswordState> {
         submitResetPasswordDataState: DataState.failure,
         failure: l,
       ),
-      (r) {
-        appPrefs.setUserLogged();
-        state = state.copyWith(
-          submitResetPasswordDataState: DataState.success,
-        );
-      },
+      (r) => state = state.copyWith(
+        submitResetPasswordDataState: DataState.success,
+      ),
     );
   }
 }

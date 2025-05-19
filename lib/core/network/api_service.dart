@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:tzwad_mobile/core/network/base_response_model.dart';
-import 'package:tzwad_mobile/core/local_data/app_preferences.dart';
+import 'package:tzwad_mobile/core/util/data_models/data_model.dart';
+import 'package:tzwad_mobile/core/util/data_models/network_response_model.dart';
+import 'package:tzwad_mobile/features/generic/local_data/setting_local_data.dart';
 
 import 'constants_api.dart';
 import 'logger_interceptor.dart';
@@ -23,9 +24,13 @@ const int apiTimeOut = 60000;
 
 class ApiService {
   final Dio dio = Dio();
-  final AppPreferences appPrefs;
+  final SettingLocalData settingLocalData;
 
-  ApiService(this.appPrefs) {
+  // final AppPreferences appPrefs;
+
+  ApiService({
+    required this.settingLocalData,
+  }) {
     Map<String, String> headers = {
       'content-type': applicationJson,
       'accept': applicationJson,
@@ -69,16 +74,17 @@ class ApiService {
     return response.data;
   }
 
-  Future<T?> _request<T>(
+  Future<DataModel<T>> _request<T>(
     MethodEnum method, {
     required String url,
     dynamic data,
     dynamic params,
     Map<String, String>? customHeaders,
     T Function(Map<String, dynamic>)? fromJsonT,
+    T Function(List<dynamic>)? fromJsonListT,
   }) async {
-    final token = appPrefs.getToken();
-    final language = appPrefs.getAppLanguage();
+    final token = settingLocalData.getToken();
+    final language = settingLocalData.getLanguageApp();
     Map<String, String> header = {
       'Authorization': token.isNotEmpty ? 'Bearer $token' : '',
       'Accept-Language': language,
@@ -95,31 +101,25 @@ class ApiService {
         headers: header,
       ),
     );
-    final result = BaseResponseModel<T>.fromJson(
+    final result = NetworkResponseModel<T>.fromJson(
       json: response.data,
       fromJsonT: fromJsonT,
+      formJsonList: fromJsonListT,
     );
-    // if (!result.success) {
-    //   final options = RequestOptions(path: url, method: method);
-    //   throw DioException(
-    //     requestOptions: options,
-    //     response: Response(
-    //       requestOptions: options,
-    //       statusCode: ResponseCode.unSuccess, // if success but success flag is false
-    //       statusMessage: result.message,
-    //     ),
-    //     error: result.message,
-    //   );
-    // }
-    return result.data;
+
+    return DataModel(
+      data: result.data,
+      hasMore: result.pageInfo != null && result.pageInfo!.next != null,
+    );
   }
 
-  Future<T?> get<T>({
+  Future<DataModel<T>> get<T>({
     required String url,
     dynamic data,
     dynamic params,
     Map<String, String>? customHeaders,
     T Function(Map<String, dynamic>)? fromJsonT,
+    T Function(List<dynamic>)? fromJsonListT,
   }) =>
       _request(
         MethodEnum.get,
@@ -127,14 +127,17 @@ class ApiService {
         data: data,
         params: params,
         customHeaders: customHeaders,
+        fromJsonT: fromJsonT,
+        fromJsonListT: fromJsonListT,
       );
 
-  Future<T?> post<T>({
+  Future<DataModel<T>> post<T>({
     required String url,
     dynamic data,
     dynamic params,
     Map<String, String>? customHeaders,
     T Function(Map<String, dynamic>)? fromJsonT,
+    T Function(List<dynamic>)? fromJsonListT,
   }) =>
       _request(
         MethodEnum.post,
@@ -142,14 +145,17 @@ class ApiService {
         data: data,
         params: params,
         customHeaders: customHeaders,
+        fromJsonT: fromJsonT,
+        fromJsonListT: fromJsonListT,
       );
 
-  Future<T?> put<T>({
+  Future<DataModel<T>> put<T>({
     required String url,
     dynamic data,
     dynamic params,
     Map<String, String>? customHeaders,
     T Function(Map<String, dynamic>)? fromJsonT,
+    T Function(List<dynamic>)? fromJsonListT,
   }) =>
       _request(
         MethodEnum.post,
@@ -157,14 +163,17 @@ class ApiService {
         data: data,
         params: params,
         customHeaders: customHeaders,
+        fromJsonT: fromJsonT,
+        fromJsonListT: fromJsonListT,
       );
 
-  Future<T?> patch<T>({
+  Future<DataModel<T>> patch<T>({
     required String url,
     dynamic data,
     dynamic params,
     Map<String, String>? customHeaders,
     T Function(Map<String, dynamic>)? fromJsonT,
+    T Function(List<dynamic>)? fromJsonListT,
   }) =>
       _request(
         MethodEnum.patch,
@@ -172,14 +181,17 @@ class ApiService {
         data: data,
         params: params,
         customHeaders: customHeaders,
+        fromJsonT: fromJsonT,
+        fromJsonListT: fromJsonListT,
       );
 
-  Future<T?> delete<T>({
+  Future<DataModel<T>> delete<T>({
     required String url,
     dynamic data,
     dynamic params,
     Map<String, String>? customHeaders,
     T Function(Map<String, dynamic>)? fromJsonT,
+    T Function(List<dynamic>)? fromJsonListT,
   }) =>
       _request(
         MethodEnum.delete,
@@ -187,5 +199,7 @@ class ApiService {
         data: data,
         params: params,
         customHeaders: customHeaders,
+        fromJsonT: fromJsonT,
+        fromJsonListT: fromJsonListT,
       );
 }

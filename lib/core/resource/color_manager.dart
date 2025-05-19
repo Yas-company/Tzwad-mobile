@@ -26,6 +26,11 @@ class ColorManager {
   static const Color greyParagraph = Color(0xff666666);
   static const Color greyHint = Color(0xff818181);
   static const Color blackColor = Color(0xff333333);
+  static const Color whiteGrey = Color(0xffF9F9F9);
+  static const Color cardGreyHint = Color(0xff9F9F9F);
+  static const Color borderColor = Color(0xffEAECF0);
+  static const Color greyFour = Color(0xff9F9F9F);
+  static const Color pink = Color(0xffFF4065);
 
   // Color Grey
   static const Color colorGrey1 = Color(0XFFB8B8B8);

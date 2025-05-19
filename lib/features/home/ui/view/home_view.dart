@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_scaffold_widget.dart';
 
+import 'widgets/home_app_bar_widget.dart';
 import 'widgets/home_view_body.dart';
 
 class HomeView extends StatelessWidget {
@@ -9,6 +10,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppScaffoldWidget(
+      appBar: HomeAppBarWidget(),
       body: HomeViewBody(),
     );
   }

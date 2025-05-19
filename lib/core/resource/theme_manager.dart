@@ -85,22 +85,23 @@ class LightModeTheme implements MainThemeApp {
         ),
       ),
 
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         centerTitle: true,
         // elevation: 0,
         backgroundColor: ColorManager.colorPureWhite,
-        // iconTheme: const IconThemeData(
-        //   color: ColorManager.colorBlack1,
-        //   size: AppSize.s24,
-        // ),
-        // actionsIconTheme: const IconThemeData(
-        //   color: ColorManager.colorBlack1,
-        //   size: AppSize.s24,
-        // ),
-        // titleTextStyle: StyleManager.getRegularStyle(
-        //   color: ColorManager.colorBlack1,
-        //   fontSize: FontSize.s14,
-        // ).copyWith(fontFamily: fontFamily),
+        iconTheme: const IconThemeData(
+          color: ColorManager.blackColor,
+          size: AppSize.s24,
+        ),
+        actionsIconTheme: const IconThemeData(
+          color: ColorManager.blackColor,
+          size: AppSize.s24,
+        ),
+        titleTextStyle: StyleManager.getSemiBoldStyle(
+          color: ColorManager.blackColor,
+          fontSize: FontSize.s20,
+        ),
+        // .copyWith(fontFamily: fontFamily),
       ),
 
       // sliderTheme: const SliderThemeData(
