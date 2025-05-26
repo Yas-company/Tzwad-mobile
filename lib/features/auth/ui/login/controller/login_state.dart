@@ -18,7 +18,7 @@ class LoginState {
     this.password = '',
     this.passwordValidationMessage = '',
     this.obscureText = true,
-    this.isRememberMe = false,
+    this.isRememberMe = true,
     this.failure,
   });
 

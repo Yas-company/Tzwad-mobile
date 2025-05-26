@@ -31,6 +31,7 @@ class ColorManager {
   static const Color borderColor = Color(0xffEAECF0);
   static const Color greyFour = Color(0xff9F9F9F);
   static const Color pink = Color(0xffFF4065);
+  static const Color greyYellow = Color(0xffFFE38F);
 
   // Color Grey
   static const Color colorGrey1 = Color(0XFFB8B8B8);

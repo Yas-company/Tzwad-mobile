@@ -36,4 +36,13 @@ class AssetsManager {
   static const imgCartEmpty = 'assets/images/img_cart_empty.png';
   static const icMinus = 'assets/icons/minus.svg';
   static const icAdd = 'assets/icons/ic_add.svg';
+
+  // Settings
+  static const icOrders = 'assets/icons/ic_orders.svg';
+  static const icChangePassword = 'assets/icons/ic_change_password.svg';
+  static const icLogout = 'assets/icons/ic_logout.svg';
+  static const icDeleteAccount = 'assets/icons/ic_delete_account.svg';
+
+  // Search
+  static const imgSearch = 'assets/images/img_search.svg';
 }

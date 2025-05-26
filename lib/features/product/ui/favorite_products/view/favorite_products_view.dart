@@ -8,8 +8,11 @@ class FavoriteProductsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AppScaffoldWidget(
-      body: FavoriteProductsViewBody(),
+    return AppScaffoldWidget(
+      appBar: AppBar(
+        title: const Text('Favorite Products'),
+      ),
+      body: const FavoriteProductsViewBody(),
     );
   }
 }

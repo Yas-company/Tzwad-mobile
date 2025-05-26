@@ -23,4 +23,8 @@ class FavoriteProductLocalData extends AppLocalData<ProductModel> {
   void removeProductFromFavorite(ProductModel product) {
     delete(product.id);
   }
+
+  Future clearBox() async {
+    await box.clear();
+  }
 }

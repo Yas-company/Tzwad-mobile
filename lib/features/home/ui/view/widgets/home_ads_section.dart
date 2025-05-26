@@ -1,6 +1,6 @@
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:tzwad_mobile/core/resource/values_manager.dart';
 
 import 'item_home_ads.dart';
 
@@ -10,7 +10,7 @@ class HomeAdsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 175,
+      height: AppSize.s175,
       child: Swiper(
         itemBuilder: (BuildContext context, int index) => const ItemHomeAds(
           title: 'Lorem Ipsum is simply dummy text of',

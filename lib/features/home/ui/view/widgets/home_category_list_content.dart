@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
+import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/features/category/models/category_model.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -55,15 +58,16 @@ class HomeCategoryListContent extends StatelessWidget {
           ),
           SizedBox(
             height: AppSize.s60,
-            child: ListView.builder(
+            child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(
-                horizontal: AppPadding.p10,
+                horizontal: AppPadding.p16,
               ),
               itemBuilder: (context, index) => ItemHomeCategory(
                 category: categories[index],
               ),
               itemCount: categories.length,
+              separatorBuilder: (BuildContext context, int index) => const Gap(AppPadding.p12),
             ),
           )
         ],
@@ -72,6 +76,6 @@ class HomeCategoryListContent extends StatelessWidget {
   }
 
   _onPressedSeeAllButton(BuildContext context) {
-    // context.pushNamed(AppRoutes.pro);
+    context.pushNamed(AppRoutes.categoriesRoute);
   }
 }

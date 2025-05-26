@@ -104,16 +104,16 @@ class LightModeTheme implements MainThemeApp {
         // .copyWith(fontFamily: fontFamily),
       ),
 
-      // sliderTheme: const SliderThemeData(
-      //   thumbColor: ColorManager.colorPrimary,
-      //   thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
-      //   activeTrackColor: ColorManager.colorPrimary,
-      //   inactiveTrackColor: ColorManager.colorWhite1,
-      //   trackHeight: AppSize.s5,
-      //   overlayColor: ColorManager.colorPrimary1,
-      //   inactiveTickMarkColor: ColorManager.colorGrey1,
-      //   disabledInactiveTickMarkColor: ColorManager.colorGrey1,
-      // ),
+      sliderTheme: const SliderThemeData(
+        thumbColor: ColorManager.colorPrimary,
+        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+        activeTrackColor: ColorManager.colorPrimary,
+        inactiveTrackColor: ColorManager.colorPrimary1,
+        trackHeight: AppSize.s5,
+        overlayColor: ColorManager.colorPrimary1,
+        inactiveTickMarkColor: ColorManager.colorGrey1,
+        disabledInactiveTickMarkColor: ColorManager.colorGrey1,
+      ),
       // elevatedButtonTheme: ElevatedButtonThemeData(
       //   style: ElevatedButton.styleFrom(
       //     minimumSize: const Size(double.infinity, 48),

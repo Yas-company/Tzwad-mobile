@@ -9,6 +9,7 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppScaffoldWidget(
+      userSafeArea: false,
       body: SettingsViewBody(),
     );
   }

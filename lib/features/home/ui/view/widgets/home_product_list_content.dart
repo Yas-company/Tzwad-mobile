@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
@@ -8,10 +9,11 @@ import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
+import 'package:tzwad_mobile/features/home/ui/providers/home_controller_provider.dart';
 import 'package:tzwad_mobile/features/product/models/product_model.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../product/ui/products/view/widgets/item_product.dart';
+import '../../../../product/ui/widgets/item_product.dart';
 
 class HomeProductListContent extends StatelessWidget {
   const HomeProductListContent({
@@ -63,8 +65,13 @@ class HomeProductListContent extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: AppPadding.p16,
               ),
-              itemBuilder: (context, index) => ItemProduct(
-                product: products[index],
+              itemBuilder: (context, index) => Consumer(
+                builder: (context, ref, child) {
+                  return ItemProduct(
+                    product: products[index],
+                    onPressedFavoriteButton: (productId, value) => _onPressedFavoriteButton(ref, productId, value),
+                  );
+                },
               ),
               itemCount: products.length,
               separatorBuilder: (BuildContext context, int index) => const Gap(AppPadding.p12),
@@ -77,5 +84,9 @@ class HomeProductListContent extends StatelessWidget {
 
   _onPressedSeeAllButton(BuildContext context) {
     context.pushNamed(AppRoutes.productsRoute);
+  }
+
+  _onPressedFavoriteButton(WidgetRef ref, int productId, bool value) {
+    ref.read(homeControllerProvider.notifier).toggleFavorite(productId, value);
   }
 }

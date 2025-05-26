@@ -65,7 +65,7 @@ class ProductDetailsContent extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         TextSpan(
-                          text: '${product?.price} ${Constants.currency} ',
+                          text: '${product?.priceBeforeDiscount} ${Constants.currency} ',
                           style: StyleManager.getSemiBoldStyle(
                             color: ColorManager.colorPrimary,
                             fontSize: FontSize.s14,
@@ -85,7 +85,7 @@ class ProductDetailsContent extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'In Stock (${product?.stockQty})',
+                        stockStatus(product?.stockQty),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: StyleManager.getSemiBoldStyle(
@@ -98,7 +98,7 @@ class ProductDetailsContent extends StatelessWidget {
                     bottom: AppPadding.p16,
                   ),
                   ProductDescription(
-                    description: Faker().lorem.sentence() + Faker().lorem.sentence() + Faker().lorem.sentence(),
+                    description: product?.description ?? '',
                   ).marginOnly(
                     bottom: AppPadding.p16,
                   ),
@@ -116,5 +116,13 @@ class ProductDetailsContent extends StatelessWidget {
 
   _onPressedBackButton(BuildContext context) {
     context.pop();
+  }
+
+  String stockStatus(int? quantity) {
+    if (quantity != null && quantity > 0) {
+      return 'In Stock($quantity)';
+    } else {
+      return 'Out of Stock($quantity)';
+    }
   }
 }

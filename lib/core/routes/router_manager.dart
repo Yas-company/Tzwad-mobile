@@ -2,11 +2,15 @@ import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/routes/app_router.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/core/util/app_context.dart';
+import 'package:tzwad_mobile/features/auth/ui/change_password/view/change_password_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/forget_password/view/forget_password_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/login/view/login_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/otp/view/otp_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/register/view/register_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/reset_password/view/reset_password_view.dart';
+import 'package:tzwad_mobile/features/category/ui/categories/view/categories_view.dart';
+import 'package:tzwad_mobile/features/category/ui/category_details/view/category_details_view.dart';
+import 'package:tzwad_mobile/features/generic/ui/under_develop_view.dart';
 import 'package:tzwad_mobile/features/product/ui/cart/view/cart_view.dart';
 import 'package:tzwad_mobile/features/product/ui/favorite_products/view/favorite_products_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/onboarding/view/onboarding_view.dart';
@@ -25,6 +29,10 @@ class RouterManager {
     navigatorKey: AppContext.navigatorKey,
     initialLocation: AppRoutes.splashRoute,
     routes: [
+      AppRouter(
+        route: AppRoutes.underDevelopmentRoute,
+        screen: const UnderDevelopView(),
+      ),
       AppRouter(
         route: AppRoutes.splashRoute,
         screen: const SplashView(),
@@ -50,6 +58,10 @@ class RouterManager {
         screen: const ResetPasswordView(),
       ),
       AppRouter(
+        route: AppRoutes.changePasswordRoute,
+        screen: const ChangePasswordView(),
+      ),
+      AppRouter(
         route: AppRoutes.otpRoute,
         screen: const OtpView(),
       ),
@@ -64,6 +76,14 @@ class RouterManager {
       AppRouter(
         route: AppRoutes.productDetailsRoute,
         screen: const ProductDetailsView(),
+      ),
+      AppRouter(
+        route: AppRoutes.categoriesRoute,
+        screen: const CategoriesView(),
+      ),
+      AppRouter(
+        route: AppRoutes.categoryDetailsRoute,
+        screen: const CategoryDetailsView(),
       ),
       ShellRoute(
         builder: (context, state, child) => NavBarView(child: child),

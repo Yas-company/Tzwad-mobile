@@ -49,7 +49,7 @@ class HomeController extends AutoDisposeNotifier<HomeState> {
       ),
       (r) => state = state.copyWith(
         getCategoriesDataState: DataState.success,
-        categories: r,
+        categories: r.data,
       ),
     );
   }
@@ -77,14 +77,12 @@ class HomeController extends AutoDisposeNotifier<HomeState> {
     cartLocalData.increaseProductToCart(product);
   }
 
-  void switchFavorite(ProductModel product) {
-    state = state.copyWith(
-      products: state.products.map((e) {
-        if (e.id == product.id) {
-          e.isFavorite = !e.isFavorite;
-        }
-        return e;
-      }).toList(),
-    );
+  void toggleFavorite(int productId, bool value) async {
+    final repository = ref.read(productRepositoryProvider);
+    if (value) {
+      await repository.addProductToFavorites(id: productId);
+    } else {
+      await repository.removeProductFromFavorites(id: productId);
+    }
   }
 }

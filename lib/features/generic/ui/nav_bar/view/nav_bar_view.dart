@@ -14,6 +14,7 @@ class NavBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldWidget(
+      userSafeArea: false,
       body: child,
       bottomNavigationBar: const CustomBottomNavigation(),
     );

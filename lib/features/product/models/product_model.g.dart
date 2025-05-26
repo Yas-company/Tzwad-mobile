@@ -20,19 +20,21 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       id: fields[0] as int?,
       name: fields[1] as String?,
       image: fields[2] as String?,
-      price: fields[3] as String?,
-      stockQty: fields[4] as int?,
-      createdAt: fields[5] as String?,
-      updatedAt: fields[6] as String?,
+      price: fields[4] as String?,
+      stockQty: fields[6] as int?,
+      createdAt: fields[7] as String?,
+      updatedAt: fields[8] as String?,
     )
-      ..isFavorite = fields[7] as bool
-      ..quantity = fields[8] as int;
+      ..priceBeforeDiscount = fields[3] as String?
+      ..description = fields[5] as String?
+      ..isFavorite = fields[9] as bool
+      ..quantity = fields[10] as int;
   }
 
   @override
   void write(BinaryWriter writer, ProductModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -40,16 +42,20 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       ..writeByte(2)
       ..write(obj.image)
       ..writeByte(3)
-      ..write(obj.price)
+      ..write(obj.priceBeforeDiscount)
       ..writeByte(4)
-      ..write(obj.stockQty)
+      ..write(obj.price)
       ..writeByte(5)
-      ..write(obj.createdAt)
+      ..write(obj.description)
       ..writeByte(6)
-      ..write(obj.updatedAt)
+      ..write(obj.stockQty)
       ..writeByte(7)
-      ..write(obj.isFavorite)
+      ..write(obj.createdAt)
       ..writeByte(8)
+      ..write(obj.updatedAt)
+      ..writeByte(9)
+      ..write(obj.isFavorite)
+      ..writeByte(10)
       ..write(obj.quantity);
   }
 

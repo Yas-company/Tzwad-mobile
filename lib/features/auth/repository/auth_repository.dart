@@ -67,8 +67,8 @@ class AuthRepository {
           'address': address,
           'location': '$latitude, $longitude',
           'business_name': businessName,
-          'lic_id': '$name, $businessName',
-          'email': '$name@$businessName.com',
+          'lic_id': '',
+          'email': '',
           'password': password,
           'password_confirmation': password,
         },
@@ -131,6 +131,25 @@ class AuthRepository {
         url: ConstantsApi.resetPasswordUrl,
         data: {
           'phone': phoneNumber,
+          'password': newPassword,
+          'password_confirmation': newPassword,
+        },
+      );
+      return const Right(unit);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Result<Failure, Unit>> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    try {
+      await apiService.post(
+        url: ConstantsApi.changePasswordUrl,
+        data: {
+          'current_password': currentPassword,
           'password': newPassword,
           'password_confirmation': newPassword,
         },

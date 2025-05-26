@@ -67,4 +67,13 @@ class ProductsController extends AutoDisposeNotifier<ProductsState> {
       );
     }
   }
+
+  void toggleFavorite(int productId, bool value) async {
+    final repository = ref.read(productRepositoryProvider);
+    if (value) {
+      await repository.addProductToFavorites(id: productId);
+    } else {
+      await repository.removeProductFromFavorites(id: productId);
+    }
+  }
 }

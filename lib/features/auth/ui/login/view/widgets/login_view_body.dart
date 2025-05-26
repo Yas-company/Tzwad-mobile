@@ -79,6 +79,7 @@ class LoginViewBody extends StatelessWidget {
   }
 
   _onPressedSkipButton(BuildContext context) {
+    context.pushNamed(AppRoutes.underDevelopmentRoute);
     // context.pop();
   }
 

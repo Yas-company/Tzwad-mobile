@@ -29,4 +29,9 @@ extension NonNullStringExtension on String? {
       return this!;
     }
   }
+
+  String getPlaceHolderImage() {
+    if (this == null) return '';
+    return this!.split(' ').map((e) => e[0]).join('').toUpperCase();
+  }
 }

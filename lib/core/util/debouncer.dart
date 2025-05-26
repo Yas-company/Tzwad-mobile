@@ -9,6 +9,6 @@ class Debouncer {
     if (_timer != null) {
       _timer!.cancel();
     }
-    _timer = Timer(const Duration(milliseconds: 500), action);
+    _timer = Timer(const Duration(milliseconds: 1000), action);
   }
 }

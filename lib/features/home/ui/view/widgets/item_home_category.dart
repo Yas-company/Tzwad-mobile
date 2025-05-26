@@ -25,9 +25,9 @@ class ItemHomeCategory extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: AppSize.s160,
-        margin: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p6,
-        ),
+        // margin: const EdgeInsets.symmetric(
+        //   horizontal: AppPadding.p6,
+        // ),
         padding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p8,
         ),
@@ -73,9 +73,10 @@ class ItemHomeCategory extends StatelessWidget {
 
   _onPressedItemButton(BuildContext context) {
     context.pushNamed(
-      AppRoutes.productsRoute,
+      AppRoutes.categoryDetailsRoute,
       extra: {
         'category_id': category.id,
+        'category_name': category.name,
       },
     );
   }

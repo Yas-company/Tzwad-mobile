@@ -16,9 +16,20 @@ class ConstantsApi {
 
   //Api Category
   static String getCategoriesUrl = "categories";
+
   static String getCategoryDetailsUrl(int id) => "categories/$id";
 
   // Api Product
   static String getProductsUrl = "products";
+
   static String getProductDetailsUrl(int id) => "products/$id";
+
+  // Api Favorites
+  static String getFavoriteProductsUrl = "buyer/favorites";
+  static String addProductToFavoritesUrl = "buyer/favorites";
+
+  static String removeProductFromFavoritesUrl(int id) => "buyer/favorites/$id";
+
+  // Search & Filter
+  static String filterProducts = "products/filter";
 }

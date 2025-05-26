@@ -59,7 +59,7 @@ class SettingLocalData extends AppLocalData<dynamic> {
     return getByKey(keyOnBoardingScreenViewed) ?? false;
   }
 
-  void clearBoxUser() {
-    box.clear();
+  Future<void> clearBox() async {
+    await box.clear();
   }
 }

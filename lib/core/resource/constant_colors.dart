@@ -26,5 +26,5 @@ class ConstantColors {
   static const Color lightpink = Color.fromARGB(14, 255, 98, 127);
   // static const Color greyDots = Color(0xffD8D8D8);
   static const Color greytitle = Color(0xff818181);
-  static const Color greyYellow = Color(0xffFFE38F);
+  // static const Color greyYellow = Color(0xffFFE38F);
 }

@@ -6,7 +6,7 @@ import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/product/models/product_model.dart';
 import 'package:tzwad_mobile/features/product/ui/products/providers/product_controller_provider.dart';
 
-import 'product_list_content.dart';
+import '../../../widgets/product_list_content.dart';
 
 class ProductsViewBody extends ConsumerWidget {
   const ProductsViewBody({super.key});
@@ -37,6 +37,8 @@ class ProductsViewBody extends ConsumerWidget {
       case DataState.success:
         return ProductListContent(
           products: products,
+          onLoadMore: () {},
+          onPressedFavoriteButton: (productId, value) => _onPressedFavoriteButton(ref, productId, value),
           isLoading: false,
         );
       case DataState.empty:
@@ -50,5 +52,9 @@ class ProductsViewBody extends ConsumerWidget {
       default:
         return const SizedBox();
     }
+  }
+
+  _onPressedFavoriteButton(WidgetRef ref, int productId, bool value) {
+    ref.read(productsControllerProvider.notifier).toggleFavorite(productId, value);
   }
 }

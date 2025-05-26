@@ -12,6 +12,10 @@ class CartLocalData extends AppLocalData<ProductModel> {
     return getAll();
   }
 
+  void addProductToCart(ProductModel product) {
+    insert(product.id, product);
+  }
+
   void increaseProductToCart(ProductModel product) {
     product.quantity = product.quantity + 1;
     insert(product.id, product);
@@ -28,5 +32,9 @@ class CartLocalData extends AppLocalData<ProductModel> {
 
   void removeProductToCart(ProductModel product) {
     delete(product.id);
+  }
+
+  Future clearBox() async {
+    await box.clear();
   }
 }

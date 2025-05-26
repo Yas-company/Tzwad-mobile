@@ -30,7 +30,7 @@ class UserLocalData extends AppLocalData<UserModel> {
     delete(id);
   }
 
-  void clearBoxUser() {
-    box.clear();
+  Future clearBox() async {
+    await box.clear();
   }
 }

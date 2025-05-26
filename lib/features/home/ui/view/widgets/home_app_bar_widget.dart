@@ -15,66 +15,68 @@ class HomeAppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
     final user = ref.watch(userLocalDataProvider.select(
       (value) => value.getUserInfo(),
     ));
-    return Row(
-      children: [
-        Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text.rich(
-                TextSpan(
-                  text: 'Hello, ',
-                  style: StyleManager.getMediumStyle(
-                    color: ColorManager.greyHint,
-                    fontSize: FontSize.s12,
+    return SafeArea(
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text.rich(
+                  TextSpan(
+                    text: 'Hello, ',
+                    style: StyleManager.getMediumStyle(
+                      color: ColorManager.greyHint,
+                      fontSize: FontSize.s12,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: '${user?.name}',
+                        style: StyleManager.getBoldStyle(
+                          color: ColorManager.blackColor,
+                          fontSize: FontSize.s14,
+                        ),
+                      )
+                    ],
                   ),
-                  children: [
-                    TextSpan(
-                      text: '${user?.name}',
-                      style: StyleManager.getBoldStyle(
-                        color: ColorManager.blackColor,
-                        fontSize: FontSize.s14,
-                      ),
-                    )
-                  ],
+                ).marginOnly(
+                  bottom: AppPadding.p4,
                 ),
-              ).marginOnly(
-                bottom: AppPadding.p4,
-              ),
-              Text(
-                'Welcome to Tzawad',
-                style: StyleManager.getSemiBoldStyle(
-                  color: ColorManager.colorTitleTexts,
-                  fontSize: FontSize.s16,
+                Text(
+                  'Welcome to Tzawad',
+                  style: StyleManager.getSemiBoldStyle(
+                    color: ColorManager.colorTitleTexts,
+                    fontSize: FontSize.s16,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
-        CircleAvatar(
-          backgroundColor: ColorManager.colorPrimary,
-          radius: AppSize.s24,
-          child: Text(
-            getPlaceHolderImage(user?.name),
-            style: StyleManager.getBoldStyle(
-              color: ColorManager.colorPureWhite,
-              fontSize: FontSize.s16,
+              ],
             ),
           ),
-        )
-      ],
-    ).marginOnly(
-      start: AppPadding.p16,
-      end: AppPadding.p16,
-      top: AppPadding.p4,
-      bottom: AppPadding.p4,
+          CircleAvatar(
+            backgroundColor: ColorManager.colorPrimary,
+            radius: AppSize.s24,
+            child: Text(
+              getPlaceHolderImage(user?.name),
+              style: StyleManager.getBoldStyle(
+                color: ColorManager.colorPureWhite,
+                fontSize: FontSize.s16,
+              ),
+            ),
+          )
+        ],
+      ).marginOnly(
+        start: AppPadding.p16,
+        end: AppPadding.p16,
+        top: AppPadding.p4,
+        bottom: AppPadding.p4,
+      ),
     );
   }
 
   String getPlaceHolderImage(String? name) {
     if (name == null) return '';
-    return name.split(' ')[0].substring(0, 1).toUpperCase();
+    return name.split(' ').map((e) => e[0]).join('').toUpperCase();
   }
 
   @override

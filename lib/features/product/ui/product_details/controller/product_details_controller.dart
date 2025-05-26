@@ -58,6 +58,6 @@ class ProductDetailsController extends AutoDisposeNotifier<ProductDetailsState> 
     final product = state.product;
     if (product == null) return;
     product.quantity = state.quantity;
-    cartLocalData.increaseProductToCart(product);
+    cartLocalData.addProductToCart(product);
   }
 }

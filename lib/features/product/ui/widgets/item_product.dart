@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_network_image_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
+import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
@@ -18,18 +19,17 @@ class ItemProduct extends StatelessWidget {
   const ItemProduct({
     super.key,
     required this.product,
+    required this.onPressedFavoriteButton,
   });
 
   final ProductModel product;
+  final Function(int, bool) onPressedFavoriteButton;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: AppSize.s160,
       height: AppSize.s190,
-      // margin: const EdgeInsets.symmetric(
-      //   horizontal: AppPadding.p6,
-      // ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppSize.s8),
         border: Border.all(
@@ -67,27 +67,9 @@ class ItemProduct extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(AppPadding.p8),
-                  child: Consumer(
-                    builder: (context, ref, child) {
-                      return AppRippleWidget(
-                        onTap: () => _onPressedFavoriteButton(ref),
-                        child: Container(
-                          padding: const EdgeInsets.all(AppPadding.p4),
-                          decoration: const BoxDecoration(
-                            color: ColorManager.colorPureWhite,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              ColorManager.genericBoxShadow,
-                            ],
-                          ),
-                          child: Icon(
-                            Icons.favorite,
-                            color: product.isFavorite ? ColorManager.colorRed : ColorManager.colorGrey1,
-                            size: AppSize.s24,
-                          ),
-                        ),
-                      );
-                    },
+                  child: _IconButtonFavoriteWidget(
+                    product: product,
+                    onPressedFavoriteButton: onPressedFavoriteButton,
                   ),
                 ),
               ],
@@ -121,7 +103,7 @@ class ItemProduct extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '${product.price} ${Constants.currency}',
+                          text: '${product.priceBeforeDiscount} ${Constants.currency}',
                           style: StyleManager.getRegularStyle(
                             color: ColorManager.cardGreyHint,
                             fontSize: FontSize.s10,
@@ -166,8 +148,58 @@ class ItemProduct extends StatelessWidget {
       },
     );
   }
+}
 
-  _onPressedFavoriteButton(WidgetRef ref) {
-    ref.read(homeControllerProvider.notifier).switchFavorite(product);
+class _IconButtonFavoriteWidget extends StatefulWidget {
+  const _IconButtonFavoriteWidget({
+    required this.product,
+    required this.onPressedFavoriteButton,
+  });
+
+  final ProductModel product;
+  final Function(int, bool) onPressedFavoriteButton;
+
+  @override
+  State<_IconButtonFavoriteWidget> createState() => _IconButtonFavoriteWidgetState();
+}
+
+class _IconButtonFavoriteWidgetState extends State<_IconButtonFavoriteWidget> {
+  bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isFavorite = widget.product.isFavorite;
+    'Mohammad ${widget.product.isFavorite}'.log();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AppRippleWidget(
+      onTap: () => _onPressedFavoriteButton(),
+      child: Container(
+        padding: const EdgeInsets.all(AppPadding.p4),
+        decoration: const BoxDecoration(
+          color: ColorManager.colorPureWhite,
+          shape: BoxShape.circle,
+          boxShadow: [
+            ColorManager.genericBoxShadow,
+          ],
+        ),
+        child: Icon(
+          Icons.favorite,
+          color: isFavorite ? ColorManager.colorRed : ColorManager.colorGrey1,
+          size: AppSize.s24,
+        ),
+      ),
+    );
+  }
+
+  _onPressedFavoriteButton() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+    widget.onPressedFavoriteButton(widget.product.id ?? 0, isFavorite);
+    // ref.read(homeControllerProvider.notifier).switchFavorite(product);
   }
 }
