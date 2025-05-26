@@ -73,6 +73,17 @@ class FavoriteProductsController extends AutoDisposeNotifier<FavoriteProductsSta
     if (value) {
       await repository.addProductToFavorites(id: productId);
     } else {
+      final products = state.products.where((element) => element.id != productId).toList();
+      if (products.isEmpty) {
+        state = state.copyWith(
+          getFavoriteProductsDataState: DataState.empty,
+          products: [],
+        );
+      } else {
+        state = state.copyWith(
+          products: products,
+        );
+      }
       await repository.removeProductFromFavorites(id: productId);
     }
   }
