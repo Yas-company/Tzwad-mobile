@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_empt_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_failure_widget.dart';
+import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/product/models/product_model.dart';
 import 'package:tzwad_mobile/features/product/ui/products/providers/product_controller_provider.dart';
 
-import '../../../widgets/product_list_content.dart';
+import '../../../widgets/product_grid_list_content.dart';
 
 class ProductsViewBody extends ConsumerWidget {
   const ProductsViewBody({super.key});
@@ -18,6 +19,12 @@ class ProductsViewBody extends ConsumerWidget {
         (state) => state.getProductsDataState,
       ),
     );
+    final isLoadingMore = ref.watch(
+      productsControllerProvider.select(
+        (state) => state.isLoadingMore,
+      ),
+    );
+
     final products = ref.watch(
       productsControllerProvider.select(
         (state) => state.products,
@@ -28,26 +35,32 @@ class ProductsViewBody extends ConsumerWidget {
         (state) => state.failure,
       ),
     );
+    'ProductsViewBody State: ${products.length}'.log();
     switch (state) {
       case DataState.loading:
-        return ProductListContent(
+        return ProductGridListContent(
           products: ProductModel.generateFakeList(),
           isLoading: true,
         );
       case DataState.success:
-        return ProductListContent(
+        return ProductGridListContent(
+          isLoadingMore: isLoadingMore,
           products: products,
-          onLoadMore: () {},
+          failure: failure,
+          onLoadMore: () => _onLoadMore(ref),
           onPressedFavoriteButton: (productId, value) => _onPressedFavoriteButton(ref, productId, value),
-          isLoading: false,
         );
       case DataState.empty:
-        return const AppEmptyWidget(
-          message: 'No products found.',
+        return const Center(
+          child: AppEmptyWidget(
+            message: 'No products found.',
+          ),
         );
       case DataState.failure:
-        return AppFailureWidget(
-          failure: failure,
+        return Center(
+          child: AppFailureWidget(
+            failure: failure,
+          ),
         );
       default:
         return const SizedBox();
@@ -56,5 +69,9 @@ class ProductsViewBody extends ConsumerWidget {
 
   _onPressedFavoriteButton(WidgetRef ref, int productId, bool value) {
     ref.read(productsControllerProvider.notifier).toggleFavorite(productId, value);
+  }
+
+  _onLoadMore(WidgetRef ref) {
+    ref.read(productsControllerProvider.notifier).getMoreData();
   }
 }

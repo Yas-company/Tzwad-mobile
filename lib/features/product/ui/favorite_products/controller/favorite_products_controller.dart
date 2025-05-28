@@ -44,22 +44,25 @@ class FavoriteProductsController extends AutoDisposeNotifier<FavoriteProductsSta
     );
   }
 
-  void getPage() async {
+  void getMoreData() async {
     if (state.hasMore) {
       final repository = ref.read(productRepositoryProvider);
-      state = state.copyWith();
-      final result = await repository.getProducts(
+      state = state.copyWith(
+        isLoadingMore: true,
+      );
+      final result = await repository.getFavoriteProducts(
         page: state.pageNumber,
       );
       result.fold(
         (l) => state = state.copyWith(
+          isLoadingMore: false,
           failure: l,
         ),
         (r) {
-          List<ProductModel> newDataList = state.products;
-          newDataList.addAll(r.data);
+          final items = List<ProductModel>.from(state.products)..addAll(r.data);
           state = state.copyWith(
-            products: newDataList,
+            isLoadingMore: false,
+            products: items,
             hasMore: r.hasMore,
             pageNumber: state.pageNumber + 1,
           );

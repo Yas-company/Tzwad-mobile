@@ -5,7 +5,7 @@ import 'package:tzwad_mobile/core/app_widgets/app_failure_widget.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/product/models/product_model.dart';
 import 'package:tzwad_mobile/features/product/ui/search/providers/search_controller_provider.dart';
-import 'package:tzwad_mobile/features/product/ui/widgets/product_list_content.dart';
+import 'package:tzwad_mobile/features/product/ui/widgets/product_grid_list_content.dart';
 
 import 'search_init_widget.dart';
 
@@ -17,6 +17,11 @@ class SearchContentList extends ConsumerWidget {
     final state = ref.watch(
       searchControllerProvider.select(
         (state) => state.getFilterProductsDataState,
+      ),
+    );
+    final isLoadingMore = ref.watch(
+      searchControllerProvider.select(
+        (state) => state.isLoadingMore,
       ),
     );
     final products = ref.watch(
@@ -31,23 +36,29 @@ class SearchContentList extends ConsumerWidget {
     );
     switch (state) {
       case DataState.loading:
-        return ProductListContent(
+        return ProductGridListContent(
           products: ProductModel.generateFakeList(),
           isLoading: true,
         );
       case DataState.success:
-        return ProductListContent(
+        return ProductGridListContent(
+          isLoadingMore: isLoadingMore,
           products: products,
-          isLoading: false,
+          failure: failure,
+          onLoadMore: () => _onLoadMore(ref),
           onPressedFavoriteButton: (productId, value) => _onPressedFavoriteButton(ref, productId, value),
         );
       case DataState.empty:
-        return const AppEmptyWidget(
-          message: 'No products found.',
+        return const Center(
+          child: AppEmptyWidget(
+            message: 'No products found.',
+          ),
         );
       case DataState.failure:
-        return AppFailureWidget(
-          failure: failure,
+        return Center(
+          child: AppFailureWidget(
+            failure: failure,
+          ),
         );
       case DataState.initial:
         return const Center(
@@ -58,5 +69,9 @@ class SearchContentList extends ConsumerWidget {
 
   _onPressedFavoriteButton(WidgetRef ref, int productId, bool value) {
     ref.read(searchControllerProvider.notifier).toggleFavorite(productId, value);
+  }
+
+  _onLoadMore(WidgetRef ref) {
+    ref.read(searchControllerProvider.notifier).getMoreData();
   }
 }

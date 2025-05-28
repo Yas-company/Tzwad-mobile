@@ -5,6 +5,7 @@ import 'package:tzwad_mobile/features/product/models/product_model.dart';
 
 class SearchState {
   final DataState getFilterProductsDataState;
+  final bool isLoadingMore;
   final List<ProductModel> products;
   final List<CategoryModel> categories;
   final int pageNumber;
@@ -17,6 +18,7 @@ class SearchState {
 
   SearchState({
     this.getFilterProductsDataState = DataState.initial,
+    this.isLoadingMore = false,
     this.products = const [],
     this.categories = const [],
     this.pageNumber = 1,
@@ -30,6 +32,7 @@ class SearchState {
 
   SearchState copyWith({
     DataState? getFilterProductsDataState,
+    bool? isLoadingMore,
     List<ProductModel>? products,
     List<CategoryModel>? categories,
     int? pageNumber,
@@ -45,6 +48,7 @@ class SearchState {
   }) {
     return SearchState(
       getFilterProductsDataState: getFilterProductsDataState ?? this.getFilterProductsDataState,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       products: products ?? this.products,
       categories: categories ?? this.categories,
       pageNumber: pageNumber ?? this.pageNumber,

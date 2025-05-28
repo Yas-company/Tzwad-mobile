@@ -40,6 +40,18 @@ class ProductRepository {
     }
   }
 
+  Future<Result<Failure, List<ProductModel>>> getProductsRelated({required int id}) async {
+    try {
+      final response = await apiService.get<List<ProductModel>>(
+        url: ConstantsApi.getProductsRelatedUrl(id),
+        fromJsonListT: ProductModel.fromJsonList,
+      );
+      return Right(response.data ?? []);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
   Future<Result<Failure, ProductModel>> getProduct({required int id}) async {
     try {
       final response = await apiService.get<ProductModel>(
@@ -63,10 +75,9 @@ class ProductRepository {
 
   Future<Result<Failure, PageModel<ProductModel>>> getFavoriteProducts({int page = 1}) async {
     try {
-      final response = await apiService.get<List<ProductModel>>(
-        url: ConstantsApi.getFavoriteProductsUrl,
-        fromJsonListT: ProductModel.fromJsonList,
-      );
+      final response = await apiService.get<List<ProductModel>>(url: ConstantsApi.getFavoriteProductsUrl, fromJsonListT: ProductModel.fromJsonList, params: {
+        'page': page,
+      });
       return Right(
         PageModel<ProductModel>(
           data: response.data ?? [],
@@ -101,7 +112,7 @@ class ProductRepository {
     }
   }
 
-  Future<Result<Failure, List<ProductModel>>> filterProducts({
+  Future<Result<Failure, PageModel<ProductModel>>> filterProducts({
     int page = 1,
     int? categoryId,
     num? minPrice,
@@ -113,13 +124,19 @@ class ProductRepository {
         url: ConstantsApi.filterProducts,
         fromJsonListT: ProductModel.fromJsonList,
         params: {
+          'page': page,
           'category_id': categoryId,
           'min_price': minPrice,
           'max_price': maxPrice,
           'q': search,
         },
       );
-      return Right(response.data ?? []);
+      return Right(
+        PageModel<ProductModel>(
+          data: response.data ?? [],
+          hasMore: response.hasMore,
+        ),
+      );
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
     }

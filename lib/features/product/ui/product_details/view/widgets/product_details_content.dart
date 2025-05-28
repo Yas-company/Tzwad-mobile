@@ -9,6 +9,7 @@ import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/util/constants.dart';
 import 'package:tzwad_mobile/features/product/models/product_model.dart';
+import 'package:tzwad_mobile/features/product/ui/widgets/product_horizontal_list_content.dart';
 
 import 'product_additional_information.dart';
 import 'product_description.dart';
@@ -18,16 +19,20 @@ class ProductDetailsContent extends StatelessWidget {
   const ProductDetailsContent({
     super.key,
     required this.product,
-    required this.isLoading,
+    required this.products,
+    this.isLoadingProduct = false,
+    this.isLoadingProductsRelated = false,
   });
 
   final ProductModel? product;
-  final bool isLoading;
+  final List<ProductModel> products;
+  final bool isLoadingProduct;
+  final bool isLoadingProductsRelated;
 
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
-      enabled: isLoading,
+      enabled: isLoadingProduct,
       child: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -65,14 +70,14 @@ class ProductDetailsContent extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         TextSpan(
-                          text: '${product?.priceBeforeDiscount} ${Constants.currency} ',
+                          text: '${product?.price} ${Constants.currency} ',
                           style: StyleManager.getSemiBoldStyle(
                             color: ColorManager.colorPrimary,
                             fontSize: FontSize.s14,
                           ),
                           children: [
                             TextSpan(
-                              text: '${product?.price} ${Constants.currency}',
+                              text: '${product?.priceBeforeDiscount} ${Constants.currency}',
                               style: StyleManager.getRegularStyle(
                                 color: ColorManager.cardGreyHint,
                                 fontSize: FontSize.s14,
@@ -104,6 +109,12 @@ class ProductDetailsContent extends StatelessWidget {
                   ),
                   ProductAdditionalInformation(
                     info: Faker().lorem.sentence() + Faker().lorem.sentence() + Faker().lorem.sentence(),
+                  ).marginOnly(
+                    bottom: AppPadding.p16,
+                  ),
+                  ProductHorizontalListContent(
+                    isLoading: isLoadingProductsRelated,
+                    products: products,
                   ),
                 ],
               ),

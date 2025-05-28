@@ -4,6 +4,7 @@ import 'package:tzwad_mobile/features/category/models/category_model.dart';
 
 class CategoriesState {
   final DataState getCategoriesDataState;
+  final bool isLoadingMore;
   final List<CategoryModel> categories;
   final int pageNumber;
   final bool hasMore;
@@ -11,6 +12,7 @@ class CategoriesState {
 
   CategoriesState({
     this.getCategoriesDataState = DataState.initial,
+    this.isLoadingMore = false,
     this.categories = const [],
     this.pageNumber = 1,
     this.hasMore = false,
@@ -19,6 +21,7 @@ class CategoriesState {
 
   CategoriesState copyWith({
     DataState? getCategoriesDataState,
+    bool? isLoadingMore,
     List<CategoryModel>? categories,
     int? pageNumber,
     bool? hasMore,
@@ -26,6 +29,7 @@ class CategoriesState {
   }) {
     return CategoriesState(
       getCategoriesDataState: getCategoriesDataState ?? this.getCategoriesDataState,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       categories: categories ?? this.categories,
       pageNumber: pageNumber ?? this.pageNumber,
       hasMore: hasMore ?? this.hasMore,

@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-ScrollController useProductsScrollController({
+ScrollController useCategoriesScrollController({
   required Function()? onLoadMore,
 }) {
   return use(
-    _ProductsScrollControllerHook(
+    _CategoriesScrollControllerHook(
       onLoadMore: onLoadMore,
     ),
   );
 }
 
-class _ProductsScrollControllerHook extends Hook<ScrollController> {
+class _CategoriesScrollControllerHook extends Hook<ScrollController> {
   final Function()? onLoadMore;
 
-  const _ProductsScrollControllerHook({
+  const _CategoriesScrollControllerHook({
     required this.onLoadMore,
   });
 
   @override
-  HookState<ScrollController, Hook<ScrollController>> createState() => _ProductsScrollControllerHookState();
+  HookState<ScrollController, Hook<ScrollController>> createState() => _CategoriesScrollControllerHookState();
 }
 
-class _ProductsScrollControllerHookState extends HookState<ScrollController, _ProductsScrollControllerHook> {
+class _CategoriesScrollControllerHookState extends HookState<ScrollController, _CategoriesScrollControllerHook> {
   late final ScrollController _scrollController;
 
   @override
@@ -43,7 +43,7 @@ class _ProductsScrollControllerHookState extends HookState<ScrollController, _Pr
   }
 
   @override
-  void didUpdateHook(_ProductsScrollControllerHook oldHook) {
+  void didUpdateHook(_CategoriesScrollControllerHook oldHook) {
     super.didUpdateHook(oldHook);
   }
 

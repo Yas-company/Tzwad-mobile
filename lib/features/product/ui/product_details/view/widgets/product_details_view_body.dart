@@ -17,6 +17,16 @@ class ProductDetailsViewBody extends ConsumerWidget {
         (value) => value.getProductDetailsDataState,
       ),
     );
+    final stateProductsRelated = ref.watch(
+      productDetailsControllerProvider.select(
+        (value) => value.getProductsRelatedDataState,
+      ),
+    );
+    final products = ref.read(
+      productDetailsControllerProvider.select(
+        (value) => value.productsRelated,
+      ),
+    );
     final product = ref.read(
       productDetailsControllerProvider.select(
         (value) => value.product,
@@ -32,12 +42,16 @@ class ProductDetailsViewBody extends ConsumerWidget {
       case DataState.loading:
         return ProductDetailsContent(
           product: ProductModel.fake(),
-          isLoading: true,
+          products: products,
+          isLoadingProduct: true,
+          isLoadingProductsRelated: stateProductsRelated == DataState.loading,
         );
       case DataState.success:
         return ProductDetailsContent(
           product: product,
-          isLoading: false,
+          products: products,
+          isLoadingProduct: false,
+          isLoadingProductsRelated: stateProductsRelated == DataState.loading,
         );
       case DataState.failure:
         return AppFailureWidget(

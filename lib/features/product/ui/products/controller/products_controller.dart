@@ -44,22 +44,25 @@ class ProductsController extends AutoDisposeNotifier<ProductsState> {
     );
   }
 
-  void getPage() async {
+  void getMoreData() async {
     if (state.hasMore) {
       final repository = ref.read(productRepositoryProvider);
-      state = state.copyWith();
+      state = state.copyWith(
+        isLoadingMore: true,
+      );
       final result = await repository.getProducts(
         page: state.pageNumber,
       );
       result.fold(
         (l) => state = state.copyWith(
+          isLoadingMore: false,
           failure: l,
         ),
         (r) {
-          List<ProductModel> newDataList = state.products;
-          newDataList.addAll(r.data);
+          final items = List<ProductModel>.from(state.products)..addAll(r.data);
           state = state.copyWith(
-            products: newDataList,
+            isLoadingMore: false,
+            products: items,
             hasMore: r.hasMore,
             pageNumber: state.pageNumber + 1,
           );

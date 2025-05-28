@@ -6,7 +6,7 @@ import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/category/models/category_model.dart';
 import 'package:tzwad_mobile/features/category/ui/categories/providers/categories_controller_provider.dart';
 
-import 'category_list_content.dart';
+import 'category_grid_list_content.dart';
 
 class CategoriesViewBody extends ConsumerWidget {
   const CategoriesViewBody({super.key});
@@ -16,6 +16,11 @@ class CategoriesViewBody extends ConsumerWidget {
     final state = ref.watch(
       categoriesControllerProvider.select(
         (state) => state.getCategoriesDataState,
+      ),
+    );
+    final isLoadingMore = ref.watch(
+      categoriesControllerProvider.select(
+        (state) => state.isLoadingMore,
       ),
     );
     final categories = ref.watch(
@@ -30,25 +35,35 @@ class CategoriesViewBody extends ConsumerWidget {
     );
     switch (state) {
       case DataState.loading:
-        return CategoryListContent(
+        return CategoryGridListContent(
           categories: CategoryModel.generateFakeList(),
           isLoading: true,
         );
       case DataState.success:
-        return CategoryListContent(
+        return CategoryGridListContent(
+          isLoadingMore: isLoadingMore,
           categories: categories,
-          isLoading: false,
+          failure: failure,
+          onLoadMore: () => _onLoadingMore(ref),
         );
       case DataState.empty:
-        return const AppEmptyWidget(
-          message: 'No Categories found.',
+        return const Center(
+          child: AppEmptyWidget(
+            message: 'No Categories found.',
+          ),
         );
       case DataState.failure:
-        return AppFailureWidget(
-          failure: failure,
+        return Center(
+          child: AppFailureWidget(
+            failure: failure,
+          ),
         );
       default:
         return const SizedBox();
     }
+  }
+
+  _onLoadingMore(WidgetRef ref) {
+    ref.read(categoriesControllerProvider.notifier).getMoreData();
   }
 }

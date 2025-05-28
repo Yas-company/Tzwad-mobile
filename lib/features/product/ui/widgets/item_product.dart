@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_network_image_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
-import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
@@ -169,8 +168,7 @@ class _IconButtonFavoriteWidgetState extends State<_IconButtonFavoriteWidget> {
   @override
   void initState() {
     super.initState();
-    isFavorite = widget.product.isFavorite;
-    'Mohammad ${widget.product.isFavorite}'.log();
+    isFavorite = widget.product.isFavorite ?? false;
   }
 
   @override

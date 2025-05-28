@@ -45,22 +45,25 @@ class CategoriesController extends AutoDisposeNotifier<CategoriesState> {
     );
   }
 
-  void getPage() async {
+  void getMoreData() async {
     if (state.hasMore) {
       final repository = ref.read(categoryRepositoryProvider);
-      state = state.copyWith();
+      state = state.copyWith(
+        isLoadingMore: true,
+      );
       final result = await repository.getCategories(
         page: state.pageNumber,
       );
       result.fold(
         (l) => state = state.copyWith(
+          isLoadingMore: false,
           failure: l,
         ),
         (r) {
-          List<CategoryModel> newDataList = state.categories;
-          newDataList.addAll(r.data);
+          final items = List<CategoryModel>.from(state.categories)..addAll(r.data);
           state = state.copyWith(
-            categories: newDataList,
+            isLoadingMore: false,
+            categories: items,
             hasMore: r.hasMore,
             pageNumber: state.pageNumber + 1,
           );

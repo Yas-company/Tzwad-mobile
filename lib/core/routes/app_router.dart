@@ -21,9 +21,10 @@ class AppRouter extends GoRoute {
           pageBuilder: (context, state) {
             final args = _extractArgs(state);
             setArgs(route, args);
+            // 'AppRouter route: $route, args: $args ${_getUniqueKey()}'.log();
+            // final uniqueKey = ValueKey(_getUniqueKey());
             if (withAnimation) {
               return CustomTransitionPage(
-                key: state.pageKey,
                 child: screen,
                 transitionsBuilder: (context, animation, secondaryAnimation, child) {
                   return FadeTransition(opacity: animation, child: screen);
@@ -45,5 +46,9 @@ class AppRouter extends GoRoute {
       args.addAll(state.extra as Map<String, dynamic>);
     }
     return args;
+  }
+
+  static String _getUniqueKey() {
+    return DateTime.now().millisecondsSinceEpoch.toString();
   }
 }

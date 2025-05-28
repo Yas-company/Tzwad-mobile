@@ -22,19 +22,20 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       image: fields[2] as String?,
       price: fields[4] as String?,
       stockQty: fields[6] as int?,
+      isFavorite: fields[9] as bool?,
+      cartQuantity: fields[10] as int?,
+      priceBeforeDiscount: fields[3] as String?,
       createdAt: fields[7] as String?,
       updatedAt: fields[8] as String?,
     )
-      ..priceBeforeDiscount = fields[3] as String?
       ..description = fields[5] as String?
-      ..isFavorite = fields[9] as bool
-      ..quantity = fields[10] as int;
+      ..quantity = fields[11] as int;
   }
 
   @override
   void write(BinaryWriter writer, ProductModel obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -56,6 +57,8 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       ..writeByte(9)
       ..write(obj.isFavorite)
       ..writeByte(10)
+      ..write(obj.cartQuantity)
+      ..writeByte(11)
       ..write(obj.quantity);
   }
 

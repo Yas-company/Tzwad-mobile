@@ -32,6 +32,24 @@ class ProductDetailsController extends AutoDisposeNotifier<ProductDetailsState> 
     );
   }
 
+  void getProductsRelated(int id) async {
+    final repository = ref.read(productRepositoryProvider);
+    state = state.copyWith(
+      getProductsRelatedDataState: DataState.loading,
+    );
+    final result = await repository.getProductsRelated(id: id);
+    result.fold(
+      (l) => state = state.copyWith(
+        getProductsRelatedDataState: DataState.failure,
+        failure: l,
+      ),
+      (r) => state = state.copyWith(
+        getProductsRelatedDataState: DataState.success,
+        productsRelated: r,
+      ),
+    );
+  }
+
   void increaseQuantity() {
     if (state.quantity == state.product?.stockQty) return;
     final price = double.tryParse(state.product?.price ?? '0.0') ?? 0.0;

@@ -23,9 +23,13 @@ class _UpsertUserViewState extends ConsumerState<ProductDetailsView> {
   void initState() {
     super.initState();
     final id = appArgs['id'];
-    Future.microtask(() {
-      ref.read(productDetailsControllerProvider.notifier).getProduct(id);
-    });
+    Future.microtask(
+      () {
+        final controller = ref.read(productDetailsControllerProvider.notifier);
+        controller.getProduct(id);
+        controller.getProductsRelated(id);
+      },
+    );
   }
 
   @override
@@ -41,11 +45,11 @@ class _UpsertUserViewState extends ConsumerState<ProductDetailsView> {
             ),
           );
 
-          final product = ref.watch(
-            productDetailsControllerProvider.select(
-              (value) => value.product,
-            ),
-          );
+          // final product = ref.watch(
+          //   productDetailsControllerProvider.select(
+          //     (value) => value.product,
+          //   ),
+          // );
           return state == DataState.success
               ? Container(
                   decoration: const BoxDecoration(

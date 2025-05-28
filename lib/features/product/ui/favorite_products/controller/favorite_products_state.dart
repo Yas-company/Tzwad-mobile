@@ -4,6 +4,7 @@ import 'package:tzwad_mobile/features/product/models/product_model.dart';
 
 class FavoriteProductsState {
   final DataState getFavoriteProductsDataState;
+  final bool isLoadingMore;
   final List<ProductModel> products;
   final int pageNumber;
   final bool hasMore;
@@ -11,6 +12,7 @@ class FavoriteProductsState {
 
   FavoriteProductsState({
     this.getFavoriteProductsDataState = DataState.initial,
+    this.isLoadingMore = false,
     this.products = const [],
     this.pageNumber = 1,
     this.hasMore = false,
@@ -19,6 +21,7 @@ class FavoriteProductsState {
 
   FavoriteProductsState copyWith({
     DataState? getFavoriteProductsDataState,
+    bool? isLoadingMore,
     List<ProductModel>? products,
     int? pageNumber,
     bool? hasMore,
@@ -26,6 +29,7 @@ class FavoriteProductsState {
   }) {
     return FavoriteProductsState(
       getFavoriteProductsDataState: getFavoriteProductsDataState ?? this.getFavoriteProductsDataState,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       products: products ?? this.products,
       pageNumber: pageNumber ?? this.pageNumber,
       hasMore: hasMore ?? this.hasMore,
@@ -33,4 +37,3 @@ class FavoriteProductsState {
     );
   }
 }
-

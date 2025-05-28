@@ -65,7 +65,8 @@ class AuthRepository {
           'phone': phoneNumber,
           'country_code': '966',
           'address': address,
-          'location': '$latitude, $longitude',
+          'latitude': latitude,
+          'longitude': longitude,
           'business_name': businessName,
           'lic_id': '',
           'email': '',
@@ -153,6 +154,17 @@ class AuthRepository {
           'password': newPassword,
           'password_confirmation': newPassword,
         },
+      );
+      return const Right(unit);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Result<Failure, Unit>> deleteAccount() async {
+    try {
+      await apiService.delete<Unit>(
+        url: ConstantsApi.deleteAccountUrl,
       );
       return const Right(unit);
     } catch (error) {

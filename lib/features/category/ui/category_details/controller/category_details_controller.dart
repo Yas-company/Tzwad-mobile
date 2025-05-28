@@ -44,6 +44,34 @@ class CategoryDetailsController extends AutoDisposeNotifier<CategoryDetailsState
     );
   }
 
+  void getMoreData(int categoryId) async {
+    if (state.hasMore) {
+      final repository = ref.read(categoryRepositoryProvider);
+      state = state.copyWith(
+        isLoadingMore: true,
+      );
+      final result = await repository.getProductsByCategory(
+        page: state.pageNumber,
+        categoryId: categoryId,
+      );
+      result.fold(
+        (l) => state = state.copyWith(
+          isLoadingMore: false,
+          failure: l,
+        ),
+        (r) {
+          final items = List<ProductModel>.from(state.products)..addAll(r.data);
+          state = state.copyWith(
+            isLoadingMore: false,
+            products: items,
+            hasMore: r.hasMore,
+            pageNumber: state.pageNumber + 1,
+          );
+        },
+      );
+    }
+  }
+
   void getPage(int categoryId) async {
     if (state.hasMore) {
       final repository = ref.read(categoryRepositoryProvider);

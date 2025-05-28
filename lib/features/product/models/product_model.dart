@@ -4,9 +4,6 @@ import 'package:tzwad_mobile/features/category/models/category_model.dart';
 
 part 'product_model.g.dart';
 
-//  String? priceBeforeDiscount;
-//   String? price;
-//   String? description;
 @HiveType(typeId: 2)
 class ProductModel extends HiveObject {
   @HiveField(0)
@@ -40,9 +37,12 @@ class ProductModel extends HiveObject {
   String? updatedAt;
 
   @HiveField(9)
-  bool isFavorite = false;
+  bool? isFavorite;
 
   @HiveField(10)
+  int? cartQuantity;
+
+  @HiveField(11)
   int quantity = 1;
 
   ProductModel({
@@ -52,6 +52,9 @@ class ProductModel extends HiveObject {
     this.price,
     this.stockQty,
     this.category,
+    this.isFavorite,
+    this.cartQuantity,
+    this.priceBeforeDiscount,
     this.createdAt,
     this.updatedAt,
   });
@@ -65,6 +68,7 @@ class ProductModel extends HiveObject {
     stockQty = json['stock_qty'];
     description = json['description'];
     isFavorite = json['is_favorite'];
+    cartQuantity = json['cart_quantity'];
     category = json['category'] != null ? CategoryModel.fromJson(json['category']) : null;
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
