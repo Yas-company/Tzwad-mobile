@@ -2,7 +2,10 @@ import 'package:tzwad_mobile/core/network/failure.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 
 class RegisterState {
+  final DataState getLocationDataState;
   final DataState submitRegisterDataState;
+  final double latitude;
+  final double longitude;
   final String name;
   final String nameValidationMessage;
   final String businessName;
@@ -18,8 +21,11 @@ class RegisterState {
   final Failure? failure;
 
   RegisterState({
+    this.getLocationDataState = DataState.initial,
     this.submitRegisterDataState = DataState.initial,
     this.name = '',
+    this.latitude = 0.0,
+    this.longitude = 0.0,
     this.nameValidationMessage = '',
     this.businessName = '',
     this.businessNameValidationMessage = '',
@@ -35,7 +41,10 @@ class RegisterState {
   });
 
   RegisterState copyWith({
+    DataState? getLocationDataState,
     DataState? submitRegisterDataState,
+    double? latitude,
+    double? longitude,
     String? name,
     String? nameValidationMessage,
     String? businessName,
@@ -51,8 +60,11 @@ class RegisterState {
     Failure? failure,
   }) {
     return RegisterState(
+      getLocationDataState: getLocationDataState ?? this.getLocationDataState,
       submitRegisterDataState: submitRegisterDataState ?? this.submitRegisterDataState,
       name: name ?? this.name,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
       nameValidationMessage: nameValidationMessage ?? this.nameValidationMessage,
       businessName: businessName ?? this.businessName,
       businessNameValidationMessage: businessNameValidationMessage ?? this.businessNameValidationMessage,

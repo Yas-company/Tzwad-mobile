@@ -28,7 +28,7 @@
   "success": "Success",
   "bad_request_error": "Bad request. Try again later",
   "no_content": "No content. Try again later",
-  "forbidden_error": "",
+  "forbidden_error": "Forbidden request. Try again later",
   "unauthorized_error": "Unauthorized request. Try again later",
   "not_found_error": "URL not found. Try again later",
   "conflict_error": "Conflict found. Try again later",

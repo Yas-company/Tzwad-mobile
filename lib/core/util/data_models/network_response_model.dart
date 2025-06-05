@@ -20,7 +20,7 @@ class NetworkResponseModel<T> {
       success: json['success'] ?? false,
       message: json['message'] ?? '',
       data: _getData(json, fromJsonT, formJsonList),
-      pageInfo: json['links'] != null ? PageInfoModel.fromJson(json['links']) : null,
+      pageInfo: json['links'] != null && json['links'] is Map<String, dynamic> ? PageInfoModel.fromJson(json['links']) : null, //todo
     );
   }
 

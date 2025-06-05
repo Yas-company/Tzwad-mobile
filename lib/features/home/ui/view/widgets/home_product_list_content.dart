@@ -70,6 +70,7 @@ class HomeProductListContent extends StatelessWidget {
                   return ItemProduct(
                     product: products[index],
                     onPressedFavoriteButton: (productId, value) => _onPressedFavoriteButton(ref, productId, value),
+                    onPressedAddToCartButton: (product) => _onPressedAddToCartButton(ref, product),
                   );
                 },
               ),
@@ -88,5 +89,9 @@ class HomeProductListContent extends StatelessWidget {
 
   _onPressedFavoriteButton(WidgetRef ref, int productId, bool value) {
     ref.read(homeControllerProvider.notifier).toggleFavorite(productId, value);
+  }
+
+  _onPressedAddToCartButton(WidgetRef ref, ProductModel product) {
+    ref.read(homeControllerProvider.notifier).addProductToCart(product);
   }
 }

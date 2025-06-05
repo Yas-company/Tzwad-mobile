@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_loading_widget.dart';
+import 'package:tzwad_mobile/core/extension/context_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
@@ -18,6 +20,11 @@ class LogoutDialog extends ConsumerWidget {
       settingsControllerProvider,
       (previous, next) => submitLogoutListener(context, previous, next),
     );
+    final status = ref.watch(
+      settingsControllerProvider.select(
+        (value) => value.submitLogoutDataState,
+      ),
+    );
     return AlertDialog(
       title: Text(
         'Logout',
@@ -34,24 +41,30 @@ class LogoutDialog extends ConsumerWidget {
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: () => _onPressedCancelButton(context),
-          child: Text(
-            'Cancel',
-            style: StyleManager.getMediumStyle(
-              color: ColorManager.colorRed,
+        if (status == DataState.loading) ...{
+          const AppLoadingWidget(
+            color: ColorManager.colorPrimary,
+          )
+        } else ...{
+          TextButton(
+            onPressed: () => _onPressedCancelButton(context),
+            child: Text(
+              'Cancel',
+              style: StyleManager.getMediumStyle(
+                color: ColorManager.colorRed,
+              ),
             ),
           ),
-        ),
-        TextButton(
-          onPressed: () => _onPressedLogoutButton(context, ref),
-          child: Text(
-            'Logout',
-            style: StyleManager.getMediumStyle(
-              color: ColorManager.colorPrimary,
+          TextButton(
+            onPressed: () => _onPressedLogoutButton(context, ref),
+            child: Text(
+              'Logout',
+              style: StyleManager.getMediumStyle(
+                color: ColorManager.colorPrimary,
+              ),
             ),
           ),
-        ),
+        },
       ],
     );
   }
@@ -67,9 +80,9 @@ class LogoutDialog extends ConsumerWidget {
   void submitLogoutListener(BuildContext context, SettingsState? previous, SettingsState next) {
     if (previous?.submitLogoutDataState != next.submitLogoutDataState) {
       if (next.submitLogoutDataState == DataState.failure) {
-        // context.showMessage(
-        //   message: next.failure?.message ?? '',
-        // );
+        context.showMessage(
+          message: next.failure?.message ?? '',
+        );
       } else if (next.submitLogoutDataState == DataState.success) {
         context.pop();
         context.goNamed(AppRoutes.splashRoute);

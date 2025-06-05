@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/extension/validation_extension.dart';
+import 'package:tzwad_mobile/core/services/location_service.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/auth/providers/auth_repository_provider.dart';
 import 'register_state.dart';
@@ -8,10 +10,34 @@ class RegisterController extends AutoDisposeNotifier<RegisterState> {
   @override
   RegisterState build() {
     state = _onInit();
+    getLocation();
     return state;
   }
 
   RegisterState _onInit() => RegisterState();
+
+  void getLocation() async {
+    final locationService = ref.read(locationServiceProvider);
+    state = state.copyWith(
+      getLocationDataState: DataState.loading,
+    );
+    final hasPermission = await locationService.checkAndRequestLocationService();
+    final currentLocation = await locationService.getCurrentLocation();
+    'Mohammad register hasPermission $hasPermission'.log();
+    'Mohammad register ${currentLocation?.latitude}'.log();
+    'Mohammad register ${currentLocation?.longitude}'.log();
+    if (!hasPermission) {
+      state = state.copyWith(
+        getLocationDataState: DataState.failure,
+      );
+    } else {
+      state = state.copyWith(
+        getLocationDataState: DataState.success,
+        latitude: currentLocation?.latitude ?? 0.0,
+        longitude: currentLocation?.longitude ?? 0.0,
+      );
+    }
+  }
 
   void changeName(String name) {
     state = state.copyWith(
@@ -91,6 +117,8 @@ class RegisterController extends AutoDisposeNotifier<RegisterState> {
       businessName: state.businessName,
       address: state.address,
       password: state.password,
+      latitude: state.latitude,
+      longitude: state.longitude,
     );
     result.fold(
       (l) => state = state.copyWith(

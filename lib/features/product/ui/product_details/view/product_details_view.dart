@@ -15,10 +15,10 @@ class ProductDetailsView extends ConsumerStatefulWidget {
   const ProductDetailsView({super.key});
 
   @override
-  ConsumerState<ProductDetailsView> createState() => _UpsertUserViewState();
+  ConsumerState<ProductDetailsView> createState() => _ProductDetailsViewState();
 }
 
-class _UpsertUserViewState extends ConsumerState<ProductDetailsView> {
+class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
   @override
   void initState() {
     super.initState();

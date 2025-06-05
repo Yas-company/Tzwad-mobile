@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
-import 'package:tzwad_mobile/features/product/providers/cart_local_data_provider.dart';
 import 'package:tzwad_mobile/features/product/providers/product_repository_provider.dart';
 import 'product_details_state.dart';
 
@@ -24,11 +23,16 @@ class ProductDetailsController extends AutoDisposeNotifier<ProductDetailsState> 
         getProductDetailsDataState: DataState.failure,
         failure: l,
       ),
-      (r) => state = state.copyWith(
-        getProductDetailsDataState: DataState.success,
-        product: r,
-        totalPrice: double.tryParse(r.price ?? '0.0'),
-      ),
+      (r) {
+        final quantity = (r.cartQuantity ?? 0) > 0 ? (r.cartQuantity ?? 0) : 1;
+        final price = double.tryParse(r.price ?? '0.0') ?? 0.0;
+        state = state.copyWith(
+          getProductDetailsDataState: DataState.success,
+          product: r,
+          quantity: quantity,
+          totalPrice: price * quantity,
+        );
+      },
     );
   }
 
@@ -71,11 +75,23 @@ class ProductDetailsController extends AutoDisposeNotifier<ProductDetailsState> 
     );
   }
 
-  void addProductToCart() {
-    final cartLocalData = ref.read(cartLocalDataProvider);
-    final product = state.product;
-    if (product == null) return;
-    product.quantity = state.quantity;
-    cartLocalData.addProductToCart(product);
+  void addProductToCart() async {
+    final repository = ref.read(productRepositoryProvider);
+    state = state.copyWith(
+      addProductToCartDataState: DataState.loading,
+    );
+    final result = await repository.addProductToCart(
+      id: state.product!.id!,
+      quantity: state.quantity,
+    );
+    result.fold(
+      (l) => state = state.copyWith(
+        addProductToCartDataState: DataState.failure,
+        failure: l,
+      ),
+      (r) => state.copyWith(
+        addProductToCartDataState: DataState.success,
+      ),
+    );
   }
 }

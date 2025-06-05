@@ -11,6 +11,8 @@ import 'package:tzwad_mobile/features/auth/ui/reset_password/view/reset_password
 import 'package:tzwad_mobile/features/category/ui/categories/view/categories_view.dart';
 import 'package:tzwad_mobile/features/category/ui/category_details/view/category_details_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/under_develop_view.dart';
+import 'package:tzwad_mobile/features/order/ui/order_details/view/order_details_view.dart';
+import 'package:tzwad_mobile/features/order/ui/orders/view/orders_view.dart';
 import 'package:tzwad_mobile/features/product/ui/cart/view/cart_view.dart';
 import 'package:tzwad_mobile/features/product/ui/favorite_products/view/favorite_products_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/onboarding/view/onboarding_view.dart';
@@ -84,6 +86,14 @@ class RouterManager {
       AppRouter(
         route: AppRoutes.categoryDetailsRoute,
         screen: const CategoryDetailsView(),
+      ),
+      AppRouter(
+        route: AppRoutes.ordersRoute,
+        screen: const OrdersView(),
+      ),
+      AppRouter(
+        route: AppRoutes.orderDetailsRoute,
+        screen: const OrderDetailsView(),
       ),
       ShellRoute(
         builder: (context, state, child) => NavBarView(child: child),

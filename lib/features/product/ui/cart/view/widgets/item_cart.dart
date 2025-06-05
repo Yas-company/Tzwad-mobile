@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_loading_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_network_image_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
-import 'package:tzwad_mobile/core/app_widgets/app_svg_picture_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
-import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
@@ -16,6 +15,7 @@ import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/core/util/constants.dart';
 import 'package:tzwad_mobile/features/product/models/product_model.dart';
 import 'package:tzwad_mobile/features/product/ui/cart/providers/cart_controller_provider.dart';
+import 'package:tzwad_mobile/features/product/ui/cart/view/widgets/remove_product_dialog.dart';
 
 class ItemCart extends StatelessWidget {
   const ItemCart({
@@ -44,6 +44,15 @@ class ItemCart extends StatelessWidget {
                 AppPadding.p4,
               ),
               _buildQuantity(),
+              const Gap(
+                AppPadding.p4,
+              ),
+              IconButton(
+                onPressed: () => _onPressedRemoveProduct(context),
+                icon: const Icon(
+                  Icons.delete,
+                ),
+              ),
             ],
           ),
         ),
@@ -81,16 +90,17 @@ class ItemCart extends StatelessWidget {
       children: [
         Text(
           product.name ?? '',
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
+          style: StyleManager.getSemiBoldStyle(
+            color: ColorManager.blackColor,
+            fontSize: FontSize.s16,
+          ).copyWith(
             overflow: TextOverflow.ellipsis,
           ),
         ).marginOnly(
           bottom: AppPadding.p8,
         ),
         Text(
-          '${product.price} ${Constants.currency}',
+          '${(double.tryParse((product.price ?? '0')) ?? 0) * (product.cartQuantity ?? 0)} ${Constants.currency}',
           style: StyleManager.getSemiBoldStyle(
             color: ColorManager.colorPrimary,
           ),
@@ -102,75 +112,50 @@ class ItemCart extends StatelessWidget {
   Widget _buildQuantity() {
     return Consumer(
       builder: (context, ref, child) {
-        final quantity = product.quantity;
-        return Row(
+        return Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: AppSize.s38,
-              height: AppSize.s38,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ColorManager.pink.withOpacity(.10),
+            if (product.isLoading) ...{
+              const AppLoadingWidget(
+                color: ColorManager.colorPrimary,
+              )
+            } else ...{
+              DropdownButton<int>(
+                items: [
+                  for (int i = 0; i < 100; i++)
+                    DropdownMenuItem(
+                      value: i + 1,
+                      child: Text(
+                        '${i + 1}',
+                        style: StyleManager.getSemiBoldStyle(
+                          color: ColorManager.colorPrimary,
+                        ),
+                      ),
+                    ),
+                ],
+                onChanged: (value) {
+                  ref.read(cartControllerProvider.notifier).updateQuantityForProduct(product, value ?? 0);
+                },
+                value: product.cartQuantity ?? 0,
               ),
-              alignment: Alignment.center,
-              child: IconButton(
-                onPressed: () => _onPressedDecreaseQuantity(ref),
-                icon: const AppSvgPictureWidget(
-                  assetName: AssetsManager.icMinus,
-                  color: ColorManager.pink,
-                ),
-              ),
-            ),
-            Text(
-              quantity.toString(),
-              textAlign: TextAlign.center,
-              style: StyleManager.getSemiBoldStyle(
-                color: ColorManager.blackColor,
-                fontSize: FontSize.s16,
-              ),
-            ).marginSymmetric(
-              horizontal: AppPadding.p4,
-            ),
-            Container(
-              width: AppSize.s38,
-              height: AppSize.s38,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ColorManager.colorPrimary.withOpacity(.10),
-              ),
-              child: IconButton(
-                onPressed: () => _onPressedIncreaseQuantity(ref),
-                icon: const AppSvgPictureWidget(
-                  assetName: AssetsManager.icAdd,
-                  color: ColorManager.pink,
-                ),
-              ),
-            ),
-            const Gap(
-              AppPadding.p4,
-            ),
-            IconButton(
-              onPressed: () => _onPressedRemoveProduct(ref),
-              icon: const Icon(
-                Icons.delete,
-              ),
-            ),
+            },
           ],
         );
       },
     );
   }
 
-  _onPressedDecreaseQuantity(WidgetRef ref) {
-    ref.read(cartControllerProvider.notifier).decreaseProductToCart(product);
-  }
-
-  _onPressedIncreaseQuantity(WidgetRef ref) {
-    ref.read(cartControllerProvider.notifier).increaseProductToCart(product);
-  }
-
-  _onPressedRemoveProduct(WidgetRef ref) {
-    ref.read(cartControllerProvider.notifier).removeProductToCart(product);
+  _onPressedRemoveProduct(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => PopScope(
+        canPop: false,
+        child: RemoveProductDialog(
+          product: product,
+        ),
+      ),
+    );
   }
 
   _onPressedItem(BuildContext context) {

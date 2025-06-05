@@ -30,6 +30,7 @@ class ProductHorizontalListContent extends StatelessWidget {
               return ItemProduct(
                 product: products[index],
                 onPressedFavoriteButton: (productId, value) => _onPressedFavoriteButton(ref, productId, value),
+                onPressedAddToCartButton: (product) => _onPressedAddToCartButton(ref, product),
               );
             },
           ),
@@ -41,4 +42,6 @@ class ProductHorizontalListContent extends StatelessWidget {
   }
 
   _onPressedFavoriteButton(WidgetRef ref, int productId, bool value) {}
+
+  _onPressedAddToCartButton(WidgetRef ref, ProductModel product) {}
 }

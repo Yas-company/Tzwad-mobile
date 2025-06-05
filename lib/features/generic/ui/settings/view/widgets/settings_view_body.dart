@@ -11,6 +11,7 @@ import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
 
+import 'delete_account_dialog.dart';
 import 'logout_dialog.dart';
 import 'settings_app_bar_widget.dart';
 
@@ -104,7 +105,7 @@ class SettingsViewBody extends StatelessWidget {
   }
 
   _onPressedOrdersButton(BuildContext context) {
-    context.pushNamed(AppRoutes.underDevelopmentRoute);
+    context.pushNamed(AppRoutes.ordersRoute);
   }
 
   _onPressedChangePasswordButton(BuildContext context) {
@@ -112,13 +113,24 @@ class SettingsViewBody extends StatelessWidget {
   }
 
   _onPressedDeleteAccountButton(BuildContext context) {
-    context.pushNamed(AppRoutes.underDevelopmentRoute);
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const PopScope(
+        canPop: false,
+        child: DeleteAccountDialog(),
+      ),
+    );
   }
 
   _onPressedLogoutButton(BuildContext context) {
     showDialog(
       context: context,
-      builder: (_) => const LogoutDialog(),
+      barrierDismissible: false,
+      builder: (_) => const PopScope(
+        canPop: false,
+        child: LogoutDialog(),
+      ),
     );
   }
 }

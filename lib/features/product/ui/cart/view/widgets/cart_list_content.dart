@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/features/product/models/product_model.dart';
 
@@ -16,11 +17,14 @@ class CartListContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: products.length,
-      padding: const EdgeInsets.all(AppPadding.p16),
-      itemBuilder: (context, index) => ItemCart(
-        product: products[index],
+    return Skeletonizer(
+      enabled: isLoading,
+      child: ListView.builder(
+        itemCount: products.length,
+        padding: const EdgeInsets.all(AppPadding.p16),
+        itemBuilder: (context, index) => ItemCart(
+          product: products[index],
+        ),
       ),
     );
   }

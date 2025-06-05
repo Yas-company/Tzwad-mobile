@@ -11,7 +11,6 @@ import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/core/util/constants.dart';
-import 'package:tzwad_mobile/features/home/ui/providers/home_controller_provider.dart';
 import 'package:tzwad_mobile/features/product/models/product_model.dart';
 
 class ItemProduct extends StatelessWidget {
@@ -19,10 +18,12 @@ class ItemProduct extends StatelessWidget {
     super.key,
     required this.product,
     required this.onPressedFavoriteButton,
+    required this.onPressedAddToCartButton,
   });
 
   final ProductModel product;
   final Function(int, bool) onPressedFavoriteButton;
+  final Function(ProductModel) onPressedAddToCartButton;
 
   @override
   Widget build(BuildContext context) {
@@ -118,11 +119,13 @@ class ItemProduct extends StatelessWidget {
                   ),
                   Consumer(
                     builder: (context, ref, child) {
+                      final isInCart = (product.cartQuantity ?? 0) > 0;
                       return AppButtonWidget(
-                        label: 'Add to cart',
-                        onPressed: () => _onPressedAddToCartButton(ref),
+                        label: isInCart ? 'Product in cart (${product.cartQuantity})' : 'Add to cart',
+                        onPressed: isInCart ? () {} : () => onPressedAddToCartButton(product),
+                        isLoading: product.isLoading,
                         buttonSize: ButtonSize.small,
-                        buttonType: ButtonType.outline,
+                        buttonType: isInCart ? ButtonType.solid : ButtonType.outline,
                       );
                     },
                   ),
@@ -133,10 +136,6 @@ class ItemProduct extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  _onPressedAddToCartButton(WidgetRef ref) {
-    ref.read(homeControllerProvider.notifier).addProductToCart(product);
   }
 
   _onPressedItemButton(BuildContext context) {

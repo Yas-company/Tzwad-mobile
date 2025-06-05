@@ -33,6 +33,14 @@ class ColorManager {
   static const Color pink = Color(0xffFF4065);
   static const Color greyYellow = Color(0xffFFE38F);
 
+  static const Color grey = Color(0xFFA0A0A0);
+  static const Color blue = Color(0xFF3B82F6);
+  static const Color red = Color(0xFFEF4444);
+  static const Color green = Color(0xFF10B981);
+  static const Color indigo = Color(0xFF6366F1);
+  static const Color teal = Color(0xFF14B8A6);
+  static const Color rose = Color(0xFFF43F5E);
+
   // Color Grey
   static const Color colorGrey1 = Color(0XFFB8B8B8);
 

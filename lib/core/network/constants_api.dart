@@ -26,14 +26,14 @@ class ConstantsApi {
   //Api Category
   static String get getCategoriesUrl => "categories";
 
-  static String getCategoryDetailsUrl(int id) => "categories/$id";
+  static String getCategoryDetailsUrl(int id) => "buyer/categories/$id";
 
   // Api Product
-  static String get getProductsUrl => "products";
+  static String get getProductsUrl => "buyer/products";
 
-  static String getProductDetailsUrl(int id) => "products/$id";
+  static String getProductDetailsUrl(int id) => "buyer/products/$id";
 
-  static String getProductsRelatedUrl(int id) => "products/$id/related";
+  static String getProductsRelatedUrl(int id) => "buyer/products/$id/related";
 
   // Api Favorites
   static String get getFavoriteProductsUrl => "buyer/favorites";
@@ -43,7 +43,7 @@ class ConstantsApi {
   static String removeProductFromFavoritesUrl(int id) => "buyer/favorites/$id";
 
   // Search & Filter
-  static String filterProducts = "products/filter";
+  static String filterProducts = "buyer/products/filter";
 
   // Cart
   static String get getCartUrl => "buyer/cart";

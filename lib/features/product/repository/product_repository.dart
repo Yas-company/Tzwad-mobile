@@ -7,6 +7,7 @@ import 'package:tzwad_mobile/core/util/state_render/result.dart';
 import 'package:tzwad_mobile/core/util/unit.dart';
 import 'package:tzwad_mobile/features/product/local_data/cart_local_data.dart';
 import 'package:tzwad_mobile/features/product/local_data/favorite_product_local_data.dart';
+import 'package:tzwad_mobile/features/product/models/cart_model.dart';
 import 'package:tzwad_mobile/features/product/models/product_model.dart';
 
 class ProductRepository {
@@ -91,9 +92,12 @@ class ProductRepository {
 
   Future<Result<Failure, Unit>> addProductToFavorites({required int id}) async {
     try {
-      await apiService.post<Unit>(url: ConstantsApi.addProductToFavoritesUrl, data: {
-        'product_id': id,
-      });
+      await apiService.post<Unit>(
+        url: ConstantsApi.addProductToFavoritesUrl,
+        data: {
+          'product_id': id,
+        },
+      );
       return const Right(unit);
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
@@ -137,6 +141,65 @@ class ProductRepository {
           hasMore: response.hasMore,
         ),
       );
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Result<Failure, List<ProductModel>>> getCart() async {
+    try {
+      final response = await apiService.get<CartModel>(
+        url: ConstantsApi.getCartUrl,
+        fromJsonT: CartModel.fromJson,
+      );
+      return Right(response.data?.items ?? []);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Result<Failure, Unit>> addProductToCart({
+    required int id,
+    int quantity = 1,
+  }) async {
+    try {
+      await apiService.post<Unit>(
+        url: ConstantsApi.addProductToCartUrl,
+        data: {
+          'product_id': id,
+          'quantity': quantity,
+        },
+      );
+      return const Right(unit);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Result<Failure, Unit>> removeProductFromCart({required int id}) async {
+    try {
+      await apiService.delete(
+        url: ConstantsApi.removeProductFromCartUrl(id),
+        // fromJsonT: ProductModel.fromJson,
+      );
+      return const Right(unit);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Result<Failure, Unit>> updateProductQuantity({
+    required int id,
+    required int quantity,
+  }) async {
+    try {
+      await apiService.patch(
+        url: ConstantsApi.updateProductQuantityUrl(id),
+        data: {
+          'quantity': quantity,
+        },
+      );
+      return const Right(unit);
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
     }

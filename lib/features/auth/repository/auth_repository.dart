@@ -54,8 +54,8 @@ class AuthRepository {
     required String businessName,
     required String address,
     required String password,
-    double latitude = 0.0,
-    double longitude = 0.0,
+    required double latitude,
+    required double longitude,
   }) async {
     try {
       await apiService.post<RegisterModel>(
@@ -166,6 +166,7 @@ class AuthRepository {
       await apiService.delete<Unit>(
         url: ConstantsApi.deleteAccountUrl,
       );
+      await _clearData();
       return const Right(unit);
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
@@ -177,7 +178,7 @@ class AuthRepository {
       await apiService.post<Unit>(
         url: ConstantsApi.logoutUrl,
       );
-      _clearData();
+      await _clearData();
       return const Right(unit);
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
@@ -198,5 +199,12 @@ class AuthRepository {
     }
   }
 
-  void _clearData() {}
+  Future<void> _clearData() async {
+    await Future.wait(
+      [
+        userLocalData.clearBox(),
+        settingLocalData.clearBox(),
+      ],
+    );
+  }
 }

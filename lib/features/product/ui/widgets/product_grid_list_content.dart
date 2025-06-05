@@ -16,6 +16,7 @@ class ProductGridListContent extends HookConsumerWidget {
     required this.products,
     this.onLoadMore,
     this.onPressedFavoriteButton,
+    this.onPressedAddToCartButton,
     this.failure,
   });
 
@@ -24,6 +25,7 @@ class ProductGridListContent extends HookConsumerWidget {
   final List<ProductModel> products;
   final Function()? onLoadMore;
   final Function(int, bool)? onPressedFavoriteButton;
+  final Function(ProductModel)? onPressedAddToCartButton;
   final Failure? failure;
 
   @override
@@ -50,6 +52,7 @@ class ProductGridListContent extends HookConsumerWidget {
               child: ItemProduct(
                 product: ProductModel.fake(),
                 onPressedFavoriteButton: onPressedFavoriteButton ?? (_, __) {},
+                onPressedAddToCartButton: onPressedAddToCartButton ?? (_) {},
               ),
             );
           }
@@ -61,6 +64,7 @@ class ProductGridListContent extends HookConsumerWidget {
           return ItemProduct(
             product: products[index],
             onPressedFavoriteButton: onPressedFavoriteButton ?? (_, __) {},
+            onPressedAddToCartButton: onPressedAddToCartButton ?? (_) {},
           );
         },
         itemCount: itemCount,

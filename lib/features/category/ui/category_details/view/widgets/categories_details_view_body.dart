@@ -46,6 +46,7 @@ class CategoriesDetailsViewBody extends ConsumerWidget {
           failure: failure,
           onLoadMore: () => _onLoadMore(ref),
           onPressedFavoriteButton: (productId, value) => _onPressedFavoriteButton(ref, productId, value),
+          onPressedAddToCartButton: (product) => _onPressedAddToCartButton(ref, product),
         );
       case DataState.empty:
         return const Center(
@@ -66,6 +67,10 @@ class CategoriesDetailsViewBody extends ConsumerWidget {
 
   _onPressedFavoriteButton(WidgetRef ref, int productId, bool value) {
     ref.read(categoryDetailsControllerProvider.notifier).toggleFavorite(productId, value);
+  }
+
+  _onPressedAddToCartButton(WidgetRef ref, ProductModel product) {
+    ref.read(categoryDetailsControllerProvider.notifier).addProductToCart(product);
   }
 
   _onLoadMore(WidgetRef ref) {

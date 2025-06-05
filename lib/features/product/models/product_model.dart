@@ -45,6 +45,8 @@ class ProductModel extends HiveObject {
   @HiveField(11)
   int quantity = 1;
 
+  bool isLoading = false;
+
   ProductModel({
     this.id,
     this.name,
@@ -100,6 +102,7 @@ class ProductModel extends HiveObject {
       name: faker.randomGenerator.string(10),
       image: faker.randomGenerator.string(10),
       price: faker.randomGenerator.string(10),
+      priceBeforeDiscount: faker.randomGenerator.string(10),
       stockQty: faker.randomGenerator.integer(10),
       createdAt: faker.date.dateTime().toString(),
       updatedAt: faker.date.dateTime().toString(),

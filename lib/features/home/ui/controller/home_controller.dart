@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/category/providers/category_repository_provider.dart';
 import 'package:tzwad_mobile/features/product/models/product_model.dart';
-import 'package:tzwad_mobile/features/product/providers/cart_local_data_provider.dart';
 import 'package:tzwad_mobile/features/product/providers/product_repository_provider.dart';
 import 'home_state.dart';
 
@@ -72,9 +71,40 @@ class HomeController extends AutoDisposeNotifier<HomeState> {
     // );
   }
 
-  void addProductToCart(ProductModel product) {
-    final cartLocalData = ref.read(cartLocalDataProvider);
-    cartLocalData.increaseProductToCart(product);
+  void addProductToCart(ProductModel product) async {
+    final repository = ref.read(productRepositoryProvider);
+    product.isLoading = true;
+    state = state.copyWith(
+      products: state.products
+          .map(
+            (e) => e.id == product.id ? product : e,
+          )
+          .toList(),
+    );
+    final result = await repository.addProductToCart(id: product.id!);
+    result.fold(
+      (l) {
+        product.isLoading = false;
+        state = state.copyWith(
+          products: state.products
+              .map(
+                (e) => e.id == product.id ? product : e,
+              )
+              .toList(),
+        );
+      },
+      (r) {
+        product.isLoading = false;
+        product.cartQuantity = (product.cartQuantity ?? 0) + 1;
+        state = state.copyWith(
+          products: state.products
+              .map(
+                (e) => e.id == product.id ? product : e,
+              )
+              .toList(),
+        );
+      },
+    );
   }
 
   void toggleFavorite(int productId, bool value) async {

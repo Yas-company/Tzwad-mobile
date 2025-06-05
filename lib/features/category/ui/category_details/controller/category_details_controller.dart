@@ -105,4 +105,40 @@ class CategoryDetailsController extends AutoDisposeNotifier<CategoryDetailsState
       await repository.removeProductFromFavorites(id: productId);
     }
   }
+
+  void addProductToCart(ProductModel product) async {
+    final repository = ref.read(productRepositoryProvider);
+    product.isLoading = true;
+    state = state.copyWith(
+      products: state.products
+          .map(
+            (e) => e.id == product.id ? product : e,
+          )
+          .toList(),
+    );
+    final result = await repository.addProductToCart(id: product.id!);
+    result.fold(
+      (l) {
+        product.isLoading = false;
+        state = state.copyWith(
+          products: state.products
+              .map(
+                (e) => e.id == product.id ? product : e,
+              )
+              .toList(),
+        );
+      },
+      (r) {
+        product.isLoading = false;
+        product.cartQuantity = (product.cartQuantity ?? 0) + 1;
+        state = state.copyWith(
+          products: state.products
+              .map(
+                (e) => e.id == product.id ? product : e,
+              )
+              .toList(),
+        );
+      },
+    );
+  }
 }

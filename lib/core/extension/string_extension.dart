@@ -34,4 +34,20 @@ extension NonNullStringExtension on String? {
     if (this == null) return '';
     return this!.split(' ').map((e) => e[0]).join('').toUpperCase();
   }
+
+  String getFormatDash() {
+    if (this != null) {
+      final date = DateTime.parse(this!);
+      return DateFormat('yyyy-MM-dd').format(date);
+    }
+    return '_';
+  }
+
+  String getFormatSlash() {
+    if (this != null) {
+      final date = DateTime.parse(this!);
+      return DateFormat('dd/MM/yyyy').format(date);
+    }
+    return '_';
+  }
 }

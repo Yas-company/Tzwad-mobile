@@ -23,3 +23,18 @@ class AppLoadingWidget extends StatelessWidget {
     );
   }
 }
+
+void fullScreenLoading(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) => const PopScope(
+      canPop: false,
+      child: Center(
+        child: AppLoadingWidget(
+          color: ColorManager.colorPrimary,
+        ),
+      ),
+    ),
+  );
+}

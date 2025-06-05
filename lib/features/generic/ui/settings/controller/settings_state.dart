@@ -1,25 +1,28 @@
+import 'package:tzwad_mobile/core/network/failure.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 
 class SettingsState {
   final DataState submitLogoutDataState;
+  final DataState submitDeleteAccountDataState;
   final int index;
   final double page;
+  final Failure? failure;
 
   SettingsState({
-    this.submitLogoutDataState = DataState.loading,
+    this.submitLogoutDataState = DataState.initial,
+    this.submitDeleteAccountDataState = DataState.initial,
     this.index = 0,
     this.page = 0.0,
+    this.failure,
   });
 
-  SettingsState copyWith({
-    DataState? submitLogoutDataState,
-    int? index,
-    double? page,
-  }) {
+  SettingsState copyWith({DataState? submitLogoutDataState, DataState? submitDeleteAccountDataState, int? index, double? page, Failure? failure}) {
     return SettingsState(
       submitLogoutDataState: submitLogoutDataState ?? this.submitLogoutDataState,
+      submitDeleteAccountDataState: submitDeleteAccountDataState ?? this.submitDeleteAccountDataState,
       index: index ?? this.index,
       page: page ?? this.page,
+      failure: failure ?? this.failure,
     );
   }
 }

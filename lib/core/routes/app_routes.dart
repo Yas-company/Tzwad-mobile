@@ -20,4 +20,6 @@ class AppRoutes {
   static const String productDetailsRoute = "/product_details";
   static const String categoriesRoute = "/categories";
   static const String categoryDetailsRoute = "/category_details";
+  static const String ordersRoute = "/orders";
+  static const String orderDetailsRoute = "/order_details";
 }

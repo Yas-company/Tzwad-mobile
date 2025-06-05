@@ -16,6 +16,7 @@ class AssetsManager {
   static const imgAuthHeader = 'assets/images/img_auth_header.png';
   static const imgVerifyOtp = 'assets/images/img_verify_otp.svg';
   static const imgEmail = 'assets/images/img_email.png';
+  static const imgAccessDenied = 'assets/images/img_access_denied.svg';
 
   // NavBar
   static const icTabHomeUnSelected = 'assets/icons/ic_tab_home_unselected.svg';
