@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/features/product/models/product_model.dart';
 import 'package:tzwad_mobile/features/product/ui/widgets/item_product.dart';
@@ -27,7 +26,9 @@ class ProductsOrderSection extends StatelessWidget {
               onPressedFavoriteButton: (productId, value) => _onPressedFavoriteButton(ref, productId, value),
               onPressedAddToCartButton: (product) => _onPressedAddToCartButton(ref, product),
             );
-          },
+
+
+            },
         ),
         itemCount: products.length,
         separatorBuilder: (BuildContext context, int index) => const Gap(AppPadding.p12),

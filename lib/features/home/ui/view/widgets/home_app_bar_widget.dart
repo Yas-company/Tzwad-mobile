@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
+import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/features/auth/providers/user_local_data_provider.dart';
 
 class HomeAppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
@@ -66,8 +68,8 @@ class HomeAppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
           )
         ],
       ).marginOnly(
-        start: AppPadding.p16,
-        end: AppPadding.p16,
+        start: AppPadding.p32,
+        end: AppPadding.p32,
         top: AppPadding.p4,
         bottom: AppPadding.p4,
       ),
