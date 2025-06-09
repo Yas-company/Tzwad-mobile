@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
+import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/features/auth/providers/user_local_data_provider.dart';
 
 class HomeAppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
@@ -53,14 +56,18 @@ class HomeAppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
               ],
             ),
           ),
-          CircleAvatar(
-            backgroundColor: ColorManager.colorPrimary,
-            radius: AppSize.s24,
-            child: Text(
-              getPlaceHolderImage(user?.name),
-              style: StyleManager.getBoldStyle(
-                color: ColorManager.colorPureWhite,
-                fontSize: FontSize.s16,
+          AppRippleWidget(
+            radius: AppSize.s54,
+            onTap: () => _onPressedImageUserButton(context),
+            child: CircleAvatar(
+              backgroundColor: ColorManager.colorPrimary,
+              radius: AppSize.s24,
+              child: Text(
+                getPlaceHolderImage(user?.name),
+                style: StyleManager.getBoldStyle(
+                  color: ColorManager.colorPureWhite,
+                  fontSize: FontSize.s16,
+                ),
               ),
             ),
           )
@@ -81,4 +88,8 @@ class HomeAppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  _onPressedImageUserButton(BuildContext context) {
+    context.goNamed(AppRoutes.settingsRoute);
+  }
 }

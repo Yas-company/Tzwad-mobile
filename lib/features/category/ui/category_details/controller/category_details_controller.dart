@@ -45,7 +45,7 @@ class CategoryDetailsController extends AutoDisposeNotifier<CategoryDetailsState
   }
 
   void getMoreData(int categoryId) async {
-    if (state.hasMore) {
+    if (state.hasMore && !state.isLoadingMore) {
       final repository = ref.read(categoryRepositoryProvider);
       state = state.copyWith(
         isLoadingMore: true,

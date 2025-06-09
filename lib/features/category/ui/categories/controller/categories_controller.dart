@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/category/models/category_model.dart';
 import 'package:tzwad_mobile/features/category/providers/category_repository_provider.dart';
@@ -46,7 +47,7 @@ class CategoriesController extends AutoDisposeNotifier<CategoriesState> {
   }
 
   void getMoreData() async {
-    if (state.hasMore) {
+    if (state.hasMore && !state.isLoadingMore) {
       final repository = ref.read(categoryRepositoryProvider);
       state = state.copyWith(
         isLoadingMore: true,
@@ -60,7 +61,10 @@ class CategoriesController extends AutoDisposeNotifier<CategoriesState> {
           failure: l,
         ),
         (r) {
+          'Categories last list  is ${state.categories.length}'.log();
+          'Categories new list  is ${r.data.length}'.log();
           final items = List<CategoryModel>.from(state.categories)..addAll(r.data);
+          'Categories list  is ${items.length}'.log();
           state = state.copyWith(
             isLoadingMore: false,
             categories: items,

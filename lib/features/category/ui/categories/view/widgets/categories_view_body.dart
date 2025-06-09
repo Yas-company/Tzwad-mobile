@@ -64,6 +64,12 @@ class CategoriesViewBody extends ConsumerWidget {
   }
 
   _onLoadingMore(WidgetRef ref) {
+    // final isLoadingMore = ref.read(
+    //   categoriesControllerProvider.select(
+    //     (value) => value.isLoadingMore,
+    //   ),
+    // );
+    // if (isLoadingMore) return;
     ref.read(categoriesControllerProvider.notifier).getMoreData();
   }
 }

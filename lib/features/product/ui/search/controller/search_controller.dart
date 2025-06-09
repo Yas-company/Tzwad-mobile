@@ -63,7 +63,7 @@ class SearchController extends AutoDisposeNotifier<SearchState> {
   }
 
   void getMoreData() async {
-    if (state.hasMore) {
+    if (state.hasMore && !state.isLoadingMore) {
       final repository = ref.read(productRepositoryProvider);
       state = state.copyWith(
         isLoadingMore: true,
