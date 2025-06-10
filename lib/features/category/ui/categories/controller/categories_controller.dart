@@ -61,10 +61,7 @@ class CategoriesController extends AutoDisposeNotifier<CategoriesState> {
           failure: l,
         ),
         (r) {
-          'Categories last list  is ${state.categories.length}'.log();
-          'Categories new list  is ${r.data.length}'.log();
           final items = List<CategoryModel>.from(state.categories)..addAll(r.data);
-          'Categories list  is ${items.length}'.log();
           state = state.copyWith(
             isLoadingMore: false,
             categories: items,
