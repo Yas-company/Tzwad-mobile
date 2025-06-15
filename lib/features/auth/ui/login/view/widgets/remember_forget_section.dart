@@ -9,18 +9,17 @@ import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
-import 'package:tzwad_mobile/features/auth/ui/login/providers/login_controller_provider.dart';
 
 class RememberForgetSection extends ConsumerWidget {
   const RememberForgetSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isRememberMe = ref.watch(
-      loginControllerProvider.select(
-        (value) => value.isRememberMe,
-      ),
-    );
+    // final isRememberMe = ref.watch(
+    //   loginControllerProvider.select(
+    //     (value) => value.isRememberMe,
+    //   ),
+    // );
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -79,9 +78,9 @@ class RememberForgetSection extends ConsumerWidget {
     );
   }
 
-  _onPressedRememberMeButton(WidgetRef ref) {
-    ref.read(loginControllerProvider.notifier).changeRememberMe();
-  }
+  // _onPressedRememberMeButton(WidgetRef ref) {
+  //   ref.read(loginControllerProvider.notifier).changeRememberMe();
+  // }
 
   _onPressedForgetPasswordButton(BuildContext context) {
     context.pushNamed(AppRoutes.forgetPasswordRoute);

@@ -27,8 +27,9 @@ class AppStrings {
   static const String strHintCompanyName = "hint_company_name";
   static const String strAddress = "address";
   static const String strHintAddress = "hint_address";
-
-  static const String strRegisterPrompt = "register_prompt";
+  static const String strFacebookAccount = "facebook_account";
+  static const String strAppleAccount = "apple_account";
+  static const String strGoogleAccount = "google_account";
   static const String strForgotPassword = "forgot_password";
   static const String strResetInstructions = "reset_instructions";
   static const String strWriteYourCode = "write_your_code";
@@ -38,6 +39,23 @@ class AppStrings {
   static const String strNewPassword = "new_password";
   static const String strConfirmNewPassword = "confirm_new_password";
   static const String strResetPasswordDescription = "reset_password_description";
+  static const String strPhoneEmpty = "phone_empty";
+  static const String strPhoneInvalidStart = "phone_invalid_start";
+  static const String strPhoneInvalidLength = "phone_invalid_length";
+  static const String strPhoneInvalidFormat = "phone_invalid_format";
+  static const String strPasswordEmpty = "password_empty";
+  static const String strPasswordMinLength = "password_min_length";
+  static const String strPasswordComplexity = "password_complexity";
+  static const String strUppercaseLetter = "uppercase_letter";
+  static const String strLowercaseLetter = "lowercase_letter";
+  static const String strNumber = "number";
+  static const String strSpecialCharacter = "special_character";
+  static const String strPasswordMismatch = "password_mismatch";
+  static const String strBusinessNameEmpty = "business_name_empty";
+  static const String strNameEmpty = "name_empty";
+  static const String strAddressEmpty = "address_empty";
+  static const String strOtpEmpty = "otp_empty";
+  static const String strOtpInvalidLength = "otp_invalid_length";
 
   // error handler
   static const String strSuccess = "success";

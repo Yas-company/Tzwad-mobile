@@ -23,6 +23,9 @@ class ConstantsApi {
 
   static String get profileDetailsUrl => "auth/me";
 
+  // Api Ads
+  static String get getAdsUrl => "ads";
+
   //Api Category
   static String get getCategoriesUrl => "categories";
 

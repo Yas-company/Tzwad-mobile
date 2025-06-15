@@ -5,6 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
 import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
+import 'package:tzwad_mobile/core/resource/language_manager.dart';
+import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 
 class SocialAuthSection extends StatelessWidget {
@@ -18,7 +20,7 @@ class SocialAuthSection extends StatelessWidget {
       children: [
         Expanded(
           child: AppButtonWidget(
-            label: 'الفيسبوك',
+            label: AppStrings.strFacebookAccount.tr(context),
             onPressed: () {},
             buttonType: ButtonType.outline,
             borderColor: ColorManager.colorWhite3,
@@ -33,7 +35,7 @@ class SocialAuthSection extends StatelessWidget {
         if (Platform.isAndroid) ...{
           Expanded(
             child: AppButtonWidget(
-              label: 'حساب ابل',
+              label: AppStrings.strGoogleAccount.tr(context),
               onPressed: () {},
               buttonType: ButtonType.outline,
               borderColor: ColorManager.colorWhite3,
@@ -46,7 +48,7 @@ class SocialAuthSection extends StatelessWidget {
         if (Platform.isIOS) ...{
           Expanded(
             child: AppButtonWidget(
-              label: 'حساب ابل',
+              label: AppStrings.strAppleAccount.tr(context),
               onPressed: () {},
               buttonType: ButtonType.outline,
               borderColor: ColorManager.colorWhite3,

@@ -47,9 +47,9 @@ class LightModeTheme implements MainThemeApp {
         ),
       ),
 
-      progressIndicatorTheme: const ProgressIndicatorThemeData(
+      progressIndicatorTheme: ProgressIndicatorThemeData(
         color: ColorManager.colorPrimary,
-        circularTrackColor: ColorManager.colorLightPrimary,
+        circularTrackColor: ColorManager.colorPrimary.withValues(alpha: 0.2),
       ),
 
       // colorScheme: ColorScheme.fromSwatch(
@@ -60,17 +60,17 @@ class LightModeTheme implements MainThemeApp {
       // ),
 
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: ColorManager.blackColor,
+        backgroundColor: ColorManager.colorBlack1,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: ColorManager.colorPrimary,
-        unselectedItemColor: ColorManager.colorPureWhite,
+        unselectedItemColor: ColorManager.colorWhite1,
         selectedLabelStyle: StyleManager.getRegularStyle(
           fontSize: FontSize.s12,
           color: ColorManager.colorPrimary,
         ),
         unselectedLabelStyle: StyleManager.getRegularStyle(
           fontSize: FontSize.s12,
-          color: ColorManager.colorPureWhite,
+          color: ColorManager.colorWhite1,
         ),
       ),
 
@@ -90,15 +90,15 @@ class LightModeTheme implements MainThemeApp {
         // elevation: 0,
         backgroundColor: ColorManager.colorPureWhite,
         iconTheme: const IconThemeData(
-          color: ColorManager.blackColor,
+          color: ColorManager.colorBlack1,
           size: AppSize.s24,
         ),
         actionsIconTheme: const IconThemeData(
-          color: ColorManager.blackColor,
+          color: ColorManager.colorBlack1,
           size: AppSize.s24,
         ),
         titleTextStyle: StyleManager.getSemiBoldStyle(
-          color: ColorManager.blackColor,
+          color: ColorManager.colorBlack1,
           fontSize: FontSize.s20,
         ).copyWith(
           fontFamily: fontFamily,

@@ -1,88 +1,93 @@
+import 'package:tzwad_mobile/core/resource/language_manager.dart';
+import 'package:tzwad_mobile/core/resource/string_manager.dart';
+import 'package:tzwad_mobile/core/util/app_context.dart';
+
 extension ValidationExtension on String {
   String get validatePhoneNumber {
-    // final context = AppContext.context;
+    final context = AppContext.context;
     if (isEmpty) {
-      return 'The phone number cannot be empty';
+      return AppStrings.strPhoneEmpty.tr(context);
     }
     if (!startsWith('05')) {
-      return 'Phone number must start with "05"';
+      return AppStrings.strPhoneInvalidStart.tr(context);
     }
     if (length < 10) {
-      return 'Phone number must be exactly 10 digits';
+      return AppStrings.strPhoneInvalidLength.tr(context);
     }
     if (!isValidSaudiPhone()) {
-      return 'Invalid phone number';
+      return AppStrings.strPhoneInvalidFormat.tr(context);
     }
     return '';
   }
 
   String get validatePassword {
-    // final context = AppContext.context;
+    final context = AppContext.context;
     if (isEmpty) {
-      return 'The password cannot be empty';
+      return AppStrings.strPasswordEmpty.tr(context);
     }
     if (length < 8) {
-      return 'The password must be at least 8 characters';
+      return AppStrings.strPasswordMinLength.tr(context);
     }
     List<String> errors = [];
 
     if (!RegExp(r'[A-Z]').hasMatch(this)) {
-      errors.add('an uppercase letter');
+      errors.add(AppStrings.strUppercaseLetter.tr(context));
     }
     if (!RegExp(r'[a-z]').hasMatch(this)) {
-      errors.add('a lowercase letter');
+      errors.add(AppStrings.strLowercaseLetter.tr(context));
     }
     if (!RegExp(r'[0-9]').hasMatch(this)) {
-      errors.add('a number');
+      errors.add(AppStrings.strNumber.tr(context));
     }
     if (!RegExp(r'[!@#\$&*~%^()\-_=+{};:,<.>]').hasMatch(this)) {
-      errors.add('a special character');
+      errors.add(AppStrings.strSpecialCharacter.tr(context));
     }
 
     if (errors.isNotEmpty) {
-      return 'Password must contain ${errors.join(', ')}.';
+      return '${AppStrings.strPasswordComplexity.tr(context)} ${errors.join(', ')}.';
     }
     return '';
   }
 
   String validateRePassword(String password) {
+    final context = AppContext.context;
     if (this != password) {
-      return 'Password does not match';
+      return AppStrings.strPasswordMismatch.tr(context);
     }
     return '';
   }
 
   String get validateBusinessName {
-    // final context = AppContext.context;
+    final context = AppContext.context;
     if (isEmpty) {
-      return 'The business name cannot be empty';
+      return AppStrings.strBusinessNameEmpty.tr(context);
     }
     return '';
   }
 
   String get validateName {
-    // final context = AppContext.context;
+    final context = AppContext.context;
     if (isEmpty) {
-      return 'The name cannot be empty';
+      return AppStrings.strNameEmpty.tr(context);
     }
     return '';
   }
 
   String get validateAddress {
-    // final context = AppContext.context;
+    final context = AppContext.context;
     if (isEmpty) {
-      return 'The address cannot be empty';
+      return AppStrings.strAddressEmpty.tr(context);
     }
     return '';
   }
 
   String get validateOtpCode {
-    // final context = AppContext.context;
+    final context = AppContext.context;
     if (isEmpty) {
-      return 'The otp code cannot be empty';
+      return AppStrings.strOtpEmpty.tr(context);
     }
     if (length < 6) {
-      return 'The otp code must be 4 digits';
+      return AppStrings.strOtpInvalidLength.tr(context);
     }
     return '';
   }

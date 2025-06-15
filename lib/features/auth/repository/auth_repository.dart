@@ -1,4 +1,3 @@
-import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/network/api_service.dart';
 import 'package:tzwad_mobile/core/network/constants_api.dart';
 import 'package:tzwad_mobile/core/network/error_handler.dart';
@@ -8,6 +7,7 @@ import 'package:tzwad_mobile/core/util/unit.dart';
 import 'package:tzwad_mobile/features/auth/models/login_model.dart';
 import 'package:tzwad_mobile/features/auth/models/otp_flow_type.dart';
 import 'package:tzwad_mobile/features/auth/models/register_model.dart';
+import 'package:tzwad_mobile/features/auth/models/reset_password_model.dart';
 import 'package:tzwad_mobile/features/auth/models/role_enum.dart';
 import 'package:tzwad_mobile/features/auth/models/user_model.dart';
 import 'package:tzwad_mobile/features/auth/models/verify_otp_model.dart';
@@ -133,14 +133,14 @@ class AuthRepository {
     required String newPassword,
   }) async {
     try {
-      final response = await apiService.post<LoginModel>(
+      final response = await apiService.post<ResetPasswordModel>(
         url: ConstantsApi.resetPasswordUrl,
         data: {
           'phone': phoneNumber,
           'password': newPassword,
           'password_confirmation': newPassword,
         },
-        fromJsonT: LoginModel.fromJson,
+        fromJsonT: ResetPasswordModel.fromJson,
       );
       _saveData(
         user: response.data?.user,
