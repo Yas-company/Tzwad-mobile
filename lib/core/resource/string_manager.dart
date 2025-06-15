@@ -15,6 +15,19 @@ class AppStrings {
   static const String strHintPassword = "hint_password";
   static const String strWelcomeBack = "welcome_back";
   static const String strLogin = "login";
+  static const String strOrRegisterThrough = "or_register_through";
+  static const String strNewUser = "new_user";
+  static const String strRegisterThrough = "register_through";
+  static const String strAlreadyHaveAccount = "already_have_account";
+  static const String strSubscribe = "subscribe";
+  static const String strAcceptTermsConditions = "accept_terms_conditions";
+  static const String strName = "name";
+  static const String strHintName = "hint_name";
+  static const String strCompanyName = "company_name";
+  static const String strHintCompanyName = "hint_company_name";
+  static const String strAddress = "address";
+  static const String strHintAddress = "hint_address";
+
   static const String strRegisterPrompt = "register_prompt";
   static const String strForgotPassword = "forgot_password";
   static const String strResetInstructions = "reset_instructions";

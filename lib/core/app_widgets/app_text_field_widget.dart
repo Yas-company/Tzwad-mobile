@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tzwad_mobile/core/extension/context_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
+import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 
 class AppTextFieldWidget extends StatelessWidget {
@@ -63,7 +64,10 @@ class AppTextFieldWidget extends StatelessWidget {
     return TextFormField(
       controller: controller,
       style: StyleManager.getMediumStyle(
-        color: ColorManager.colorTitleTexts,
+        color: ColorManager.colorBlack1,
+        fontSize: FontSize.s16,
+      ).copyWith(
+          letterSpacing: 1.5,
       ),
       inputFormatters: inputFormatters,
       decoration: InputDecoration(

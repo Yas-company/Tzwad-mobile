@@ -3,15 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
+import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/language_manager.dart';
 import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
-import 'package:tzwad_mobile/features/auth/ui/widgets/horizontal_divider_section.dart';
 import 'package:tzwad_mobile/features/auth/ui/widgets/social_auth_section.dart';
 
-import '../../../widgets/auth_app_bar_widget.dart';
 import 'form_login_section.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -19,68 +18,71 @@ class LoginViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          leading: IconButton(
-            onPressed: () => _onPressedSkipButton(context),
-            icon: const Icon(Icons.close),
-          ),
-          automaticallyImplyLeading: false,
-          pinned: true,
-          expandedHeight: AppSize.s220,
-          flexibleSpace: const FlexibleSpaceBar(
-            background: AuthAppBarWidget(),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(AppPadding.p16),
-            child: Column(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(AppPadding.p16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppStrings.strWelcomeBack.tr(context),
+              style: StyleManager.getBoldStyle(
+                color: ColorManager.colorBlack1,
+                fontSize: FontSize.s28,
+              ),
+            ),
+            Text(
+              AppStrings.strLogin.tr(context),
+              style: StyleManager.getRegularStyle(
+                color: ColorManager.colorBlack2,
+                fontSize: FontSize.s20,
+              ),
+            ).marginOnly(
+              bottom: AppPadding.p16,
+            ),
+            const FormLoginSection().marginOnly(
+              bottom: AppPadding.p16,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                AppStrings.strOrRegisterThrough.tr(context),
+                style: StyleManager.getRegularStyle(
+                  color: ColorManager.colorBlack2,
+                  fontSize: FontSize.s16,
+                ),
+              ),
+            ).marginOnly(
+              bottom: AppPadding.p16,
+            ),
+            const SocialAuthSection().marginOnly(
+              bottom: AppPadding.p16,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const FormLoginSection().marginOnly(
-                  bottom: AppPadding.p16,
-                ),
-                Text.rich(
-                  TextSpan(
-                    text: AppStrings.strDontHaveAccount.tr(context),
-                    style: StyleManager.getRegularStyle(
-                      color: ColorManager.greyParagraph,
-                    ),
-                    children: [
-                      WidgetSpan(
-                        child: AppRippleWidget(
-                          onTap: () => _onPressedRegisterButton(context),
-                          child: Text(
-                            AppStrings.strRegister.tr(context),
-                            style: StyleManager.getBoldStyle(
-                              color: ColorManager.colorPrimary,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                Text(
+                  AppStrings.strDontHaveAccount.tr(context),
+                  style: StyleManager.getRegularStyle(
+                    color: ColorManager.colorWhite2,
                   ),
-                ).marginOnly(
-                  bottom: AppPadding.p16,
                 ),
-                const HorizontalDividerSection().marginOnly(
-                  bottom: AppPadding.p16,
-                ),
-                const SocialAuthSection().marginOnly(
-                  bottom: AppPadding.p16,
-                ),
+                AppRippleWidget(
+                  onTap: () => _onPressedRegisterButton(context),
+                  child: Text(
+                    AppStrings.strRegister.tr(context),
+                    style: StyleManager.getMediumStyle(
+                      color: ColorManager.colorPrimary,
+                      fontSize: FontSize.s16,
+                    ),
+                  ),
+                )
               ],
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
-  }
-
-  _onPressedSkipButton(BuildContext context) {
-    context.pushNamed(AppRoutes.underDevelopmentRoute);
-    // context.pop();
   }
 
   _onPressedRegisterButton(BuildContext context) {

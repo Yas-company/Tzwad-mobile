@@ -9,7 +9,6 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppScaffoldWidget(
-      userSafeArea: false,
       body: LoginViewBody(),
     );
   }

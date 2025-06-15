@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/extension/validation_extension.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
+import 'package:tzwad_mobile/features/auth/models/role_enum.dart';
 import 'package:tzwad_mobile/features/auth/providers/auth_repository_provider.dart';
 import 'login_state.dart';
 
@@ -56,7 +57,7 @@ class LoginController extends AutoDisposeNotifier<LoginState> {
     final result = await repository.login(
       phoneNumber: state.phoneNumber,
       password: state.password,
-      isRememberMe: state.isRememberMe,
+      role: RoleEnum.buyer,
     );
     result.fold(
       (l) => state = state.copyWith(

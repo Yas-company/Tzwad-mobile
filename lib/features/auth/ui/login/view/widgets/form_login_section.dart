@@ -4,11 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
 import 'package:tzwad_mobile/core/extension/context_extension.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
-import 'package:tzwad_mobile/core/resource/color_manager.dart';
-import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/language_manager.dart';
 import 'package:tzwad_mobile/core/resource/string_manager.dart';
-import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
@@ -27,15 +24,6 @@ class FormLoginSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          AppStrings.strWelcomeBack.tr(context),
-          style: StyleManager.getSemiBoldStyle(
-            color: ColorManager.colorTitleTexts,
-            fontSize: FontSize.s18,
-          ),
-        ).marginOnly(
-          bottom: AppPadding.p16,
-        ),
         const LoginPhoneNumberWidget().marginOnly(
           bottom: AppPadding.p4,
         ),

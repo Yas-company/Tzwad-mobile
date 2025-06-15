@@ -39,7 +39,7 @@ class LightModeTheme implements MainThemeApp {
       // hintColor: Palette.colorPlaceHolderLight,
       //
       // shadowColor: Palette.colorBackgroundDark,
-      // fontFamily: fontFamily,
+      fontFamily: fontFamily,
 
       iconButtonTheme: const IconButtonThemeData(
         style: ButtonStyle(
@@ -100,8 +100,9 @@ class LightModeTheme implements MainThemeApp {
         titleTextStyle: StyleManager.getSemiBoldStyle(
           color: ColorManager.blackColor,
           fontSize: FontSize.s20,
+        ).copyWith(
+          fontFamily: fontFamily,
         ),
-        // .copyWith(fontFamily: fontFamily),
       ),
 
       sliderTheme: const SliderThemeData(
@@ -163,44 +164,48 @@ class LightModeTheme implements MainThemeApp {
       // input decoration theme (text form field)
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: ColorManager.colorPureWhite,
+        fillColor: ColorManager.colorWhite3,
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p8,
-          vertical: AppPadding.p16,
+          horizontal: AppPadding.p10,
+          vertical: AppPadding.p18,
         ),
 
         // hint style
         hintStyle: StyleManager.getRegularStyle(
-          color: ColorManager.greyTextFieldLebel,
+          color: ColorManager.colorWhite2,
+          fontSize: FontSize.s16,
         ),
 
         // error style
         errorStyle: StyleManager.getRegularStyle(
-          color: ColorManager.orange,
+          color: ColorManager.colorRed,
           fontSize: FontSize.s12,
         ),
 
         // helper style
         helperStyle: StyleManager.getRegularStyle(
-          color: ColorManager.orange,
+          color: ColorManager.colorRed,
           fontSize: FontSize.s12,
         ),
 
         // enabled border style
         enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: ColorManager.greyBorder, width: AppSize.s1),
-          borderRadius: BorderRadius.all(Radius.circular(AppSize.s10)),
+          borderSide:
+              BorderSide(color: ColorManager.colorWhite3, width: AppSize.s1),
+          borderRadius: BorderRadius.all(Radius.circular(AppSize.s8)),
         ),
 
         // disable border style
         disabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: ColorManager.colorDisable, width: AppSize.s1),
-          borderRadius: BorderRadius.all(Radius.circular(AppSize.s10)),
+          borderSide:
+              BorderSide(color: ColorManager.colorDisable, width: AppSize.s1),
+          borderRadius: BorderRadius.all(Radius.circular(AppSize.s8)),
         ),
 
         // focused border style
         focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: ColorManager.colorPrimary, width: AppSize.s2),
+          borderSide:
+              BorderSide(color: ColorManager.colorWhite3, width: AppSize.s1),
           borderRadius: BorderRadius.all(
             Radius.circular(AppSize.s8),
           ),
@@ -208,13 +213,19 @@ class LightModeTheme implements MainThemeApp {
 
         // error border style
         errorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: ColorManager.orange, width: AppSize.s1),
-          borderRadius: BorderRadius.all(Radius.circular(AppSize.s10)),
+          borderSide:
+              BorderSide(color: ColorManager.colorWhite3, width: AppSize.s1),
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppSize.s8),
+          ),
         ),
         // focused border style
         focusedErrorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: ColorManager.orange, width: AppSize.s1),
-          borderRadius: BorderRadius.all(Radius.circular(AppSize.s10)),
+          borderSide:
+              BorderSide(color: ColorManager.colorWhite3, width: AppSize.s1),
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppSize.s8),
+          ),
         ),
       ),
     );

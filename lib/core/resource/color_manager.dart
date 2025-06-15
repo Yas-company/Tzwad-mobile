@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 
 class ColorManager {
-  static const Color colorPrimary = Color(0xff00B106);
-  static const Color colorPrimary1 = Color(0x4200b106);
+  //#
+  static const Color colorPrimary = Color(0xff009196);
+  static const Color colorPrimary1 = Color(0x42009196);
+  static const Color colorSecondary = Color(0XFFF9A51A);
+  static const Color colorDisable = Color(0X7F1CC9BC);
+  static const Color colorBackground = Color(0XFFFFFFFF);
+
+  // Color Black
+  static const Color colorBlack1 = Color(0xff030303); // Primary Text
+  static const Color colorBlack2 = Color(0xff7F7F7F); // Secondary Text
+
+  // Color White
+  static const Color colorWhite1 = Color(0xffFFFFFF);
+  static const Color colorWhite2 = Color(0xff7F7F7F);
+  static const Color colorWhite3 = Color(0xffF5F5F5);
+
+  // Color Grey
+  // static const Color colorGrey1 = Color(0xffF5F5F5);
+  // static const Color colorGrey2 = Color(0xff7F7F7F);
+
+  static const Color colorTitleTexts = Color(0xff333333);
+
   static const Color colorLightPrimary = Color(0xffE3FFE5);
   static const Color colorLightPrimary2 = Color(0xffBAEDBF);
   static const Color colorLightPrimary3 = Color(0xffDDEFDE);
-
-  static const Color colorSecondary = Color(0XFFFF960A);
-
-  static const Color colorDisable = Color(0X7F1CC9BC);
-
-  static const Color colorBackground = Color(0XFFFFFFFF);
-
-  static const Color colorTitleTexts = Color(0xff333333);
 
   // White
   static const Color colorPureWhite = Color(0xffFFFFFF);

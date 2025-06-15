@@ -24,18 +24,22 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       role: fields[4] as String?,
       isVerified: fields[5] as bool?,
       businessName: fields[6] as String?,
-      licId: fields[7] as String?,
       address: fields[8] as String?,
-      location: fields[9] as String?,
-      createdAt: fields[10] as String?,
-      updatedAt: fields[11] as String?,
+      latitude: fields[9] as String?,
+      longitude: fields[10] as String?,
+      licenseAttachment: fields[11] as String?,
+      commercialRegisterAttachment: fields[12] as String?,
+      status: fields[13] as String?,
+      fieldId: fields[14] as String?,
+      createdAt: fields[15] as String?,
+      updatedAt: fields[16] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(16)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,15 +54,23 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       ..write(obj.isVerified)
       ..writeByte(6)
       ..write(obj.businessName)
-      ..writeByte(7)
-      ..write(obj.licId)
       ..writeByte(8)
       ..write(obj.address)
       ..writeByte(9)
-      ..write(obj.location)
+      ..write(obj.latitude)
       ..writeByte(10)
-      ..write(obj.createdAt)
+      ..write(obj.longitude)
       ..writeByte(11)
+      ..write(obj.licenseAttachment)
+      ..writeByte(12)
+      ..write(obj.commercialRegisterAttachment)
+      ..writeByte(13)
+      ..write(obj.status)
+      ..writeByte(14)
+      ..write(obj.fieldId)
+      ..writeByte(15)
+      ..write(obj.createdAt)
+      ..writeByte(16)
       ..write(obj.updatedAt);
   }
 

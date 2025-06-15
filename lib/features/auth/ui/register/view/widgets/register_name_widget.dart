@@ -4,6 +4,8 @@ import 'package:tzwad_mobile/core/app_widgets/app_text_field_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
+import 'package:tzwad_mobile/core/resource/language_manager.dart';
+import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/features/auth/ui/register/hooks/register_name_hook.dart';
@@ -27,7 +29,7 @@ class RegisterNameWidget extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Name',
+          AppStrings.strName.tr(context),
           style: StyleManager.getMediumStyle(
             color: ColorManager.greytitle,
             fontSize: FontSize.s16,
@@ -37,14 +39,9 @@ class RegisterNameWidget extends HookConsumerWidget {
         ),
         AppTextFieldWidget(
           controller: phoneNumberController,
-          hintText: 'Enter your name',
+          hintText: AppStrings.strHintName.tr(context),
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.next,
-          prefixIcon: const Icon(
-            Icons.perm_identity_rounded,
-            color: ColorManager.greyHint,
-            size: 25,
-          ),
           errorText: errorText,
           helperText: ' ',
         )

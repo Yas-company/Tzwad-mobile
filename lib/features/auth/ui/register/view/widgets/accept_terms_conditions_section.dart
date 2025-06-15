@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
+import 'package:tzwad_mobile/core/resource/language_manager.dart';
+import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
-import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/features/auth/ui/register/providers/register_controller_provider.dart';
 
 class AcceptTermsConditionsSection extends ConsumerWidget {
@@ -49,7 +49,7 @@ class AcceptTermsConditionsSection extends ConsumerWidget {
                   AppPadding.p4,
                 ),
                 Text(
-                  'Accept all',
+                  AppStrings.strAcceptTermsConditions.tr(context),
                   style: StyleManager.getSemiBoldStyle(
                     color: ColorManager.greyParagraph,
                   ),
@@ -58,26 +58,8 @@ class AcceptTermsConditionsSection extends ConsumerWidget {
             ),
           ),
         ),
-        Flexible(
-          child: AppRippleWidget(
-            radius: AppSize.s4,
-            onTap: () => _onPressedTermsConditionsButton(context),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p4),
-              child: Text(
-                'Terms and Conditions',
-                style: StyleManager.getSemiBoldStyle(
-                  color: ColorManager.colorPrimary,
-                ),
-              ),
-            ),
-          ),
-        ),
+
       ],
     );
-  }
-
-  _onPressedTermsConditionsButton(BuildContext context) {
-    context.pushNamed(AppRoutes.termsConditionsRoute);
   }
 }

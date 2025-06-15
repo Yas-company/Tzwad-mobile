@@ -5,23 +5,23 @@ class ConstantsApi {
   static String get onboardingUrl => "onboarding-screens";
 
   //Api Auth
-  static String get registerUrl => "buyer/register";
+  static String get registerUrl => "auth/register";
 
-  static String get loginUrl => "buyer/login";
+  static String get loginUrl => "auth/login";
 
-  static String get logoutUrl => "buyer/logout";
+  static String get logoutUrl => "auth/logout";
 
-  static String get verifyOtpUrl => "buyer/verify-otp";
+  static String get verifyOtpUrl => "auth/verify-otp";
 
-  static String get forgotPasswordUrl => "buyer/forgot-password";
+  static String get forgotPasswordUrl => "auth/forgot-password";
 
-  static String get resetPasswordUrl => "buyer/reset-password";
+  static String get resetPasswordUrl => "auth/reset-password";
 
-  static String get changePasswordUrl => "buyer/change-password";
+  static String get changePasswordUrl => "auth/change-password";
 
-  static String get deleteAccountUrl => "buyer/delete-account";
+  static String get deleteAccountUrl => "auth/delete-account";
 
-  static String get profileDetailsUrl => "buyer/me";
+  static String get profileDetailsUrl => "auth/me";
 
   //Api Category
   static String get getCategoriesUrl => "categories";

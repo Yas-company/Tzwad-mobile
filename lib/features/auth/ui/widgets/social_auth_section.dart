@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
-import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
@@ -10,50 +10,52 @@ import 'package:tzwad_mobile/core/resource/values_manager.dart';
 class SocialAuthSection extends StatelessWidget {
   const SocialAuthSection({
     super.key,
-    this.isRegister = false,
   });
-
-  final bool isRegister;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: [
-        if (Platform.isAndroid) ...{
-          AppButtonWidget(
-            height: AppSize.s44,
-            label: isRegister ? 'Register with Google' : 'Login with Google',
+        Expanded(
+          child: AppButtonWidget(
+            label: 'الفيسبوك',
             onPressed: () {},
             buttonType: ButtonType.outline,
-            borderColor: ColorManager.greyBorder,
-            textColor: ColorManager.greyParagraph,
-            assetsIcon: AssetsManager.icGoogle,
-          ).marginOnly(
-            bottom: AppPadding.p16,
+            borderColor: ColorManager.colorWhite3,
+            textColor: ColorManager.colorWhite2,
+            assetsIcon: AssetsManager.icFacebook,
+            buttonSize: ButtonSize.small,
           ),
+        ),
+        const Gap(
+          AppPadding.p16,
+        ),
+        if (Platform.isAndroid) ...{
+          Expanded(
+            child: AppButtonWidget(
+              label: 'حساب ابل',
+              onPressed: () {},
+              buttonType: ButtonType.outline,
+              borderColor: ColorManager.colorWhite3,
+              textColor: ColorManager.colorWhite2,
+              assetsIcon: AssetsManager.icGoogle,
+              buttonSize: ButtonSize.small,
+            ),
+          )
         },
         if (Platform.isIOS) ...{
-          AppButtonWidget(
-            height: AppSize.s44,
-            label: isRegister ? 'Register with Apple' : 'Login with Apple',
-            onPressed: () {},
-            buttonType: ButtonType.outline,
-            borderColor: ColorManager.greyBorder,
-            textColor: ColorManager.greyParagraph,
-            assetsIcon: AssetsManager.icApple,
-          ).marginOnly(
-            bottom: AppPadding.p16,
+          Expanded(
+            child: AppButtonWidget(
+              label: 'حساب ابل',
+              onPressed: () {},
+              buttonType: ButtonType.outline,
+              borderColor: ColorManager.colorWhite3,
+              textColor: ColorManager.colorWhite2,
+              assetsIcon: AssetsManager.icApple,
+              buttonSize: ButtonSize.small,
+            ),
           ),
         },
-        AppButtonWidget(
-          height: AppSize.s44,
-          label: isRegister ? 'Register with Facebook' : 'Login with Facebook',
-          onPressed: () {},
-          buttonType: ButtonType.outline,
-          borderColor: ColorManager.greyBorder,
-          textColor: ColorManager.greyParagraph,
-          assetsIcon: AssetsManager.icFacebook,
-        ),
       ],
     );
   }

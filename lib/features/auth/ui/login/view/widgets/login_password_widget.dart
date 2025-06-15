@@ -36,8 +36,8 @@ class LoginPasswordWidget extends HookConsumerWidget {
       children: [
         Text(
           AppStrings.strPassword.tr(context),
-          style: StyleManager.getMediumStyle(
-            color: ColorManager.greytitle,
+          style: StyleManager.getRegularStyle(
+            color: ColorManager.colorBlack1,
             fontSize: FontSize.s16,
           ),
         ).marginOnly(
@@ -49,11 +49,11 @@ class LoginPasswordWidget extends HookConsumerWidget {
           keyboardType: TextInputType.visiblePassword,
           textInputAction: TextInputAction.done,
           obscureText: obscureText,
-          prefixIcon: const Icon(
-            Icons.lock_outlined,
-            color: ColorManager.greyHint,
-            size: 25,
-          ),
+          // prefixIcon: const Icon(
+          //   Icons.lock_outlined,
+          //   color: ColorManager.greyHint,
+          //   size: 25,
+          // ),
           suffixIcon: AppRippleWidget(
             radius: AppSize.s12,
             onTap: () {

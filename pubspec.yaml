@@ -72,7 +72,6 @@ flutter_native_splash:
     icon_background_color: "#ffffff"
     image_dark: assets/images/img_splash.png
     icon_background_color_dark: "#FFFFFF"
-
   web: false
 
 flutter_icons:
@@ -103,4 +102,16 @@ flutter:
         - asset: assets/fonts/DMSans-Regular.ttf
           weight: 400
         - asset: assets/fonts/DMSans-Light.ttf
+          weight: 300
+    - family: Tajawal
+      fonts:
+        - asset: assets/fonts/Tajawal-ExtraBold.ttf
+          weight: 700
+        - asset: assets/fonts/Tajawal-Bold.ttf
+          weight: 600
+        - asset: assets/fonts/Tajawal-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Tajawal-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Tajawal-Light.ttf
           weight: 300

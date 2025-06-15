@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_text_field_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
@@ -45,26 +44,6 @@ class RegisterPhoneNumberWidget extends HookConsumerWidget {
           keyboardType: TextInputType.phone,
           textInputAction: TextInputAction.next,
           inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-          prefixIcon: AppRippleWidget(
-            // radius: AppSize.s12,
-            // onTap: () {
-            //   '+966'.log();
-            // },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  child: Text(
-                    '+966',
-                    style: StyleManager.getSemiBoldStyle(
-                      color: ColorManager.greyHint,
-                      fontSize: FontSize.s14,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
           maxLength: 10,
           errorText: errorText,
           helperText: ' ',

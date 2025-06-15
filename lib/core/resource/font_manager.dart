@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FontConstants {
-  // static const String fontCairo = "Cairo";
+  static const String fontTajawal = "Tajawal";
   static const String fontDMSans = "DMSans";
 }
 
@@ -24,6 +24,7 @@ class FontSize {
   static const double s20 = 20.0 * _scaleFont;
   static const double s22 = 22.0 * _scaleFont;
   static const double s24 = 24.0 * _scaleFont;
+  static const double s28 = 28.0 * _scaleFont;
   static const double s30 = 30.0 * _scaleFont;
   static const double s40 = 40.0 * _scaleFont;
 }

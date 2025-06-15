@@ -3,6 +3,7 @@ import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/extension/validation_extension.dart';
 import 'package:tzwad_mobile/core/services/location_service.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
+import 'package:tzwad_mobile/features/auth/models/role_enum.dart';
 import 'package:tzwad_mobile/features/auth/providers/auth_repository_provider.dart';
 import 'register_state.dart';
 
@@ -119,6 +120,7 @@ class RegisterController extends AutoDisposeNotifier<RegisterState> {
       password: state.password,
       latitude: state.latitude,
       longitude: state.longitude,
+      role: RoleEnum.buyer,
     );
     result.fold(
       (l) => state = state.copyWith(

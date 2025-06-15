@@ -25,35 +25,50 @@ class UserModel extends HiveObject {
   @HiveField(6)
   String? businessName;
 
-  @HiveField(7)
-  String? licId;
-
   @HiveField(8)
   String? address;
 
   @HiveField(9)
-  String? location;
+  String? latitude;
 
   @HiveField(10)
-  String? createdAt;
+  String? longitude;
 
   @HiveField(11)
+  String? licenseAttachment;
+
+  @HiveField(12)
+  String? commercialRegisterAttachment;
+
+  @HiveField(13)
+  String? status;
+
+  @HiveField(14)
+  String? fieldId;
+
+  @HiveField(15)
+  String? createdAt;
+
+  @HiveField(16)
   String? updatedAt;
 
-  UserModel({
-    this.id,
-    this.name,
-    this.email,
-    this.phone,
-    this.role,
-    this.isVerified,
-    this.businessName,
-    this.licId,
-    this.address,
-    this.location,
-    this.createdAt,
-    this.updatedAt,
-  });
+  UserModel(
+      {this.id,
+        this.name,
+        this.email,
+        this.phone,
+        this.role,
+        this.isVerified,
+        this.businessName,
+        this.address,
+        this.latitude,
+        this.longitude,
+        this.licenseAttachment,
+        this.commercialRegisterAttachment,
+        this.status,
+        this.fieldId,
+        this.createdAt,
+        this.updatedAt,});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -63,9 +78,13 @@ class UserModel extends HiveObject {
     role = json['role'];
     isVerified = json['is_verified'];
     businessName = json['business_name'];
-    licId = json['lic_id'];
     address = json['address'];
-    location = json['location'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
+    licenseAttachment = json['license_attachment'];
+    commercialRegisterAttachment = json['commercial_register_attachment'];
+    status = json['status'];
+    fieldId = json['field_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -79,9 +98,13 @@ class UserModel extends HiveObject {
     data['role'] = role;
     data['is_verified'] = isVerified;
     data['business_name'] = businessName;
-    data['lic_id'] = licId;
     data['address'] = address;
-    data['location'] = location;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
+    data['license_attachment'] = licenseAttachment;
+    data['commercial_register_attachment'] = commercialRegisterAttachment;
+    data['status'] = status;
+    data['field_id'] = fieldId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     return data;
@@ -93,13 +116,17 @@ class UserModel extends HiveObject {
       id: id,
       name: faker.person.name(),
       email: faker.internet.email(),
-      phone: faker.phoneNumber.us(),
-      role: faker.randomGenerator.string(10),
+      phone: faker.lorem.word(),
+      role: faker.randomGenerator.integer(2).toString(),
       isVerified: faker.randomGenerator.boolean(),
-      businessName: faker.randomGenerator.string(10),
-      licId: faker.randomGenerator.string(10),
-      address: faker.randomGenerator.string(10),
-      location: faker.randomGenerator.string(10),
+      businessName: faker.company.name(),
+      address: faker.address.streetAddress(),
+      latitude: faker.randomGenerator.decimal().toString(),
+      longitude: faker.randomGenerator.decimal().toString(),
+      licenseAttachment: faker.randomGenerator.string(10),
+      commercialRegisterAttachment: faker.randomGenerator.string(10),
+      status: faker.randomGenerator.string(10),
+      fieldId: faker.randomGenerator.string(10),
       createdAt: faker.date.dateTime().toString(),
       updatedAt: faker.date.dateTime().toString(),
     );

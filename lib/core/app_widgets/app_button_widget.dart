@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
+import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 
@@ -41,7 +42,7 @@ class AppButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double mHeight = height ?? (buttonSize == ButtonSize.large ? AppSize.s50 : AppSize.s40);
+    final double mHeight = height ?? (buttonSize == ButtonSize.large ? AppSize.s54 : AppSize.s48);
     final bool isSolid = buttonType == ButtonType.solid;
     final Color mBackgroundColor = backgroundColor ?? (isSolid ? ColorManager.colorPrimary : ColorManager.colorPureWhite);
     final Color mTextColor = textColor ?? (isSolid ? ColorManager.colorPureWhite : ColorManager.colorPrimary);
@@ -97,8 +98,9 @@ class AppButtonWidget extends StatelessWidget {
                           label,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: StyleManager.getSemiBoldStyle(
+                          style: StyleManager.getBoldStyle(
                             color: mTextColor,
+                            fontSize: FontSize.s16,
                           ),
                           textAlign: TextAlign.center,
                         ),

@@ -26,17 +26,18 @@ class ForgetPasswordViewBody extends StatelessWidget {
             ),
             Text(
               AppStrings.strForgetPassword.tr(context),
-              style: StyleManager.getSemiBoldStyle(
-                color: ColorManager.colorTitleTexts,
-                fontSize: FontSize.s18,
+              style: StyleManager.getBoldStyle(
+                color: ColorManager.colorBlack1,
+                fontSize: FontSize.s28,
               ),
             ).marginOnly(
               bottom: AppPadding.p8,
             ),
             Text(
               AppStrings.strResetInstructions.tr(context),
-              style: StyleManager.getMediumStyle(
-                color: ColorManager.greyParagraph,
+              style: StyleManager.getRegularStyle(
+                color: ColorManager.colorBlack2,
+                fontSize: FontSize.s18,
               ),
             ).marginOnly(
               bottom: AppPadding.p20,

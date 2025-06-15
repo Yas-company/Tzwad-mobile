@@ -47,5 +47,7 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSLocationWhenInUseUsageDescription</key>
+        <string>Your location is used to help buyers and suppliers find each other based on proximity, improving matching and delivery accuracy during registration and app usage.</string>
 	</dict>
 </plist>

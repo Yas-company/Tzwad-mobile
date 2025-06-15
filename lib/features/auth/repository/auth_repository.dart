@@ -1,3 +1,4 @@
+import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/network/api_service.dart';
 import 'package:tzwad_mobile/core/network/constants_api.dart';
 import 'package:tzwad_mobile/core/network/error_handler.dart';
@@ -7,6 +8,7 @@ import 'package:tzwad_mobile/core/util/unit.dart';
 import 'package:tzwad_mobile/features/auth/models/login_model.dart';
 import 'package:tzwad_mobile/features/auth/models/otp_flow_type.dart';
 import 'package:tzwad_mobile/features/auth/models/register_model.dart';
+import 'package:tzwad_mobile/features/auth/models/role_enum.dart';
 import 'package:tzwad_mobile/features/auth/models/user_model.dart';
 import 'package:tzwad_mobile/features/auth/models/verify_otp_model.dart';
 import 'package:tzwad_mobile/features/auth/local_data/user_local_data.dart';
@@ -26,7 +28,7 @@ class AuthRepository {
   Future<Result<Failure, Unit>> login({
     required String phoneNumber,
     required String password,
-    required bool isRememberMe,
+    required RoleEnum role,
   }) async {
     try {
       final response = await apiService.post<LoginModel>(
@@ -34,13 +36,13 @@ class AuthRepository {
         data: {
           'phone': phoneNumber,
           'password': password,
+          'role': role.value,
         },
         fromJsonT: LoginModel.fromJson,
       );
       _saveData(
         user: response.data?.user,
         token: response.data?.token,
-        isRememberMe: isRememberMe,
       );
       return const Right(unit);
     } catch (error) {
@@ -56,6 +58,7 @@ class AuthRepository {
     required String password,
     required double latitude,
     required double longitude,
+    required RoleEnum role,
   }) async {
     try {
       await apiService.post<RegisterModel>(
@@ -68,10 +71,10 @@ class AuthRepository {
           'latitude': latitude,
           'longitude': longitude,
           'business_name': businessName,
-          'lic_id': '',
           'email': '',
           'password': password,
           'password_confirmation': password,
+          'role': role.value,
         },
         fromJsonT: RegisterModel.fromJson,
       );
@@ -93,7 +96,9 @@ class AuthRepository {
           'phone': phoneNumber,
           'otp': otp,
         },
-        fromJsonT: otpFlowType == OtpFlowType.register ? VerifyOtpModel.fromJson : null,
+        fromJsonT: otpFlowType == OtpFlowType.register
+            ? VerifyOtpModel.fromJson
+            : null,
       );
       if (otpFlowType == OtpFlowType.register) {
         _saveData(
@@ -128,13 +133,18 @@ class AuthRepository {
     required String newPassword,
   }) async {
     try {
-      await apiService.post(
+      final response = await apiService.post<LoginModel>(
         url: ConstantsApi.resetPasswordUrl,
         data: {
           'phone': phoneNumber,
           'password': newPassword,
           'password_confirmation': newPassword,
         },
+        fromJsonT: LoginModel.fromJson,
+      );
+      _saveData(
+        user: response.data?.user,
+        token: response.data?.token,
       );
       return const Right(unit);
     } catch (error) {

@@ -49,11 +49,6 @@ class ResetPasswordPasswordWidget extends HookConsumerWidget {
           keyboardType: TextInputType.visiblePassword,
           textInputAction: TextInputAction.next,
           obscureText: obscureText,
-          prefixIcon: const Icon(
-            Icons.lock_outlined,
-            color: ColorManager.greyHint,
-            size: 25,
-          ),
           suffixIcon: AppRippleWidget(
             radius: AppSize.s12,
             onTap: () {
