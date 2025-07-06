@@ -67,7 +67,7 @@ class FormOtpSection extends StatelessWidget {
         );
       } else if (next.submitVerifyOtpDataState == DataState.success) {
         otpFlowType == OtpFlowType.register
-            ? context.goNamed(AppRoutes.homeRoute)
+            ? context.goNamed(AppRoutes.homeBuyerRoute)
             : context.pushNamed(
                 AppRoutes.resetPasswordRoute,
                 extra: {

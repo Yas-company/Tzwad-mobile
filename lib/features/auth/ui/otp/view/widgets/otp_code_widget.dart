@@ -6,8 +6,8 @@ import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
-import 'package:tzwad_mobile/features/auth/ui/login/providers/login_controller_provider.dart';
 import 'package:tzwad_mobile/features/auth/ui/otp/hooks/otp_code_hook.dart';
+import 'package:tzwad_mobile/features/auth/ui/otp/providers/otp_controller_provider.dart';
 
 class OtpCodeWidget extends HookConsumerWidget {
   const OtpCodeWidget({super.key});
@@ -15,8 +15,8 @@ class OtpCodeWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final errorText = ref.watch(
-      loginControllerProvider.select(
-        (value) => value.phoneNumberValidationMessage,
+      otpControllerProvider.select(
+        (value) => value.otpValidationMessage,
       ),
     );
     final controller = useOtpCodeController(

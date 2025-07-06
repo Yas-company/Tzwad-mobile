@@ -87,7 +87,7 @@ class CustomBottomNavigation extends ConsumerWidget {
     ref.read(navBarControllerProvider.notifier).changeIndex(index);
     switch (index) {
       case 0:
-        context.goNamed(AppRoutes.homeRoute);
+        context.goNamed(AppRoutes.homeBuyerRoute);
       case 1:
         context.goNamed(AppRoutes.searchRoute);
       case 2:

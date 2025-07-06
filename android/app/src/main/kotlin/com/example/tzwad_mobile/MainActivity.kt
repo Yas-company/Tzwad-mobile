@@ -1,4 +1,4 @@
-package com.example.tzwad_mobile
+package com.yas.wfrli
 
 import io.flutter.embedding.android.FlutterActivity
 

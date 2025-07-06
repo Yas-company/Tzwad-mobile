@@ -1,11 +1,11 @@
 class ConstantsApi {
-  static String get baseUrl => "https://tzawd.com/api/";
+  static String get baseUrl => "https://tzawd.com/api/v1/";//https://tzawd.com/api/v1
 
   // Api Onboarding
   static String get onboardingUrl => "onboarding-screens";
 
   //Api Auth
-  static String get registerUrl => "auth/register";
+  static String get registerUrl => "auth/register_buyer";
 
   static String get loginUrl => "auth/login";
 

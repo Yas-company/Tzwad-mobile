@@ -64,7 +64,7 @@ class FormResetPasswordSection extends StatelessWidget {
           message: next.failure?.message ?? '',
         );
       } else if (next.submitResetPasswordDataState == DataState.success) {
-        context.pushNamed(AppRoutes.homeRoute);
+        context.pushNamed(AppRoutes.homeBuyerRoute);
       }
     }
   }

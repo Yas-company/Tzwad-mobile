@@ -56,9 +56,9 @@ class _SplashViewBodyState extends ConsumerState<SplashViewBody> {
     if (!settingLocalData.isOnBoardingScreenViewed()) {
       context.pushReplacementNamed(AppRoutes.onboardingRoute);
     } else if (!settingLocalData.isUserLogged()) {
-      context.pushReplacementNamed(AppRoutes.loginRoute);
+      context.pushReplacementNamed(AppRoutes.loginBuyerRoute);
     } else {
-      context.pushReplacementNamed(AppRoutes.homeRoute);
+      context.pushReplacementNamed(AppRoutes.homeBuyerRoute);
     }
   }
 }

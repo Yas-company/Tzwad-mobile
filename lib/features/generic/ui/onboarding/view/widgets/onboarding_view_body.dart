@@ -113,7 +113,7 @@ class OnboardingViewBody extends HookConsumerWidget {
 
   _onPressedSkipButton(BuildContext context, OnboardingController controller) {
     controller.setOnBoardingScreenViewed();
-    context.pushReplacementNamed(AppRoutes.loginRoute);
+    context.pushReplacementNamed(AppRoutes.loginBuyerRoute);
   }
 
   _onPressedContinueButton(BuildContext context, int index, PageController pageController, OnboardingController controller) {
@@ -124,7 +124,7 @@ class OnboardingViewBody extends HookConsumerWidget {
       );
     } else {
       controller.setOnBoardingScreenViewed();
-      context.pushReplacementNamed(AppRoutes.loginRoute);
+      context.pushReplacementNamed(AppRoutes.loginBuyerRoute);
     }
   }
 }
