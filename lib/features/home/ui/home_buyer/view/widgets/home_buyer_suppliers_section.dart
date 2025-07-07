@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_failure_widget.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
-import 'package:tzwad_mobile/features/ads/models/ads_model.dart';
 import 'package:tzwad_mobile/features/home/ui/home_buyer/providers/home_buyer_controller_provider.dart';
+import 'package:tzwad_mobile/features/supplier/models/supplier_model.dart';
 
-import 'home_buyer_ads_list_content.dart';
+import 'home_buyer_supplier_list_content.dart';
 
-class HomeAdsSection extends ConsumerWidget {
-  const HomeAdsSection({super.key});
+class HomeBuyerSuppliersSection extends ConsumerWidget {
+  const HomeBuyerSuppliersSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(
       homeBuyerControllerProvider.select(
-        (value) => value.getAdsDataState,
+        (value) => value.getSuppliersDataState,
       ),
     );
-    final ads = ref.watch(
+    final items = ref.watch(
       homeBuyerControllerProvider.select(
-        (value) => value.ads,
+        (value) => value.suppliers,
       ),
     );
 
@@ -30,13 +30,13 @@ class HomeAdsSection extends ConsumerWidget {
     );
     switch (state) {
       case DataState.loading:
-        return HomeBuyerAdsListContent(
-          ads: AdsModel.generateFakeList(),
+        return HomeBuyerSupplierListContent(
+          items: SupplierModel.generateFakeList(),
           isLoading: true,
         );
       case DataState.success:
-        return HomeBuyerAdsListContent(
-          ads: ads,
+        return HomeBuyerSupplierListContent(
+          items: items,
           isLoading: false,
         );
       case DataState.failure:

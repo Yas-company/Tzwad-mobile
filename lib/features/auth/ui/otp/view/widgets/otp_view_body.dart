@@ -53,7 +53,7 @@ class OtpViewBody extends StatelessWidget {
               '${AppStrings.strCodeSentNotice.tr(context)} $phoneNumber',
               textAlign: TextAlign.center,
               style: StyleManager.getRegularStyle(
-                color: ColorManager.greytitle,
+                color: ColorManager.colorBlack1,
               ),
             ).marginOnly(
               bottom: AppPadding.p20,

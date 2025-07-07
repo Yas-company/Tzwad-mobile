@@ -36,8 +36,8 @@ class ChangePasswordRePasswordWidget extends HookConsumerWidget {
       children: [
         Text(
           AppStrings.strConfirmNewPassword.tr(context),
-          style: StyleManager.getMediumStyle(
-            color: ColorManager.greytitle,
+          style: StyleManager.getRegularStyle(
+            color: ColorManager.colorBlack1,
             fontSize: FontSize.s16,
           ),
         ).marginOnly(

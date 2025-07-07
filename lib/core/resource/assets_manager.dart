@@ -10,8 +10,6 @@ class AssetsManager {
   static const icGoogle = 'assets/icons/ic_google.svg';
   static const icApple = 'assets/icons/ic_apple.svg';
   static const icFacebook = 'assets/icons/ic_facebook.svg';
-  static const icMail = 'assets/icons/ic_mail.png';
-  static const icPassword = 'assets/icons/ic_password.png';
   static const imgElements = 'assets/images/img_elements.png';
   static const imgAuthHeader = 'assets/images/img_auth_header.png';
   static const imgVerifyOtp = 'assets/images/img_verify_otp.svg';
@@ -25,6 +23,13 @@ class AssetsManager {
   static const icTabFavorites = 'assets/icons/ic_tab_favorites.svg';
   static const icTabProducts = 'assets/icons/ic_tab_products.svg';
   static const icTabMore = 'assets/icons/ic_tab_more.svg';
+
+
+  // Home
+  static const imgTopographic = 'assets/images/img_topographic.png';
+  static const icSearch = 'assets/icons/ic_search.svg';
+  static const icLocation = 'assets/icons/ic_location.svg';
+  static const icCart = 'assets/icons/ic_cart.svg';
 
   //Products
   static const imgProductPlaceHolder = 'assets/images/img_product_palce_holder.png';

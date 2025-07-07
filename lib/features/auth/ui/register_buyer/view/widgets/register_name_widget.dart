@@ -30,8 +30,8 @@ class RegisterNameWidget extends HookConsumerWidget {
       children: [
         Text(
           AppStrings.strName.tr(context),
-          style: StyleManager.getMediumStyle(
-            color: ColorManager.greytitle,
+          style: StyleManager.getRegularStyle(
+            color: ColorManager.colorBlack1,
             fontSize: FontSize.s16,
           ),
         ).marginOnly(

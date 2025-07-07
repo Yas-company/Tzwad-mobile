@@ -11,9 +11,7 @@ import 'package:tzwad_mobile/features/auth/ui/otp/view/otp_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/register_buyer/view/register_buyer_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/register_supplier/view/register_supplier_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/reset_password/view/reset_password_view.dart';
-import 'package:tzwad_mobile/features/category/ui/categories/view/categories_view.dart';
 import 'package:tzwad_mobile/features/category/ui/categories_supplier/view/categories_supplier_view.dart';
-import 'package:tzwad_mobile/features/category/ui/category_details/view/category_details_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/more/view/more_buyer_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/more/view/more_supplier_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/under_develop_view.dart';
@@ -28,9 +26,8 @@ import 'package:tzwad_mobile/features/generic/ui/onboarding/view/onboarding_view
 import 'package:tzwad_mobile/features/generic/ui/splash/view/splash_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/trems_conditions/view/trems_conditions_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/undefined_route/view/undefined_route_view.dart';
-import 'package:tzwad_mobile/features/product/ui/product_details/view/product_details_view.dart';
-import 'package:tzwad_mobile/features/product/ui/products/view/products_view.dart';
 import 'package:tzwad_mobile/features/product/ui/products_supplier/view/products_supplier_view.dart';
+import 'package:tzwad_mobile/features/supplier/view/suppliers/suupliers_view.dart';
 
 class RouterManager {
   static final GoRouter router = GoRouter(
@@ -86,20 +83,8 @@ class RouterManager {
         screen: const RegisterSupplierView(),
       ),
       AppRouter(
-        route: AppRoutes.productsRoute,
-        screen: const ProductsView(),
-      ),
-      AppRouter(
-        route: AppRoutes.productDetailsRoute,
-        screen: const ProductDetailsView(),
-      ),
-      AppRouter(
-        route: AppRoutes.categoriesRoute,
-        screen: const CategoriesView(),
-      ),
-      AppRouter(
-        route: AppRoutes.categoryDetailsRoute,
-        screen: const CategoryDetailsView(),
+        route: AppRoutes.suppliersRoute,
+        screen: const SuppliersView(),
       ),
       AppRouter(
         route: AppRoutes.orderDetailsRoute,
@@ -117,7 +102,7 @@ class RouterManager {
           ),
           AppRouter(
             route: AppRoutes.ordersBuyerRoute,
-            screen:  const OrdersBuyerView(),
+            screen: const OrdersBuyerView(),
           ),
           AppRouter(
             route: AppRoutes.favoriteProductsRoute,

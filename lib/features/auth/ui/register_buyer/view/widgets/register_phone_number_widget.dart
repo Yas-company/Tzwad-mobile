@@ -31,8 +31,8 @@ class RegisterPhoneNumberWidget extends HookConsumerWidget {
       children: [
         Text(
           AppStrings.strPhoneNumber.tr(context),
-          style: StyleManager.getMediumStyle(
-            color: ColorManager.greytitle,
+          style: StyleManager.getRegularStyle(
+            color: ColorManager.colorBlack1,
             fontSize: FontSize.s16,
           ),
         ).marginOnly(

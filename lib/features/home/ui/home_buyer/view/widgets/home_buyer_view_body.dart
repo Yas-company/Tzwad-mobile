@@ -1,45 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:tzwad_mobile/core/app_widgets/app_text_field_widget.dart';
-import 'package:tzwad_mobile/core/extension/widget_extension.dart';
+import 'package:gap/gap.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 
 import 'home_ads_section.dart';
-import 'home_categories_section.dart';
-import 'home_products_section.dart';
+import 'home_buyer_app_bar_widget.dart';
+import 'home_buyer_suppliers_section.dart';
 
 class HomeBuyerViewBody extends StatelessWidget {
   const HomeBuyerViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          AppTextFieldWidget(
-            hintText: 'Search for products, brands and categories',
-            maxLines: 1,
-            enabled: false,
-            onTap: () => _onPressedSearchTextFiled(context),
-            suffixIcon: const Icon(
-              Icons.keyboard_arrow_right_outlined,
-            ),
-          ).marginAll(
-            AppPadding.p16,
-          ),
-          const HomeAdsSection().marginOnly(
-            bottom: AppPadding.p16,
-          ),
-          const HomeProductsSection().marginOnly(
-            bottom: AppPadding.p16,
-          ),
-          const HomeCategoriesSection().marginOnly(
-            bottom: AppPadding.p32,
-          ),
-          // const HomeAdsSection().marginOnly(
-          //   bottom: AppPadding.p32,
+    return const CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          // leading: IconButton(
+          //   onPressed: () => _onPressedSkipButton(context),
+          //   icon: const Icon(Icons.close),
           // ),
-        ],
-      ),
+          automaticallyImplyLeading: false,
+          pinned: true,
+          expandedHeight: AppSize.s175,
+          flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
+            background: HomeBuyerAppBarWidget(),
+          ),
+        ),
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Column(
+            children: [
+              Gap(
+                AppPadding.p20,
+              ),
+              HomeAdsSection(),
+              Gap(
+                AppPadding.p16,
+              ),
+              HomeBuyerSuppliersSection(),
+
+            ],
+          ),
+        )
+      ],
     );
   }
 

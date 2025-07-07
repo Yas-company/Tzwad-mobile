@@ -36,8 +36,8 @@ class ChangePasswordCurrentPasswordWidget extends HookConsumerWidget {
       children: [
         Text(
           'Current Password',
-          style: StyleManager.getMediumStyle(
-            color: ColorManager.greytitle,
+          style: StyleManager.getRegularStyle(
+            color: ColorManager.colorBlack1,
             fontSize: FontSize.s16,
           ),
         ).marginOnly(

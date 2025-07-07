@@ -167,7 +167,7 @@ class LightModeTheme implements MainThemeApp {
         fillColor: ColorManager.colorWhite3,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p10,
-          vertical: AppPadding.p18,
+          vertical: AppPadding.p16,
         ),
 
         // hint style
