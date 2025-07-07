@@ -30,7 +30,7 @@ class SettingLocalData extends AppLocalData<dynamic> {
   }
 
   String getLanguageApp() {
-    return getByKey(keyLang) ?? LanguageType.english.getValue();
+    return getByKey(keyLang) ?? LanguageType.arabic.getValue();
   }
 
   Locale getLocale() {

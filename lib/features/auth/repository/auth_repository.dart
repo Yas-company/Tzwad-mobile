@@ -25,7 +25,9 @@ class AuthRepository {
     required this.settingLocalData,
   });
 
-  Future<Result<Failure, Unit>> login({
+  //region Buyer
+
+  Future<Result<Failure, Unit>> loginBuyer({
     required String phoneNumber,
     required String password,
     required RoleEnum role,
@@ -50,15 +52,17 @@ class AuthRepository {
     }
   }
 
-  Future<Result<Failure, Unit>> register({
+  Future<Result<Failure, Unit>> registerBuyer({
     required String name,
     required String phoneNumber,
     required String businessName,
-    required String address,
     required String password,
+    required RoleEnum role,
+    required String nameAddress,
+    required String street,
+    required String city,
     required double latitude,
     required double longitude,
-    required RoleEnum role,
   }) async {
     try {
       await apiService.post<RegisterModel>(
@@ -67,7 +71,6 @@ class AuthRepository {
           'name': name,
           'phone': phoneNumber,
           'country_code': '966',
-          'address': address,
           'latitude': latitude,
           'longitude': longitude,
           'business_name': businessName,
@@ -75,6 +78,14 @@ class AuthRepository {
           'password': password,
           'password_confirmation': password,
           'role': role.value,
+          'address': {
+            'name': nameAddress,
+            'street': street,
+            'city': city,
+            'phone': phoneNumber,
+            'latitude': latitude,
+            'longitude': longitude,
+          }
         },
         fromJsonT: RegisterModel.fromJson,
       );
@@ -96,9 +107,7 @@ class AuthRepository {
           'phone': phoneNumber,
           'otp': otp,
         },
-        fromJsonT: otpFlowType == OtpFlowType.register
-            ? VerifyOtpModel.fromJson
-            : null,
+        fromJsonT: otpFlowType == OtpFlowType.register ? VerifyOtpModel.fromJson : null,
       );
       if (otpFlowType == OtpFlowType.register) {
         _saveData(
@@ -195,6 +204,73 @@ class AuthRepository {
     }
   }
 
+  //endregion
+
+  //region Supplier
+
+  Future<Result<Failure, Unit>> loginSupplier({
+    required String phoneNumber,
+    required String password,
+    required RoleEnum role,
+  }) async {
+    try {
+      final response = await apiService.post<LoginModel>(
+        url: ConstantsApi.loginUrl,
+        data: {
+          'phone': phoneNumber,
+          'password': password,
+          'role': role.value,
+        },
+        fromJsonT: LoginModel.fromJson,
+      );
+      _saveData(
+        user: response.data?.user,
+        token: response.data?.token,
+      );
+      return const Right(unit);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Result<Failure, Unit>> registerSupplier({
+    required String name,
+    required String phoneNumber,
+    required String businessName,
+    required String address,
+    required String password,
+    required double latitude,
+    required double longitude,
+    required RoleEnum role,
+  }) async {
+    try {
+      await apiService.post<RegisterModel>(
+        url: ConstantsApi.registerUrl,
+        data: {
+          'name': name,
+          'phone': phoneNumber,
+          'country_code': '966',
+          'address': address,
+          'latitude': latitude,
+          'longitude': longitude,
+          'business_name': businessName,
+          'email': '',
+          'password': password,
+          'password_confirmation': password,
+          'role': role.value,
+        },
+        fromJsonT: RegisterModel.fromJson,
+      );
+      return const Right(unit);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  //endregion
+
+  //region Shared Methods
+
   void _saveData({
     required UserModel? user,
     required String? token,
@@ -217,4 +293,6 @@ class AuthRepository {
       ],
     );
   }
+
+//endregion
 }

@@ -60,17 +60,17 @@ class LightModeTheme implements MainThemeApp {
       // ),
 
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: ColorManager.colorBlack1,
+        backgroundColor: ColorManager.colorBackground,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: ColorManager.colorPrimary,
-        unselectedItemColor: ColorManager.colorWhite1,
+        unselectedItemColor: ColorManager.colorBlack2,
         selectedLabelStyle: StyleManager.getRegularStyle(
           fontSize: FontSize.s12,
           color: ColorManager.colorPrimary,
         ),
         unselectedLabelStyle: StyleManager.getRegularStyle(
           fontSize: FontSize.s12,
-          color: ColorManager.colorWhite1,
+          color: ColorManager.colorBlack2,
         ),
       ),
 

@@ -56,6 +56,7 @@ class AppStrings {
   static const String strAddressEmpty = "address_empty";
   static const String strOtpEmpty = "otp_empty";
   static const String strOtpInvalidLength = "otp_invalid_length";
+  static const String strFieldRequired = "field_required";
 
   // error handler
   static const String strSuccess = "success";

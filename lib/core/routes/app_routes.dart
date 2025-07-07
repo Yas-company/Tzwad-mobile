@@ -18,11 +18,15 @@ class AppRoutes {
   static const String searchRoute = "/search";
   static const String favoriteProductsRoute = "/favorite_products";
   static const String cartRoute = "/cart";
-  static const String settingsRoute = "/settings";
+  static const String moreBuyerRoute = "/more_buyer";
+  static const String moreSupplierRoute = "/more_supplier";
+  static const String productsSupplierRoute = "/categories_supplier";
+  static const String categoriesSupplierRoute = "/products_supplier";
   static const String productsRoute = "/products";
   static const String productDetailsRoute = "/product_details";
   static const String categoriesRoute = "/categories";
   static const String categoryDetailsRoute = "/category_details";
-  static const String ordersRoute = "/orders";
+  static const String ordersBuyerRoute = "/orders_buyer";
+  static const String ordersSupplier = "/orders_supplier";
   static const String orderDetailsRoute = "/order_details";
 }

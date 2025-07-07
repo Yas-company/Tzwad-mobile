@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
 import 'package:tzwad_mobile/core/extension/context_extension.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/language_manager.dart';
 import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
+import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/auth/ui/login_supplier/controller/login_supplier_state.dart';
 import 'package:tzwad_mobile/features/auth/ui/login_supplier/providers/login_supplier_controller_provider.dart';
@@ -61,7 +63,7 @@ class FormLoginSupplierSection extends StatelessWidget {
           message: next.failure?.message ?? '',
         );
       } else if (next.submitLoginDataState == DataState.success) {
-        // context.pushReplacementNamed(AppRoutes.homeRoute);
+        context.goNamed(AppRoutes.homeSupplierRoute);
       }
     }
   }

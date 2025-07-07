@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/features/order/models/order_model.dart';
-import 'package:tzwad_mobile/features/order/ui/orders/view/widgets/item_order.dart';
+import 'package:tzwad_mobile/features/order/ui/orders_buyer/view/widgets/item_order.dart';
 import 'package:tzwad_mobile/features/product/ui/widgets/item_product.dart';
 
 class OrderDetailsContent extends StatelessWidget {

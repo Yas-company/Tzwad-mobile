@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/extension/validation_extension.dart';
 import 'package:tzwad_mobile/core/services/location_service.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
@@ -24,9 +23,6 @@ class RegisterBuyerController extends AutoDisposeNotifier<RegisterBuyerState> {
     );
     final hasPermission = await locationService.checkAndRequestLocationService();
     final currentLocation = await locationService.getCurrentLocation();
-    'Mohammad register_buyer hasPermission $hasPermission'.log();
-    'Mohammad register_buyer ${currentLocation?.latitude}'.log();
-    'Mohammad register_buyer ${currentLocation?.longitude}'.log();
     if (!hasPermission) {
       state = state.copyWith(
         getLocationDataState: DataState.failure,
@@ -68,6 +64,20 @@ class RegisterBuyerController extends AutoDisposeNotifier<RegisterBuyerState> {
     );
   }
 
+  void changeCity(String city) {
+    state = state.copyWith(
+      city: city,
+      cityValidationMessage: city.validateRequiredField,
+    );
+  }
+
+  void changeStreet(String street) {
+    state = state.copyWith(
+      street: street,
+      streetValidationMessage: street.validateRequiredField,
+    );
+  }
+
   void changePassword(String password) {
     state = state.copyWith(
       password: password,
@@ -94,10 +104,14 @@ class RegisterBuyerController extends AutoDisposeNotifier<RegisterBuyerState> {
     final businessNameValidationMessage = state.businessName.validateBusinessName;
     final phoneNumberValidationMessage = state.phoneNumber.validatePhoneNumber;
     final addressValidationMessage = state.address.validateAddress;
+    final cityValidationMessage = state.city.validateAddress;
+    final streetValidationMessage = state.street.validateAddress;
     final passwordValidationMessage = state.password.validatePassword;
     if (nameValidationMessage.isNotEmpty ||
         businessNameValidationMessage.isNotEmpty ||
         phoneNumberValidationMessage.isNotEmpty ||
+        cityValidationMessage.isNotEmpty ||
+        streetValidationMessage.isNotEmpty ||
         addressValidationMessage.isNotEmpty ||
         passwordValidationMessage.isNotEmpty) {
       state = state.copyWith(
@@ -105,6 +119,8 @@ class RegisterBuyerController extends AutoDisposeNotifier<RegisterBuyerState> {
         businessNameValidationMessage: businessNameValidationMessage,
         phoneNumberValidationMessage: phoneNumberValidationMessage,
         addressValidationMessage: addressValidationMessage,
+        streetValidationMessage: streetValidationMessage,
+        cityValidationMessage: cityValidationMessage,
         passwordValidationMessage: passwordValidationMessage,
       );
       return;
@@ -112,15 +128,17 @@ class RegisterBuyerController extends AutoDisposeNotifier<RegisterBuyerState> {
     state = state.copyWith(
       submitRegisterDataState: DataState.loading,
     );
-    final result = await repository.register(
+    final result = await repository.registerBuyer(
       name: state.name,
       phoneNumber: state.phoneNumber,
       businessName: state.businessName,
-      address: state.address,
       password: state.password,
+      role: RoleEnum.buyer,
+      nameAddress: state.address,
+      street: state.street,
+      city: state.city,
       latitude: state.latitude,
       longitude: state.longitude,
-      role: RoleEnum.buyer,
     );
     result.fold(
       (l) => state = state.copyWith(

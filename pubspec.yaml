@@ -51,7 +51,10 @@ dependencies:
   ### Dummy Data ###
   faker: ^2.2.0
   either_dart: ^1.0.0
+
+  ### Map ###
   location: ^8.0.0
+  geocoding: ^4.0.0
 
 dev_dependencies:
   flutter_test:

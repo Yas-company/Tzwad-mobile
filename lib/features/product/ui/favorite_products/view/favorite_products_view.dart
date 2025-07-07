@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_scaffold_widget.dart';
 
-import 'widgets/favorite_products_view_body.dart';
 
 class FavoriteProductsView extends StatelessWidget {
   const FavoriteProductsView({super.key});
@@ -12,7 +11,10 @@ class FavoriteProductsView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Favorite Products'),
       ),
-      body: const FavoriteProductsViewBody(),
+      body: const Center(
+        child: Text('Favorite Products'),
+      ),
+      // body: const FavoriteProductsViewBody(),
     );
   }
 }

@@ -35,7 +35,7 @@ class ProductAddToCartWidget extends ConsumerWidget {
         child: Row(
           children: [
             const AppSvgPictureWidget(
-              assetName: AssetsManager.icTabCartSelected,
+              assetName: AssetsManager.icTabHome,
               color: ColorManager.colorPureWhite,
             ).marginOnly(
               start: AppPadding.p8,

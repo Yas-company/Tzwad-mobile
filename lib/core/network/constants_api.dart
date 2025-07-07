@@ -5,7 +5,7 @@ class ConstantsApi {
   static String get onboardingUrl => "onboarding-screens";
 
   //Api Auth
-  static String get registerUrl => "auth/register_buyer";
+  static String get registerUrl => "auth/register";
 
   static String get loginUrl => "auth/login";
 
@@ -57,10 +57,10 @@ class ConstantsApi {
 
   static String updateProductQuantityUrl(int id) => "buyer/cart/items/$id/quantity";
 
-  static String get checkoutUrl => "buyer/orders/checkout";
+  static String get checkoutUrl => "buyer/orders_buyer/checkout";
 
   // Orders
-  static String get getOrdersUrl => "buyer/orders";
+  static String get getOrdersUrl => "buyer/orders_buyer";
 
-  static String getOrderDetailsUrl(int id) => "buyer/orders/$id";
+  static String getOrderDetailsUrl(int id) => "buyer/orders_buyer/$id";
 }

@@ -2,9 +2,9 @@ class AssetsManager {
   static const imgSplash = 'assets/images/img_splash.png';
   static const imgLogo = 'assets/images/img_logo.png';
 
-  static const imgOnboarding1 = 'assets/images/img_onboarding_1.png';
-  static const imgOnboarding2 = 'assets/images/img_onboarding_2.png';
-  static const imgOnboarding3 = 'assets/images/img_onboarding_3.png';
+  static const imgOnboarding1 = 'assets/images/img_onboarding_1.svg';
+  static const imgOnboarding2 = 'assets/images/img_onboarding_2.svg';
+  static const imgOnboarding3 = 'assets/images/img_onboarding_3.svg';
 
   // Auth
   static const icGoogle = 'assets/icons/ic_google.svg';
@@ -20,16 +20,11 @@ class AssetsManager {
   static const icStore = 'assets/icons/ic_store.png';
 
   // NavBar
-  static const icTabHomeUnSelected = 'assets/icons/ic_tab_home_unselected.svg';
-  static const icTabHomeSelected = 'assets/icons/ic_tab_home_selected.svg';
-  static const icTabSearchUnSelected = 'assets/icons/ic_tab_search_unselected.svg';
-  static const icTabSearchSelected = 'assets/icons/ic_tab_search_selected.svg';
-  static const icTabCartUnSelected = 'assets/icons/ic_tab_cart_unselected.svg';
-  static const icTabCartSelected = 'assets/icons/ic_tab_cart_selected.svg';
-  static const icTabFavoriteUnSelected = 'assets/icons/ic_tab_favorite_unselected.svg';
-  static const icTabFavoriteSelected = 'assets/icons/ic_tab_favorite_selected.svg';
-  static const icTabSettingUnSelected = 'assets/icons/ic_tab_setting_unselected.svg';
-  static const icTabSettingSelected = 'assets/icons/ic_tab_setting_selected.svg';
+  static const icTabHome = 'assets/icons/ic_tab_home.svg';
+  static const icTabOrders = 'assets/icons/ic_tab_orders.svg';
+  static const icTabFavorites = 'assets/icons/ic_tab_favorites.svg';
+  static const icTabProducts = 'assets/icons/ic_tab_products.svg';
+  static const icTabMore = 'assets/icons/ic_tab_more.svg';
 
   //Products
   static const imgProductPlaceHolder = 'assets/images/img_product_palce_holder.png';
@@ -40,7 +35,7 @@ class AssetsManager {
   static const icAdd = 'assets/icons/ic_add.svg';
 
   // Settings
-  static const icOrders = 'assets/icons/ic_orders.svg';
+  static const icOrders = 'assets/icons/ic_tab_orders.svg';
   static const icChangePassword = 'assets/icons/ic_change_password.svg';
   static const icLogout = 'assets/icons/ic_logout.svg';
   static const icDeleteAccount = 'assets/icons/ic_delete_account.svg';

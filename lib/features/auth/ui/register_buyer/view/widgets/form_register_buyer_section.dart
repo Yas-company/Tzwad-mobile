@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
 import 'package:tzwad_mobile/core/extension/context_extension.dart';
@@ -16,6 +17,8 @@ import 'package:tzwad_mobile/features/auth/ui/register_buyer/providers/register_
 import 'accept_terms_conditions_section.dart';
 import 'register_address_widget.dart';
 import 'register_business_name_widget.dart';
+import 'register_buyer_city_widget.dart';
+import 'register_buyer_street_widget.dart';
 import 'register_name_widget.dart';
 import 'register_password_widget.dart';
 import 'register_phone_number_widget.dart';
@@ -38,6 +41,21 @@ class FormRegisterBuyerSection extends StatelessWidget {
           bottom: AppPadding.p4,
         ),
         const RegisterAddressWidget().marginOnly(
+          bottom: AppPadding.p4,
+        ),
+        const Row(
+          children: [
+            Expanded(
+              child: RegisterBuyerCityWidget(),
+            ),
+            Gap(
+              AppPadding.p16,
+            ),
+            Expanded(
+              child: RegisterBuyerStreetWidget(),
+            ),
+          ],
+        ).marginOnly(
           bottom: AppPadding.p4,
         ),
         const RegisterPasswordWidget(),

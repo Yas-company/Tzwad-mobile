@@ -54,7 +54,7 @@ class LoginBuyerController extends AutoDisposeNotifier<LoginBuyerState> {
     state = state.copyWith(
       submitLoginDataState: DataState.loading,
     );
-    final result = await repository.login(
+    final result = await repository.loginBuyer(
       phoneNumber: state.phoneNumber,
       password: state.password,
       role: RoleEnum.buyer,

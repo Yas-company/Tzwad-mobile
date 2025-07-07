@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_dot_indicator_widgets.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
+import 'package:tzwad_mobile/core/extension/context_extension.dart';
+import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/language_manager.dart';
@@ -44,7 +45,9 @@ class OnboardingViewBody extends HookConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
+          const Spacer(),
+          SizedBox(
+            height: context.getHeight * 0.5,
             child: PageView.builder(
               controller: pageController,
               itemBuilder: (context, index) => ItemOnboarding(
@@ -65,29 +68,21 @@ class OnboardingViewBody extends HookConsumerWidget {
                 ),
             ],
           ),
-          const Gap(
-            AppPadding.p16,
-          ),
+          const Spacer(),
           Row(
             children: [
-              Expanded(
-                child: AppButtonWidget(
-                  label: 'Skip',
-                  onPressed: () => _onPressedSkipButton(context, controller),
-                  buttonType: ButtonType.outline,
-                ),
+              _buildButton(
+                onTap: () => _onPressedLastButton(context, currentPage.toInt(), pageController, controller),
+                color: ColorManager.colorPrimary,
+                isLeftButton: false,
               ),
-              const Gap(
-                AppPadding.p16,
-              ),
-              Expanded(
-                child: AppButtonWidget(
-                  label: 'Continue',
-                  onPressed: () => _onPressedContinueButton(context, currentPage.toInt(), pageController, controller),
-                ),
+              const Spacer(),
+              _buildButton(
+                onTap: () => _onPressedNextButton(context, currentPage.toInt(), pageController, controller),
+                color: ColorManager.colorSecondary,
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -111,13 +106,47 @@ class OnboardingViewBody extends HookConsumerWidget {
         ),
       ];
 
-  _onPressedSkipButton(BuildContext context, OnboardingController controller) {
-    controller.setOnBoardingScreenViewed();
-    context.pushReplacementNamed(AppRoutes.loginBuyerRoute);
+  Widget _buildButton({
+    required Function onTap,
+    required Color color,
+    bool isLeftButton = true,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(AppSize.s8),
+        border: Border.all(
+          color: color,
+          width: AppSize.s1,
+        ),
+      ),
+      child: AppRippleWidget(
+        radius: AppSize.s8,
+        onTap: () => onTap(),
+        child: Container(
+          margin: const EdgeInsets.all(AppPadding.p2),
+          width: AppSize.s50,
+          height: AppSize.s50,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(AppSize.s8),
+          ),
+          alignment: Alignment.center,
+          child: Transform.rotate(
+            angle: isLeftButton ? 0 : 3.14,
+            child: const Icon(
+              Icons.keyboard_arrow_left_rounded,
+              color: ColorManager.colorWhite1,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
-  _onPressedContinueButton(BuildContext context, int index, PageController pageController, OnboardingController controller) {
-    if (index < onboardingList(context).length - 1) {
+  _onPressedNextButton(BuildContext context, int index, PageController pageController, OnboardingController controller) {
+    'Mohammad Alhaj Ali'.log();
+    if (index < 2) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeIn,
@@ -125,6 +154,15 @@ class OnboardingViewBody extends HookConsumerWidget {
     } else {
       controller.setOnBoardingScreenViewed();
       context.pushReplacementNamed(AppRoutes.loginBuyerRoute);
+    }
+  }
+
+  _onPressedLastButton(BuildContext context, int index, PageController pageController, OnboardingController controller) {
+    if (index > 0) {
+      pageController.previousPage(
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeIn,
+      );
     }
   }
 }

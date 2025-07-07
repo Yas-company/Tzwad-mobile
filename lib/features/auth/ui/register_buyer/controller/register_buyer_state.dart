@@ -14,6 +14,10 @@ class RegisterBuyerState {
   final String phoneNumberValidationMessage;
   final String address;
   final String addressValidationMessage;
+  final String street;
+  final String streetValidationMessage;
+  final String city;
+  final String cityValidationMessage;
   final String password;
   final String passwordValidationMessage;
   final bool obscureText;
@@ -33,6 +37,10 @@ class RegisterBuyerState {
     this.phoneNumberValidationMessage = '',
     this.address = '',
     this.addressValidationMessage = '',
+    this.street = '',
+    this.streetValidationMessage = '',
+    this.city = '',
+    this.cityValidationMessage = '',
     this.password = '',
     this.passwordValidationMessage = '',
     this.obscureText = true,
@@ -53,6 +61,10 @@ class RegisterBuyerState {
     String? phoneNumberValidationMessage,
     String? address,
     String? addressValidationMessage,
+    String? street,
+    String? streetValidationMessage,
+    String? city,
+    String? cityValidationMessage,
     String? password,
     String? passwordValidationMessage,
     bool? obscureText,
@@ -72,6 +84,10 @@ class RegisterBuyerState {
       phoneNumberValidationMessage: phoneNumberValidationMessage ?? this.phoneNumberValidationMessage,
       address: address ?? this.address,
       addressValidationMessage: addressValidationMessage ?? this.addressValidationMessage,
+      street: street ?? this.street,
+      streetValidationMessage: streetValidationMessage ?? this.streetValidationMessage,
+      city: city ?? this.city,
+      cityValidationMessage: cityValidationMessage ?? this.cityValidationMessage,
       password: password ?? this.password,
       passwordValidationMessage: passwordValidationMessage ?? this.passwordValidationMessage,
       obscureText: obscureText ?? this.obscureText,

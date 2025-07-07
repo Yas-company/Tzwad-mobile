@@ -81,6 +81,15 @@ extension ValidationExtension on String {
     return '';
   }
 
+
+  String get validateRequiredField {
+    final context = AppContext.context;
+    if (isEmpty) {
+      return AppStrings.strFieldRequired.tr(context);
+    }
+    return '';
+  }
+
   String get validateOtpCode {
     final context = AppContext.context;
     if (isEmpty) {

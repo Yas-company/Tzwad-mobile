@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_scaffold_widget.dart';
 
-import 'widgets/home_app_bar_widget.dart';
-import 'widgets/home_buyer_view_body.dart';
 
 class HomeBuyerView extends StatelessWidget {
   const HomeBuyerView({super.key});
@@ -10,8 +8,11 @@ class HomeBuyerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AppScaffoldWidget(
-      appBar: HomeAppBarWidget(),
-      body: HomeBuyerViewBody(),
+      body: Center(
+        child: Text('Home Buyer'),
+      ),
+      // appBar: HomeAppBarWidget(),
+      // body: HomeBuyerViewBody(),
     );
   }
 }

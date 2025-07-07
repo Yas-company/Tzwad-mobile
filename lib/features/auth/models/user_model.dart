@@ -1,5 +1,6 @@
 import 'package:faker/faker.dart';
 import 'package:hive/hive.dart';
+
 part 'user_model.g.dart';
 
 @HiveType(typeId: 0)
@@ -29,46 +30,43 @@ class UserModel extends HiveObject {
   String? address;
 
   @HiveField(9)
-  String? latitude;
-
-  @HiveField(10)
-  String? longitude;
-
-  @HiveField(11)
   String? licenseAttachment;
 
-  @HiveField(12)
+  @HiveField(10)
   String? commercialRegisterAttachment;
 
-  @HiveField(13)
+  @HiveField(11)
+  String? image;
+
+  @HiveField(12)
   String? status;
 
-  @HiveField(14)
+  @HiveField(13)
   String? fieldId;
 
-  @HiveField(15)
+  @HiveField(14)
   String? createdAt;
 
-  @HiveField(16)
+  @HiveField(15)
   String? updatedAt;
 
-  UserModel(
-      {this.id,
-        this.name,
-        this.email,
-        this.phone,
-        this.role,
-        this.isVerified,
-        this.businessName,
-        this.address,
-        this.latitude,
-        this.longitude,
-        this.licenseAttachment,
-        this.commercialRegisterAttachment,
-        this.status,
-        this.fieldId,
-        this.createdAt,
-        this.updatedAt,});
+  UserModel({
+    this.id,
+    this.name,
+    this.email,
+    this.phone,
+    this.role,
+    this.isVerified,
+    this.businessName,
+    this.address,
+    this.licenseAttachment,
+    this.commercialRegisterAttachment,
+    this.image,
+    this.status,
+    this.fieldId,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -79,10 +77,9 @@ class UserModel extends HiveObject {
     isVerified = json['is_verified'];
     businessName = json['business_name'];
     address = json['address'];
-    latitude = json['latitude'];
-    longitude = json['longitude'];
     licenseAttachment = json['license_attachment'];
     commercialRegisterAttachment = json['commercial_register_attachment'];
+    image = json['image'];
     status = json['status'];
     fieldId = json['field_id'];
     createdAt = json['created_at'];
@@ -99,10 +96,9 @@ class UserModel extends HiveObject {
     data['is_verified'] = isVerified;
     data['business_name'] = businessName;
     data['address'] = address;
-    data['latitude'] = latitude;
-    data['longitude'] = longitude;
     data['license_attachment'] = licenseAttachment;
     data['commercial_register_attachment'] = commercialRegisterAttachment;
+    data['image'] = image;
     data['status'] = status;
     data['field_id'] = fieldId;
     data['created_at'] = createdAt;
@@ -121,8 +117,6 @@ class UserModel extends HiveObject {
       isVerified: faker.randomGenerator.boolean(),
       businessName: faker.company.name(),
       address: faker.address.streetAddress(),
-      latitude: faker.randomGenerator.decimal().toString(),
-      longitude: faker.randomGenerator.decimal().toString(),
       licenseAttachment: faker.randomGenerator.string(10),
       commercialRegisterAttachment: faker.randomGenerator.string(10),
       status: faker.randomGenerator.string(10),

@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_image_asset_widget.dart';
 import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
+import 'package:tzwad_mobile/features/auth/models/role_enum.dart';
+import 'package:tzwad_mobile/features/auth/providers/user_local_data_provider.dart';
 import 'package:tzwad_mobile/features/generic/providers/setting_local_data_provider.dart';
 
 class SplashViewBody extends ConsumerStatefulWidget {
@@ -53,12 +55,28 @@ class _SplashViewBodyState extends ConsumerState<SplashViewBody> {
     final settingLocalData = ref.read(
       settingLocalDataProvider,
     );
+
     if (!settingLocalData.isOnBoardingScreenViewed()) {
       context.pushReplacementNamed(AppRoutes.onboardingRoute);
     } else if (!settingLocalData.isUserLogged()) {
       context.pushReplacementNamed(AppRoutes.loginBuyerRoute);
     } else {
+      _checkRole();
+    }
+  }
+
+  _checkRole() {
+    final user = ref.read(
+      userLocalDataProvider.select(
+        (value) => value.getUserInfo(),
+      ),
+    );
+    if (user?.role == RoleEnum.buyer.value) {
       context.pushReplacementNamed(AppRoutes.homeBuyerRoute);
+    } else if (user?.role == RoleEnum.supplier.value) {
+      context.pushReplacementNamed(AppRoutes.homeSupplierRoute);
+    } else {
+      context.pushReplacementNamed(AppRoutes.loginBuyerRoute);
     }
   }
 }

@@ -1,5 +1,5 @@
 class Constants {
-  static const String appName = 'Tzawd';
+  static const String appName = 'Wfrli';
   static const int appVersionNumber = 100;
   static const String appVersion = '1.0.0';
   static const String empty = "";

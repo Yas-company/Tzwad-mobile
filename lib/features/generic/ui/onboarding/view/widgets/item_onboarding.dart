@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tzwad_mobile/core/app_widgets/app_image_asset_widget.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_svg_picture_widget.dart';
 import 'package:tzwad_mobile/core/extension/context_extension.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
@@ -23,10 +23,10 @@ class ItemOnboarding extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        AppImageAssetWidget(
-          width: context.getWidth * 0.6,
-          height: context.getWidth * 0.6,
-          imagePath: onBoarding.imagePath,
+        AppSvgPictureWidget(
+          width: context.getWidth * 0.5,
+          height: context.getWidth * 0.5,
+          assetName: onBoarding.imagePath,
           fit: BoxFit.contain,
         ).marginOnly(
           bottom: AppPadding.p16,
@@ -35,7 +35,7 @@ class ItemOnboarding extends StatelessWidget {
           onBoarding.title,
           textAlign: TextAlign.center,
           style: StyleManager.getBoldStyle(
-            color: ColorManager.colorTitleTexts,
+            color: ColorManager.colorBlack1,
             fontSize: FontSize.s24,
           ),
         ).marginOnly(
@@ -45,8 +45,8 @@ class ItemOnboarding extends StatelessWidget {
           onBoarding.description,
           textAlign: TextAlign.center,
           style: StyleManager.getRegularStyle(
-            color: ColorManager.colorTitleTexts,
-            fontSize: FontSize.s14,
+            color: ColorManager.colorBlack2,
+            fontSize: FontSize.s20,
           ),
         ),
       ],

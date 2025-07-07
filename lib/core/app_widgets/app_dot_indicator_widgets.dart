@@ -20,11 +20,11 @@ class AppDotIndicatorWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double distance = (currentPage - index).abs().clamp(0.0, 1.0);
-    double width = lerpDouble(AppSize.s10, AppSize.s20, 1 - distance)!;
+    double width = lerpDouble(AppSize.s10, AppSize.s16, 1 - distance)!;
     Color color = Color.lerp(colorUnFocus, colorFocus, 1 - distance)!;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
-      height: AppSize.s10,
+      height: AppSize.s2,
       width: width,
       margin: const EdgeInsets.only(right: AppPadding.p4),
       decoration: BoxDecoration(
