@@ -43,7 +43,7 @@ class LoginAsSupplierWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    'تسجيل الدخول كتاجر',
+                    'تسجيل الدخول كمورد',
                     style: StyleManager.getMediumStyle(
                       color: ColorManager.colorWhite1,
                       fontSize: FontSize.s16,

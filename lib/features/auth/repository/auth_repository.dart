@@ -34,7 +34,7 @@ class AuthRepository {
   }) async {
     try {
       final response = await apiService.post<LoginModel>(
-        url: ConstantsApi.loginUrl,
+        url: ConstantsApi.loginBuyerUrl,
         data: {
           'phone': phoneNumber,
           'password': password,
@@ -215,7 +215,7 @@ class AuthRepository {
   }) async {
     try {
       final response = await apiService.post<LoginModel>(
-        url: ConstantsApi.loginUrl,
+        url: ConstantsApi.loginSupplierUrl,
         data: {
           'phone': phoneNumber,
           'password': password,

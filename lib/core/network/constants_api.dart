@@ -7,7 +7,9 @@ class ConstantsApi {
   //Api Auth
   static String get registerUrl => "auth/register";
 
-  static String get loginUrl => "auth/login";
+  static String get loginBuyerUrl => "auth/buyer/login";
+
+  static String get loginSupplierUrl => "auth/supplier/login";
 
   static String get logoutUrl => "auth/logout";
 
