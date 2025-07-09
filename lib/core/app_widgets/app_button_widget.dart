@@ -20,6 +20,7 @@ class AppButtonWidget extends StatelessWidget {
     this.buttonType = ButtonType.solid,
     this.buttonSize = ButtonSize.large,
     this.assetsIcon,
+    this.assetColor,
     this.isExpanded = true,
     this.backgroundColor,
     this.textColor,
@@ -33,6 +34,7 @@ class AppButtonWidget extends StatelessWidget {
   final ButtonType buttonType;
   final ButtonSize buttonSize;
   final String? assetsIcon;
+  final Color? assetColor;
   final bool isExpanded;
   final Color? backgroundColor;
   final Color? textColor;
@@ -87,6 +89,7 @@ class AppButtonWidget extends StatelessWidget {
                       if (assetsIcon != null) ...{
                         AppSvgPictureWidget(
                           assetName: assetsIcon!,
+                          color:assetColor,
                           width: AppSize.s24,
                           height: AppSize.s24,
                         ).marginOnly(
@@ -94,15 +97,17 @@ class AppButtonWidget extends StatelessWidget {
                         ),
                       },
                       Flexible(
-                        child: Text(
-                          label,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: StyleManager.getBoldStyle(
-                            color: mTextColor,
-                            fontSize: FontSize.s16,
+                        child: Padding(padding: const EdgeInsets.only(top:4),
+                          child: Text(
+                            label,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: StyleManager.getBoldStyle(
+                              color: mTextColor,
+                              fontSize: FontSize.s16,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                       ),
                     ],

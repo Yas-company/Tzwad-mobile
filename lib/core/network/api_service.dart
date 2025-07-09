@@ -202,4 +202,32 @@ class ApiService {
         fromJsonT: fromJsonT,
         fromJsonListT: fromJsonListT,
       );
+
+  Future<Response> postFormData({
+    required String url,
+    required FormData formData,
+    Map<String, String>? customHeaders,
+  }) async {
+    final token = settingLocalData.getToken();
+    final language = settingLocalData.getLanguageApp();
+
+    final headers = {
+      'Authorization': token.isNotEmpty ? 'Bearer $token' : '',
+      'Accept-Language': language,
+      'Content-Type': 'multipart/form-data',
+      if (customHeaders != null) ...customHeaders,
+    };
+
+    final response = await dio.post(
+      url,
+      data: formData,
+      options: Options(
+        headers: headers,
+        contentType: Headers.multipartFormDataContentType,
+      ),
+    );
+
+    return response;
+  }
+
 }
