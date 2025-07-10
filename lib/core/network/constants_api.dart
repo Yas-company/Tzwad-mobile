@@ -65,4 +65,12 @@ class ConstantsApi {
   static String get getOrdersUrl => "buyer/orders_buyer";
 
   static String getOrderDetailsUrl(int id) => "buyer/orders_buyer/$id";
+
+  static String get getProductsSupplierUrl=>"products";
+
+  static String get addProductSupplierUrl => "products";
+
+  static String removeProductSupplierUrl(String id) => "/products/$id";
+
+  static String editProductSupplierUrl(String id) => "/products/$id";
 }
