@@ -21,6 +21,7 @@ import 'package:tzwad_mobile/features/nav_bar/view/nav_bar_view.dart';
 import 'package:tzwad_mobile/features/order/ui/order_details/view/order_details_view.dart';
 import 'package:tzwad_mobile/features/order/ui/order_supplier/view/orders_supplier_view.dart';
 import 'package:tzwad_mobile/features/order/ui/orders_buyer/view/orders_buyer_view.dart';
+import 'package:tzwad_mobile/features/product/models/add_supplier_product_request_model.dart';
 import 'package:tzwad_mobile/features/product/ui/favorite_products/view/favorite_products_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/onboarding/view/onboarding_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/splash/view/splash_view.dart';
@@ -140,8 +141,15 @@ class RouterManager {
           ),
           AppRouter(
             route: AppRoutes.addProductSupplierView,
-            screen: const AddProductSupplierView(),
+            builder: (context, state) {
+              if(state.extra==null){
+                return const AddProductSupplierView();
+              }
+              final model = state.extra as AddSupplierProductRequestModel;
+              return AddProductSupplierView(model: model);
+            },
           ),
+
           AppRouter(
             route: AppRoutes.moreSupplierRoute,
             screen: const MoreSupplierView(),

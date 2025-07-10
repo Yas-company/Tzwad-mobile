@@ -37,7 +37,8 @@ class ProductSupplierRepository {
         'name[en]': request.nameEn,
         'name[ar]': request.nameAr,
         'field_id': request.fieldId,
-        'image':await MultipartFile.fromFile(request.images.path, filename: request.images.path.split('/').last),
+        'image':await MultipartFile.fromFile(request.image?.path??'',
+            filename: request.image?.path.split('/').last),
       });
 
       final response = await apiService.postFormData(
@@ -56,6 +57,49 @@ class ProductSupplierRepository {
       }
     } catch (e) {
       return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  Future<Result<Failure, bool>> updateSupplierCategory(int id,AddSupplierProductRequestModel request) async {
+    try {
+      final formData = FormData.fromMap({
+        'name[en]': request.nameEn,
+        'name[ar]': request.nameAr,
+        'field_id': request.fieldId,
+        'image':await MultipartFile.fromFile(request.image?.path??'',
+            filename: request.image?.path.split('/').last),
+      });
+
+      final response = await apiService.postFormData(
+        url: '${ConstantsApi.getCategoriesUrl}/$id',
+        formData: formData,
+      );
+      // Optionally check response.success, or parse model
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return const Right(true); // or parse response if needed
+      } else {
+        return Left(Failure(
+          code: response.statusCode ?? 0,
+          message: response.statusMessage ?? 'Unknown error',
+        ));
+      }
+    } catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  Future<Result<Failure, Response>>deleteSupplierCategory(int id) async {
+    try {
+      final response = await apiService.delete<Response>(
+        url: '${ConstantsApi.getCategoriesUrl}/$id',
+      );
+      if (response.data != null) {
+        return Right(response.data!);
+      } else {
+        return Left(Failure(code: 0, message: 'No categories found'));
+      }
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
     }
   }
 }

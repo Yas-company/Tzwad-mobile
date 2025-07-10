@@ -28,12 +28,27 @@ final productSupplierControllerProvider = NotifierProvider.autoDispose<ProductSu
 
 final arabicNameControllerProvider = Provider.autoDispose<TextEditingController>((ref) {
   final controller = TextEditingController();
-  ref.onDispose(() => controller.dispose());
+  ref.onDispose(controller.dispose);
   return controller;
 });
 
 final englishNameControllerProvider = Provider.autoDispose<TextEditingController>((ref) {
   final controller = TextEditingController();
-  ref.onDispose(() => controller.dispose());
+  ref.onDispose(controller.dispose);
   return controller;
 });
+
+final isFormValidProvider = StateProvider.autoDispose<bool>((ref) => false);
+
+
+final imageProvider = StateProvider.autoDispose<String>((ref) => '');
+
+final isInitializedProvider = StateProvider<bool>((ref) => false);
+
+// final englishNameControllerProvider = Provider<TextEditingController>((ref) {
+//   final controller = TextEditingController();
+//   ref.onDispose(() => controller.dispose());
+//   return controller;
+// });
+
+

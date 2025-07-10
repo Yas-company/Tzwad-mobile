@@ -1,15 +1,21 @@
 import 'dart:io';
 
 class AddSupplierProductRequestModel {
-  final String nameEn;
-  final String nameAr;
-  final int fieldId;
-  final File images;
+  bool? isEdit;
+  String? nameEn;
+  String? nameAr;
+  int? fieldId;
+  int? id;
+  File? image;
+  String? imageUrl;
 
   AddSupplierProductRequestModel({
-    required this.nameEn,
-    required this.nameAr,
-    required this.fieldId,
-    required this.images,
+    this.nameEn,
+    this.isEdit,
+    this.nameAr,
+    this.id,
+    this.fieldId,
+    this.image,
+    this.imageUrl,
   });
 }

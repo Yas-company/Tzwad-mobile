@@ -16,6 +16,7 @@ class ProductSupplierState {
 
   // 🔽 Add create category specific state
   final DataState createCategoryState;
+  final DataState deleteCategoryState;
   final bool isCategoryCreated;
 
   ProductSupplierState({
@@ -26,6 +27,7 @@ class ProductSupplierState {
     this.hasMore = false,
     this.failure,
     this.createCategoryState = DataState.initial,
+    this.deleteCategoryState = DataState.initial,
     this.isCategoryCreated = false,
   });
 
@@ -39,6 +41,7 @@ class ProductSupplierState {
 
     // 🔽 New fields
     DataState? createCategoryState,
+    DataState? deleteCategoryState,
     bool? isCategoryCreated,
   }) {
     return ProductSupplierState(
@@ -49,6 +52,7 @@ class ProductSupplierState {
       hasMore: hasMore ?? this.hasMore,
       failure: failure ?? this.failure,
       createCategoryState: createCategoryState ?? this.createCategoryState,
+      deleteCategoryState: deleteCategoryState ?? this.deleteCategoryState,
       isCategoryCreated: isCategoryCreated ?? this.isCategoryCreated,
     );
   }
