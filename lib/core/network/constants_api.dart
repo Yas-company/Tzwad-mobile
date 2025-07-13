@@ -1,5 +1,5 @@
 class ConstantsApi {
-  static String get baseUrl => "https://tzawd.com/api/v1/";//https://tzawd.com/api/v1
+  static String get baseUrl => "https://tzawd.com/api/v1/"; //https://tzawd.com/api/v1
 
   // Api Onboarding
   static String get onboardingUrl => "onboarding-screens";
@@ -65,4 +65,18 @@ class ConstantsApi {
   static String get getOrdersUrl => "buyer/orders_buyer";
 
   static String getOrderDetailsUrl(int id) => "buyer/orders_buyer/$id";
+
+  static String get getSuppliers => "suppliers";
+
+  static String getSupplierCategories(int supplierId) => "supplier/$supplierId/categories";
+
+  static String getSupplierProducts(int supplierId) => "supplier/$supplierId/products";
+
+  static String get getCart => "cart";
+
+  static String get addToCart => "cart";
+
+  static String removeFromCart(int id) => "cart/$id";
+
+  static String get clearCart => "cart/clear";
 }

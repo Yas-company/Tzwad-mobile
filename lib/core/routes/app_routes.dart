@@ -13,7 +13,7 @@ class AppRoutes {
   static const String registerSupplierRoute = "/register_supplier";
 
   // static const String navBarRoute = "/nav_bar";
-  static const String homeBuyerRoute = "/home_buyer";
+  static const String homeBuyerRoute = "/home";
   static const String homeSupplierRoute = "/home_supplier";
   static const String favoriteProductsRoute = "/favorite_products";
   static const String moreBuyerRoute = "/more_buyer";
@@ -24,6 +24,7 @@ class AppRoutes {
   static const String ordersSupplier = "/orders_supplier";
   static const String cartRoute = "/cart";
   static const String suppliersRoute = "/suppliers";
+  static const String supplierDetailsRoute = "/supplier_details";
   static const String productsRoute = "/products";
   static const String productDetailsRoute = "/product_details";
   static const String categoriesRoute = "/categories";

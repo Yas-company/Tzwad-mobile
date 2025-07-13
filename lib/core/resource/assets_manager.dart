@@ -47,4 +47,9 @@ class AssetsManager {
 
   // Search
   static const imgSearch = 'assets/images/img_search.svg';
+
+
+  static const icStar = 'assets/icons/ic_star.svg';
+  static const icList = 'assets/icons/ic_list.svg';
+  static const icGrid = 'assets/icons/ic_grid.svg';
 }

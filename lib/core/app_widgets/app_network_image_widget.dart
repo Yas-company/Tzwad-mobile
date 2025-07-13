@@ -7,7 +7,7 @@ class AppNetworkImageWidget extends StatelessWidget {
   const AppNetworkImageWidget({
     super.key,
     required this.url,
-    required this.placeHolderEnum,
+     this.placeHolderEnum = PlaceHolderEnum.product,
     this.fit = BoxFit.cover,
     this.radius = AppSize.s0,
     this.height,

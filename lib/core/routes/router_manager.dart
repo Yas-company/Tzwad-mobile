@@ -11,11 +11,14 @@ import 'package:tzwad_mobile/features/auth/ui/otp/view/otp_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/register_buyer/view/register_buyer_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/register_supplier/view/register_supplier_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/reset_password/view/reset_password_view.dart';
+import 'package:tzwad_mobile/features/buyer/cart/ui/cart/view/cart_view.dart';
+import 'package:tzwad_mobile/features/buyer/home/view/home_buyer_view.dart';
+import 'package:tzwad_mobile/features/buyer/supplier/ui/supplier_details/view/supplier_details_view.dart';
+import 'package:tzwad_mobile/features/buyer/supplier/ui/suppliers/view/suppliers_view.dart';
 import 'package:tzwad_mobile/features/category/ui/categories_supplier/view/categories_supplier_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/more/view/more_buyer_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/more/view/more_supplier_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/under_develop_view.dart';
-import 'package:tzwad_mobile/features/home/ui/home_buyer/view/home_buyer_view.dart';
 import 'package:tzwad_mobile/features/home/ui/home_supplier/view/home_supplier_view.dart';
 import 'package:tzwad_mobile/features/nav_bar/view/nav_bar_view.dart';
 import 'package:tzwad_mobile/features/order/ui/order_details/view/order_details_view.dart';
@@ -29,7 +32,6 @@ import 'package:tzwad_mobile/features/generic/ui/trems_conditions/view/trems_con
 import 'package:tzwad_mobile/features/generic/ui/undefined_route/view/undefined_route_view.dart';
 import 'package:tzwad_mobile/features/product/ui/products_supplier/view/add_product_supplier_view.dart';
 import 'package:tzwad_mobile/features/product/ui/products_supplier/view/products_supplier_view.dart';
-import 'package:tzwad_mobile/features/supplier/view/suppliers/suupliers_view.dart';
 
 class RouterManager {
   static final GoRouter router = GoRouter(
@@ -89,8 +91,16 @@ class RouterManager {
         screen: const SuppliersView(),
       ),
       AppRouter(
+        route: AppRoutes.supplierDetailsRoute,
+        screen: const SupplierDetailsView(),
+      ),
+      AppRouter(
         route: AppRoutes.orderDetailsRoute,
         screen: const OrderDetailsView(),
+      ),
+      AppRouter(
+        route: AppRoutes.cartRoute,
+        screen: const CartView(),
       ),
       ShellRoute(
         builder: (context, state, child) => NavBarView(
