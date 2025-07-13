@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_drop_down.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_network_image_widget.dart';
 import 'package:tzwad_mobile/core/extension/context_extension.dart';
 import 'package:tzwad_mobile/core/file_upload/picked_file_controller.dart';
@@ -9,8 +10,10 @@ import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/product/models/add_supplier_product_request_model.dart';
+import 'package:tzwad_mobile/features/product/models/supplier_fields_response_model.dart';
 import 'package:tzwad_mobile/features/product/providers/supplier_categories_provider.dart';
-import 'package:tzwad_mobile/features/product/ui/products_supplier/view/dotted_border_container.dart';
+import 'package:tzwad_mobile/features/product/ui/products_supplier/widgets/dotted_border_container.dart';
+import 'package:collection/collection.dart';
 
 class AddProductSupplierView extends ConsumerWidget {
   final AddSupplierProductRequestModel? model;
@@ -20,6 +23,11 @@ class AddProductSupplierView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final arabicController = ref.watch(arabicNameControllerProvider);
     final englishController = ref.watch(englishNameControllerProvider);
+    final fields = ref.watch(
+      productSupplierControllerProvider.select((state) => state.fields),
+    );
+    // final selectedId = ref.watch(selectedSupplierFieldIdProvider);
+    // final selectedItem = fields.firstWhereOrNull((e) => e.id == (model?.fieldId??0));
 
     final isLoading = ref.watch(
       productSupplierControllerProvider.select(
@@ -28,15 +36,17 @@ class AddProductSupplierView extends ConsumerWidget {
     );
     final isInitialized = ref.watch(isInitializedProvider);
 
-    // do one-time init via post-frame callback
-    if (!isInitialized && model != null) {
-      // delay state change until after build
+    if (!isInitialized && model != null && fields.isNotEmpty) {
       Future.microtask(() {
+        // print('selectedItem>>'+selectedId.toString());
+        final match = fields.firstWhereOrNull((e) => e.id == (model?.fieldId??0));
+        ref.read(selectedSupplierFieldIdProvider.notifier).set(match?.id ?? 0);
         arabicController.text = model?.nameAr ?? '';
         englishController.text = model?.nameEn ?? '';
         ref.read(isInitializedProvider.notifier).state = true;
       });
     }
+
 
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -113,6 +123,29 @@ class AddProductSupplierView extends ConsumerWidget {
                           },
                         ),
                         const SizedBox(height: 24),
+                        AppDropDown<SupplierFieldsData>(
+                          getLabel: (item) => item.name ?? '',
+                          initialValue: fields.firstWhereOrNull((e) =>
+                          e.id == (model?.fieldId??0)),
+                          options: fields,
+                          label: 'التصنيف',
+                          onChange: (value) {
+                            if (value != null) {
+                              ref.read(selectedSupplierFieldIdProvider.notifier).set(value.id ?? 0);
+                            }
+                          },
+                        ),
+
+                        // AppDropDown(
+                        //   initialValue: initialValue,
+                        //   options: mappedOptions,
+                        //   borderColor:ColorManager.colorPrimary,
+                        //   fillColor: Colors.white,borderRadius:2,
+                        //   hintText:'التصنيف',keyValue:'name',
+                        //   label:'التصنيف',isSpecializations:true,onChange:(value) {
+                        //    print('value>>'+value.toString());
+                        //   },),
+                        const SizedBox(height: 24),
                         Text(
                           'اسم التصنيف - عربي',
                           style: StyleManager.getRegularStyle(
@@ -156,8 +189,18 @@ class AddProductSupplierView extends ConsumerWidget {
                             onPressed:() {
                               print('name>>'+arabicController.text.toString());
                               print('nameen>>'+englishController.text.toString());
-                              print('fileee>>'+ref.read(pickedFileProvider).toString());
+                              // print('ididid>>'+s.id.toString());
                               bool isEdit = model?.isEdit??false;
+                              final m = ref.read(selectedSupplierFieldIdProvider);
+                              if(ref.read(selectedSupplierFieldIdProvider)==null||
+                                  ref.read(selectedSupplierFieldIdProvider)==0){
+                                context.showMessage(
+                                  message: 'يرجي اختيار التصنيف',
+                                  messageType: MessageType.error,
+                                );
+                                return;
+                              }
+
                               if(arabicController.text.isEmpty||englishController.text.isEmpty){
                                 context.showMessage(
                                   message: 'يرجي ادخال الاسم',
@@ -165,8 +208,7 @@ class AddProductSupplierView extends ConsumerWidget {
                                 );
                                 return;
                               }
-                              // if((!isEdit && ref.read(pickedFileProvider) == null) ||
-                              // isEdit && (model?.imageUrl??'').isEmpty){
+
                               if((ref.read(pickedFileProvider) == null)){
                                 context.showMessage(
                                   message: 'يرجي اختيار الصورة',
@@ -184,7 +226,7 @@ class AddProductSupplierView extends ConsumerWidget {
                               final request = AddSupplierProductRequestModel(
                                 nameAr: arabicName,
                                 nameEn: englishName,
-                                fieldId: 1,
+                                fieldId: ref.watch(selectedSupplierFieldIdProvider)??0,
                                 image: imageFile ?? File(''),
                               );
                               final notifier = ref.read(productSupplierControllerProvider.notifier);
@@ -235,4 +277,5 @@ class AddProductSupplierView extends ConsumerWidget {
     return file!=null && nameAr.isNotEmpty && nameEN.isNotEmpty;
   }
 }
+
 

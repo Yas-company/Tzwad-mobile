@@ -20,15 +20,11 @@ class ProductSupplierController extends AutoDisposeNotifier<ProductSupplierState
       getProductsByCategoryDataState: DataState.loading,
     );
     final result = await repository.getSupplierCategories();
-    result.fold((l) {
-      state = state.copyWith(
+    result.fold((l) => state = state.copyWith(
         getProductsByCategoryDataState: DataState.failure,
         failure: l,
-      );
-      print('lllllll>'+l.toString());
-    },(r) {
-      print('rrrrrrr>'+r.toString());
-        if (r.isEmpty) {
+      ), (r) {
+        if (r.data.isEmpty) {
           state = state.copyWith(
             getProductsByCategoryDataState: DataState.empty,
             products: [],
@@ -37,14 +33,43 @@ class ProductSupplierController extends AutoDisposeNotifier<ProductSupplierState
         } else {
           state = state.copyWith(
             getProductsByCategoryDataState: DataState.success,
-            products: r,
-            hasMore:false,
+            products: r.data,
+            hasMore: r.hasMore,
             pageNumber: 2,
           );
         }
       },
     );
   }
+
+  void getMoreData() async {
+    if (state.hasMore && !state.isLoadingMore) {
+      final repository = ref.read(productSupplierRepositoryProvider);
+      state = state.copyWith(
+        isLoadingMore: true,
+      );
+      final result = await repository.getSupplierCategories(
+        page: state.pageNumber,);
+      result.fold(
+            (l) => state = state.copyWith(
+          isLoadingMore: false,
+          failure: l,
+        ), (r) {
+          final items = List<SupplierCategories>.from(state.products)..addAll(r.data);
+          state = state.copyWith(
+            isLoadingMore: false,
+            products: items,
+            hasMore: r.hasMore,
+            pageNumber: state.pageNumber + 1,
+          );
+        },
+      );
+    }
+  }
+
+
+
+
 
   Future<void> addSupplierCategory(AddSupplierProductRequestModel request) async {
     final repository = ref.read(productSupplierRepositoryProvider);
@@ -103,6 +128,32 @@ class ProductSupplierController extends AutoDisposeNotifier<ProductSupplierState
     );
   }
 
+
+  void getSupplierFields() async {
+    final repository = ref.read(productSupplierRepositoryProvider);
+    state = state.copyWith(
+      supplierFieldsState: DataState.loading,
+    );
+    final result = await repository.getSupplierFields();
+    result.fold((l) => state = state.copyWith(
+      supplierFieldsState: DataState.failure,
+      failure: l,
+    ), (r) {
+      if (r.isEmpty) {
+        state = state.copyWith(
+          supplierFieldsState: DataState.empty,
+          products: [],
+          hasMore: false,
+        );
+      } else {
+        state = state.copyWith(
+          supplierFieldsState: DataState.success,
+          fields: r
+        );
+      }
+    },
+    );
+  }
 }
 
 

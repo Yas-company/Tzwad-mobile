@@ -1,3 +1,5 @@
+import 'package:faker/faker.dart';
+
 class SupplierCategoriesListModel {
   List<SupplierCategories>? data;
 
@@ -52,6 +54,28 @@ class SupplierCategories {
       data['field'] = this.field!.toJson();
     }
     return data;
+  }
+
+  static List<SupplierCategories> fromJsonList(List<dynamic> jsonList) {
+    return (jsonList).map((item) => SupplierCategories.fromJson(item)).toList();
+  }
+
+  factory SupplierCategories.fake({int id = 0}) {
+    final faker = Faker();
+    return SupplierCategories(
+      id: id,
+      name: faker.randomGenerator.string(10),
+      image: faker.randomGenerator.string(10),
+      fieldId:0,
+      productsCount: 0,
+      supplierId: 0,
+    );
+  }
+
+  static List<SupplierCategories> generateFakeList({int count = 10}) {
+    return List.generate(
+      count, (index) => SupplierCategories.fake(id: index),
+    );
   }
 }
 

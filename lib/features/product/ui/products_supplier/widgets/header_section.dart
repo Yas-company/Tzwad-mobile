@@ -139,7 +139,7 @@ class SupplierHeaderSection extends ConsumerWidget {
                         onPressed: () async {
                           ref.read(isInitializedProvider.notifier).state = false;
                           ref.read(pickedFileProvider.notifier).reset();
-
+                          ref.read(selectedSupplierFieldIdProvider.notifier).resetTo(0);
                           final request =
                           AddSupplierProductRequestModel(isEdit: false);
                           final result = await context.push(
@@ -148,8 +148,7 @@ class SupplierHeaderSection extends ConsumerWidget {
                           );
 
                           if (result == true) {
-                            ref
-                                .read(productSupplierControllerProvider.notifier)
+                            ref.read(productSupplierControllerProvider.notifier)
                                 .getSupplierCategory();
                           }
                         },

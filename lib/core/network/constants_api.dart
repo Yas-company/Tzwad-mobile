@@ -64,5 +64,9 @@ class ConstantsApi {
   // Orders
   static String get getOrdersUrl => "buyer/orders_buyer";
 
+  static String get getSupplierOrders => "supplier/orders?shipping_method=1";
+
+  static String get getSupplierFields => "fields/supplier";
+
   static String getOrderDetailsUrl(int id) => "buyer/orders_buyer/$id";
 }

@@ -58,3 +58,15 @@ class PickedFileController extends StateNotifier<File?> {
   }
 }
 
+class SelectedFieldIdNotifier extends StateNotifier<int?> {
+  SelectedFieldIdNotifier() : super(null);
+
+  void set(int id) => state = id;
+
+  void resetTo(int id) {
+    if (state != id) {
+      state = id;
+    }
+  }
+}
+
