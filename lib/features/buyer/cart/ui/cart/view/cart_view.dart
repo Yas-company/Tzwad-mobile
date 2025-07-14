@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_scaffold_widget.dart';
 
+import 'widgets/cart_summary_info.dart';
 import 'widgets/cart_view_body.dart';
 
 class CartView extends StatelessWidget {
@@ -9,14 +10,16 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffoldWidget(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => _onPressedBackButton(context),
-            icon: const Icon(Icons.arrow_back_ios),
-          ),
-          title: const Text('السلة'),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => _onPressedBackButton(context),
+          icon: const Icon(Icons.arrow_back_ios),
         ),
-        body: const CartViewBody());
+        title: const Text('السلة'),
+      ),
+      body: const CartViewBody(),
+      bottomNavigationBar: const CartSummaryInfo(),
+    );
   }
 
   _onPressedBackButton(BuildContext context) {

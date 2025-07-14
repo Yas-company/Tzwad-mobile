@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_image_asset_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
@@ -7,10 +9,12 @@ import 'package:tzwad_mobile/core/app_widgets/app_svg_picture_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
-import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
+import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/features/buyer/supplier/models/supplier_product_model.dart';
+import 'package:tzwad_mobile/features/buyer/supplier/ui/supplier_details/controller/supplier_details_state.dart';
+import 'package:tzwad_mobile/features/buyer/supplier/ui/supplier_details/providers/supplier_details_controller_provider.dart';
 
 class ItemSupplierProduct extends StatelessWidget {
   const ItemSupplierProduct({
@@ -55,21 +59,21 @@ class ItemSupplierProduct extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    '81.99',
+                    product.price ?? '',
                     style: StyleManager.getMediumStyle(
                       color: ColorManager.colorBlack1,
                     ),
                   ),
                 ),
-                Flexible(
-                  child: Text(
-                    '81.99',
-                    style: StyleManager.getRegularStyle(
-                      color: ColorManager.colorWhite2,
-                      fontSize: FontSize.s12,
-                    ),
-                  ),
-                ),
+                // Flexible(
+                //   child: Text(
+                //     product.priceBeforeDiscount ?? '',
+                //     style: StyleManager.getRegularStyle(
+                //       color: ColorManager.colorWhite2,
+                //       fontSize: FontSize.s12,
+                //     ),
+                //   ),
+                // ),
               ],
             ).marginOnly(
               bottom: AppPadding.p8,
@@ -87,12 +91,21 @@ class ItemSupplierProduct extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: AppButtonWidget(
-                    label: '',
-                    assetsIcon: AssetsManager.icCart,
-                    assetColor: ColorManager.colorWhite1,
-                    onPressed: () {},
-                    buttonSize: ButtonSize.small,
+                  child: Consumer(
+                    builder: (context, ref, child) {
+                      ref.listen(
+                        supplierDetailsControllerProvider,
+                        (previous, next) => submitAddToCartListener(context, previous, next),
+                      );
+                      return AppButtonWidget(
+                        label: '',
+                        assetsIcon: AssetsManager.icCart,
+                        assetColor: ColorManager.colorWhite1,
+                        onPressed: () => _onPressedAddToCartButton(ref, product),
+                        buttonSize: ButtonSize.small,
+                        isLoading: product.isLoading,
+                      );
+                    },
                   ),
                 ),
                 const Gap(
@@ -108,12 +121,16 @@ class ItemSupplierProduct extends StatelessWidget {
                       color: ColorManager.colorSecondary,
                     ),
                   ),
-                  child: const Center(
-                    child: AppSvgPictureWidget(
-                      assetName: AssetsManager.icTabFavorites,
-                      width: AppSize.s24,
-                      height: AppSize.s24,
-                      color: ColorManager.colorSecondary,
+                  child: AppRippleWidget(
+                    radius: AppSize.s8,
+                    onTap: () => _oPressedAddToFavoritesButton(context),
+                    child: const Center(
+                      child: AppSvgPictureWidget(
+                        assetName: AssetsManager.icTabFavorites,
+                        width: AppSize.s24,
+                        height: AppSize.s24,
+                        color: ColorManager.colorSecondary,
+                      ),
                     ),
                   ),
                 )
@@ -123,5 +140,26 @@ class ItemSupplierProduct extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _onPressedAddToCartButton(WidgetRef ref, SupplierProductModel product) {
+    ref.read(supplierDetailsControllerProvider.notifier).addToCart(product);
+  }
+
+  _oPressedAddToFavoritesButton(BuildContext context) {
+    context.pushNamed(AppRoutes.underDevelopmentRoute);
+    // ref.read(supplierDetailsControllerProvider.notifier).toggleFavorite(product);
+  }
+
+  submitAddToCartListener(BuildContext context, SupplierDetailsState? previous, SupplierDetailsState next) {
+    // if (previous?.submitLoginDataState != next.submitLoginDataState) {
+    //   if (next.submitLoginDataState == DataState.failure) {
+    //     context.showMessage(
+    //       message: next.failure?.message ?? '',
+    //     );
+    //   } else if (next.submitLoginDataState == DataState.success) {
+    //     context.pushReplacementNamed(AppRoutes.homeBuyerRoute);
+    //   }
+    // }
   }
 }

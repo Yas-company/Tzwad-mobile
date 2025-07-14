@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
+import 'package:tzwad_mobile/features/buyer/cart/providers/cart_repository_provider.dart';
 import 'package:tzwad_mobile/features/buyer/supplier/models/supplier_product_model.dart';
 import 'package:tzwad_mobile/features/buyer/supplier/providers/supplier_repository_provider.dart';
 
@@ -102,5 +103,43 @@ class SupplierDetailsController extends AutoDisposeNotifier<SupplierDetailsState
         },
       );
     }
+  }
+
+  void addToCart(SupplierProductModel product) async {
+    final repository = ref.read(cartRepositoryProvider);
+    product.isLoading = true;
+    state = state.copyWith(
+      products: state.products
+          .map(
+            (e) => e.id == product.id ? product : e,
+          )
+          .toList(),
+    );
+    final result = await repository.addToCart(
+      productId: product.id!,
+    );
+    result.fold(
+      (l) {
+        product.isLoading = false;
+        state = state.copyWith(
+          products: state.products
+              .map(
+                (e) => e.id == product.id ? product : e,
+              )
+              .toList(),
+        );
+      },
+      (r) {
+        product.isLoading = false;
+        // product.cartQuantity = (product.cartQuantity ?? 0) + 1;
+        state = state.copyWith(
+          products: state.products
+              .map(
+                (e) => e.id == product.id ? product : e,
+              )
+              .toList(),
+        );
+      },
+    );
   }
 }

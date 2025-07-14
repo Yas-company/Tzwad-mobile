@@ -2,16 +2,34 @@ import 'package:faker/faker.dart';
 
 class CartProductModel {
   int? id;
-  String? name;
+  String? productName;
+  String? productImage;
+  String? productPrice;
+  String? priceBeforeDiscount;
+  int? quantity;
+  String? price;
+  int? total;
 
   CartProductModel({
     this.id,
-    this.name,
+    this.productName,
+    this.productImage,
+    this.productPrice,
+    this.priceBeforeDiscount,
+    this.quantity,
+    this.price,
+    this.total,
   });
 
   CartProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
+    productName = json['product_name'];
+    productImage = json['product_image'];
+    productPrice = json['product_price'];
+    priceBeforeDiscount = json['price_before_discount'];
+    quantity = json['quantity'];
+    price = json['price'];
+    total = json['total'];
   }
 
   static List<CartProductModel> fromJsonList(List<dynamic> jsonList) {
@@ -22,14 +40,20 @@ class CartProductModel {
     final faker = Faker();
     return CartProductModel(
       id: id,
-      name: faker.person.name(),
+      productName: faker.food.dish(),
+      productImage: faker.image.image(),
+      productPrice: faker.randomGenerator.decimal(min: 1, scale: 100).toString(),
+      priceBeforeDiscount: faker.randomGenerator.decimal(min: 1, scale: 100).toString(),
+      quantity: faker.randomGenerator.integer(10, min: 1),
+      price: faker.randomGenerator.decimal(min: 1, scale: 100).toString(),
+      total: faker.randomGenerator.decimal(min: 1, scale: 100).toInt(),
     );
   }
 
   static List<CartProductModel> generateFakeList({int count = 10}) {
     return List.generate(
       count,
-          (index) => CartProductModel.fake(id: index),
+      (index) => CartProductModel.fake(id: index),
     );
   }
 }

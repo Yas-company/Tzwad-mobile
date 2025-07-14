@@ -52,4 +52,7 @@ class AssetsManager {
   static const icStar = 'assets/icons/ic_star.svg';
   static const icList = 'assets/icons/ic_list.svg';
   static const icGrid = 'assets/icons/ic_grid.svg';
+  static const icCurrency = 'assets/icons/ic_currency.svg';
+  static const icDiscount = 'assets/icons/ic_discount.svg';
+  static const isAlterCircle = 'assets/icons/ic_alert_circle.svg';
 }
