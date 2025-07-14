@@ -35,8 +35,6 @@ class SupplierDetailsController extends AutoDisposeNotifier<SupplierDetailsState
     state = state.copyWith(
       categories: updatedCategories,
     );
-    'Mohammad Joumani ${category.id}'.log();
-    'Mohammad Joumani ${category.supplierId}'.log();
     getProducts(
       supplierId: category.supplierId!,
       categoryId: category.id ?? -1,

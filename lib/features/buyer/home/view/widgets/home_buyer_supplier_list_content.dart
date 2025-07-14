@@ -1,8 +1,8 @@
-import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_network_image_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
@@ -10,10 +10,7 @@ import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
-import 'package:tzwad_mobile/features/ads/models/ads_model.dart';
 import 'package:tzwad_mobile/features/buyer/supplier/models/supplier_model.dart';
-
-import 'item_home_ads.dart';
 
 class HomeBuyerSupplierListContent extends StatelessWidget {
   const HomeBuyerSupplierListContent({
@@ -72,21 +69,37 @@ class HomeBuyerSupplierListContent extends StatelessWidget {
             bottom: AppPadding.p12,
           ),
           SizedBox(
-            height: 100,
+            height: AppSize.s90,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
               itemBuilder: (BuildContext context, int index) => Container(
-                width: 100,
-                height: 100,
+                width: AppSize.s90,
+                height: AppSize.s90,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(AppSize.s8),
-                  color: ColorManager.colorWhite4,
+                  color: ColorManager.colorWhite1,
+                  border: Border.all(
+                    color: ColorManager.colorWhite5,
+                  ),
                 ),
-                // child: Image.network(
-                //   items[index].image ?? '',
-                //   fit: BoxFit.cover,
-                // ),
+                child: AppRippleWidget(
+                  radius: AppSize.s8,
+                  onTap: () => context.pushNamed(
+                    AppRoutes.supplierDetailsRoute,
+                    extra: {
+                      'supplier_id': items[index].id,
+                      'supplier_name': items[index].name,
+                      'supplier_image': items[index].image,
+                    },
+                  ),
+                  child: AppNetworkImageWidget(
+                    url: items[index].image ?? '',
+                    width: AppSize.s90,
+                    height: AppSize.s90,
+                    radius: AppSize.s8,
+                  ),
+                ),
               ),
               separatorBuilder: (context, index) => const Gap(AppPadding.p12),
               itemCount: items.length,
