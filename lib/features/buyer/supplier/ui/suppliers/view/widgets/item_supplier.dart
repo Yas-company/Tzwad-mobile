@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tzwad_mobile/core/app_widgets/app_image_asset_widget.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_network_image_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
@@ -39,13 +39,11 @@ class ItemSupplier extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Align(
-                alignment: Alignment.center,
-                child: AppImageAssetWidget(
-                  imagePath: 'assets/images/img_temp.png',
-                  width: AppSize.s60,
-                  height: AppSize.s60,
-                ),
+              AppNetworkImageWidget(
+                url: supplier.image ?? '',
+                width: AppSize.s60,
+                height: AppSize.s60,
+                radius: AppSize.s8,
               ).marginOnly(
                 end: AppPadding.p16,
               ),
@@ -73,7 +71,7 @@ class ItemSupplier extends StatelessWidget {
                       ],
                     ).marginOnly(
                       bottom: AppPadding.p4,
-                      
+
                     ),
                     Text(
                       fieldsName,

@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tzwad_mobile/core/extension/string_extension.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/buyer/cart/providers/cart_repository_provider.dart';
+import 'package:tzwad_mobile/features/buyer/supplier/models/supplier_category_model.dart';
 import 'package:tzwad_mobile/features/buyer/supplier/models/supplier_product_model.dart';
 import 'package:tzwad_mobile/features/buyer/supplier/providers/supplier_repository_provider.dart';
 
@@ -14,6 +16,32 @@ class SupplierDetailsController extends AutoDisposeNotifier<SupplierDetailsState
   }
 
   SupplierDetailsState _onInit() => SupplierDetailsState();
+
+  void changeCategory(SupplierCategoryModel category) {
+    final updatedCategories = state.categories
+        .map(
+          (e) => SupplierCategoryModel(
+            id: e.id,
+            name: e.name,
+            supplierId: e.supplierId,
+            image: e.image,
+            field: e.field,
+            fieldId: e.fieldId,
+            productsCount: e.productsCount,
+            isSelected: e.id == category.id,
+          ),
+        )
+        .toList();
+    state = state.copyWith(
+      categories: updatedCategories,
+    );
+    'Mohammad Joumani ${category.id}'.log();
+    'Mohammad Joumani ${category.supplierId}'.log();
+    getProducts(
+      supplierId: category.supplierId!,
+      categoryId: category.id ?? -1,
+    );
+  }
 
   void getCategories(int supplierId) async {
     final repository = ref.read(supplierRepositoryProvider);
@@ -45,13 +73,17 @@ class SupplierDetailsController extends AutoDisposeNotifier<SupplierDetailsState
     );
   }
 
-  void getProducts(int supplierId) async {
+  void getProducts({
+    required int supplierId,
+    int categoryId = -1,
+  }) async {
     final repository = ref.read(supplierRepositoryProvider);
     state = state.copyWith(
       getSupplierProductsDataState: DataState.loading,
     );
     final result = await repository.getProducts(
       supplierId: supplierId,
+      categoryId: categoryId,
     );
     result.fold(
       (l) => state = state.copyWith(
@@ -86,6 +118,7 @@ class SupplierDetailsController extends AutoDisposeNotifier<SupplierDetailsState
       final result = await repository.getProducts(
         supplierId: supplierId,
         page: state.pageNumber,
+        categoryId: state.categories.firstWhere((element) => element.isSelected).id!,
       );
       result.fold(
         (l) => state = state.copyWith(

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
-import 'package:tzwad_mobile/core/app_widgets/app_image_asset_widget.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_network_image_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_ripple_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_svg_picture_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
@@ -46,10 +46,11 @@ class ItemSupplierProduct extends StatelessWidget {
                 color: ColorManager.colorWhite3,
               ),
               alignment: Alignment.center,
-              child: const AppImageAssetWidget(
-                imagePath: 'assets/images/img_temp.png',
+              child:  AppNetworkImageWidget(
+                url: product.image ?? '',
                 width: AppSize.s80,
                 height: AppSize.s80,
+                radius: AppSize.s8,
               ),
             ).marginOnly(
               bottom: AppPadding.p8,

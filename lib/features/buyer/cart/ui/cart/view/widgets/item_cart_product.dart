@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tzwad_mobile/core/app_widgets/app_image_asset_widget.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_network_image_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/font_manager.dart';
@@ -29,10 +29,11 @@ class ItemCartProduct extends StatelessWidget {
             color: ColorManager.colorWhite3,
           ),
           alignment: Alignment.center,
-          child: const AppImageAssetWidget(
-            imagePath: 'assets/images/img_temp.png',
+          child:  AppNetworkImageWidget(
+            url: product.productImage ?? '',
             width: AppSize.s60,
             height: AppSize.s60,
+            radius: AppSize.s8,
           ),
         ).marginOnly(
           end: AppPadding.p8,

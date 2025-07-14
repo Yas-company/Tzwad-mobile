@@ -33,6 +33,7 @@ class AssetsManager {
 
   //Products
   static const imgProductPlaceHolder = 'assets/images/img_product_palce_holder.png';
+  static const imgPlaceHolder = 'assets/images/img_place_holder.png';
 
   // cart
   static const imgCartEmpty = 'assets/images/img_cart_empty.png';

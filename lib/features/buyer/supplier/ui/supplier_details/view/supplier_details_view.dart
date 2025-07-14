@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_image_asset_widget.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_network_image_widget.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_scaffold_widget.dart';
 import 'package:tzwad_mobile/core/extension/widget_extension.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
@@ -26,7 +27,9 @@ class _SupplierDetailsViewState extends ConsumerState<SupplierDetailsView> {
       final controller = ref.read(supplierDetailsControllerProvider.notifier);
       final supplierId = appArgs['supplier_id'] as int;
       controller.getCategories(supplierId);
-      controller.getProducts(supplierId);
+      controller.getProducts(
+        supplierId: supplierId,
+      );
     });
   }
 
@@ -40,10 +43,11 @@ class _SupplierDetailsViewState extends ConsumerState<SupplierDetailsView> {
         ),
         title: Row(
           children: [
-            const AppImageAssetWidget(
-              imagePath: 'assets/images/img_temp.png',
+            AppNetworkImageWidget(
+              url: appArgs['supplier_image'] ?? '',
               width: AppSize.s32,
               height: AppSize.s32,
+              radius: AppSize.s8,
             ).marginOnly(
               end: AppPadding.p8,
             ),

@@ -62,13 +62,13 @@ class AppImagePlaceHolderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final assetImage = placeHolderEnum == PlaceHolderEnum.product ? AssetsManager.imgProductPlaceHolder : AssetsManager.imgProductPlaceHolder;
+    // final assetImage = placeHolderEnum == PlaceHolderEnum.product ? AssetsManager.imgProductPlaceHolder : AssetsManager.imgProductPlaceHolder;
     return Container(
       width: width,
       height: height,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(assetImage),
+          image: AssetImage(AssetsManager.imgPlaceHolder),
           opacity: .4,
         ),
       ),

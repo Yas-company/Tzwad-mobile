@@ -22,7 +22,7 @@ class SupplierRepository {
     try {
       final response = await apiService.get<List<SupplierModel>>(
         url: ConstantsApi.getSuppliers,
-        data: {
+        params: {
           'page': page,
         },
         fromJsonListT: SupplierModel.fromJsonList,
@@ -46,7 +46,16 @@ class SupplierRepository {
         url: ConstantsApi.getSupplierCategories(supplierId),
         fromJsonListT: SupplierCategoryModel.fromJsonList,
       );
-      return Right(response.data ?? []);
+      List<SupplierCategoryModel> categories = response.data ?? [];
+      categories.insert(
+        0,
+        SupplierCategoryModel(
+          id: -1,
+          name: 'الكل',
+          isSelected: true,
+        ),
+      );
+      return Right(categories);
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
     }
@@ -55,12 +64,14 @@ class SupplierRepository {
   Future<Result<Failure, PageModel<SupplierProductModel>>> getProducts({
     int page = 1,
     required int supplierId,
+    int categoryId = -1,
   }) async {
     try {
       final response = await apiService.get<List<SupplierProductModel>>(
         url: ConstantsApi.getSupplierProducts(supplierId),
-        data: {
+        params: {
           'page': page,
+          'category_id': categoryId == -1 ? null : categoryId,
         },
         fromJsonListT: SupplierProductModel.fromJsonList,
       );

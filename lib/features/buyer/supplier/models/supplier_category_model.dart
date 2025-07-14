@@ -19,6 +19,7 @@ class SupplierCategoryModel {
     this.fieldId,
     this.productsCount,
     this.field,
+    this.isSelected = false
   });
 
   SupplierCategoryModel.fromJson(Map<String, dynamic> json) {
