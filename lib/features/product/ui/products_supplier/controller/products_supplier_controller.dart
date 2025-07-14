@@ -90,18 +90,15 @@ class ProductsSupplierController extends AutoDisposeNotifier<ProductsSupplierSta
 
     final result = await repository.removeProductSupplier(id: productId);
 
-    result.fold(
-          (failure) {
+    result.fold((failure) {
         state = state.copyWith(
           deleteProductDataState: DataState.failure,
           failure: failure,
         );
-      },
-          (_) {
+      }, (_) {
         // حذف المنتج محلياً من القائمة لتحديث الـ UI فورًا
         final updatedList = List<ProductSupplierModel>.from(state.productsSupplier)
           ..removeWhere((product) => product.id == productId);
-
         state = state.copyWith(
           deleteProductDataState: DataState.success,
           productsSupplier: updatedList,

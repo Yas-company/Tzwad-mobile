@@ -16,9 +16,9 @@ class SupplierProductsDetails extends StatelessWidget {
             horizontal: AppPadding.p24, vertical: AppPadding.p24),
         child: const Column(
           children: [
-            Expanded(flex: 3, child: SearchBackRow()),
-            Expanded(flex: 3, child: ProductsNumberDetails()),
-            Expanded(flex: 4, child: AllProductsNumberCard())
+            SearchBackRow(),
+            ProductsNumberDetails(),
+            AllProductsNumberCard()
           ],
         ));
   }

@@ -26,10 +26,9 @@ class RemoveProductSupplierDialog extends ConsumerWidget {
         if (previous?.deleteProductDataState != next.deleteProductDataState) {
           if (next.deleteProductDataState == DataState.success) {
             // عند نجاح الحذف، اغلاق الدايلوج واعادة جلب المنتجات
-            context.showMessage(message: "تم حذف العنصر بنجاح");
+            context.showMessage(message: "تم حذف العنصر بنجاح",messageType: MessageType.success);
             Navigator.of(context).pop();
-            ref
-                .read(productsSupplierControllerProvider.notifier)
+            ref.read(productsSupplierControllerProvider.notifier)
                 .getProductsSupplier();
           } else if (next.deleteProductDataState == DataState.failure) {
             // عند الخطأ، اظهار رسالة خطأ

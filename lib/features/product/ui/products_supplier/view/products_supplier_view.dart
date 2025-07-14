@@ -12,8 +12,8 @@ class ProductsSupplierView extends ConsumerWidget {
     return const AppScaffoldWidget(
       body: Column(
         children: [
-          Expanded(flex: 12, child: SupplierProductsDetails()),
-          Expanded(flex: 20, child: SupplierProductsListView()),
+          SupplierProductsDetails(),
+          Expanded(child: SupplierProductsListView()),
         ],
       ),
     );

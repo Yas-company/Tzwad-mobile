@@ -42,7 +42,7 @@ class ListViewFeilds extends HookConsumerWidget {
     final state = ref.watch(addProductControllerProvider);
     final controller = ref.read(addProductControllerProvider.notifier);
     return ListView(
-      padding: EdgeInsets.symmetric(horizontal: AppPadding.p24),
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
       children: [
         GestureDetector(
           onTap: () => controller.pickImage(),

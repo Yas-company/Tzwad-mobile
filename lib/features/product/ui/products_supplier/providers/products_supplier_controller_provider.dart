@@ -8,3 +8,8 @@ final productsSupplierControllerProvider = NotifierProvider.autoDispose<Products
     return ProductsSupplierController();
   },
 );
+
+final isSearchVisibleProvider = StateProvider.autoDispose<bool>((ref) => false);
+
+
+final supplierSearchQueryProvider = StateProvider.autoDispose<String>((ref) => '');

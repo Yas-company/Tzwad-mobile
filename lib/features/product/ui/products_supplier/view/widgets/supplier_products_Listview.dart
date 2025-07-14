@@ -16,6 +16,7 @@ class SupplierProductsListView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(productsSupplierControllerProvider);
     final notifier = ref.read(productsSupplierControllerProvider.notifier);
+    final searchQuery = ref.watch(supplierSearchQueryProvider);
 
     final scrollController = useAutoLoadScrollController(
       hasMore: state.hasMore,
@@ -33,16 +34,21 @@ class SupplierProductsListView extends HookConsumerWidget {
       return const AppEmptyWidget(message: "حدث خطأ أثناء تحميل المنتجات");
     }
 
-    if (state.productsSupplier.isEmpty) {
-      return const AppEmptyWidget(message: "الصفحة فارغة");
+    final filteredProducts = state.productsSupplier.where((product) {
+      final name = product.name?.toLowerCase() ?? '';
+      return name.contains(searchQuery.toLowerCase());
+    }).toList();
+
+    if (filteredProducts.isEmpty) {
+      return const AppEmptyWidget(message: "لا توجد نتائج مطابقة");
     }
 
     return ListView.builder(
       controller: scrollController,
-      itemCount: state.productsSupplier.length + (state.hasMore ? 1 : 0),
+      itemCount: filteredProducts.length + (state.hasMore ? 1 : 0),
       itemBuilder: (context, index) {
-        if (index < state.productsSupplier.length) {
-          final product = state.productsSupplier[index];
+        if (index < filteredProducts.length) {
+          final product = filteredProducts[index];
           return ListViewItem(product: product);
         } else {
           return const Padding(
