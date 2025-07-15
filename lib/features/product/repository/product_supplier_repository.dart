@@ -3,9 +3,11 @@ import 'package:tzwad_mobile/core/network/api_service.dart';
 import 'package:tzwad_mobile/core/network/constants_api.dart';
 import 'package:tzwad_mobile/core/network/error_handler.dart';
 import 'package:tzwad_mobile/core/network/failure.dart';
+import 'package:tzwad_mobile/core/util/data_models/page_model.dart';
 import 'package:tzwad_mobile/core/util/state_render/result.dart';
 import 'package:tzwad_mobile/features/product/models/add_supplier_product_request_model.dart';
 import 'package:tzwad_mobile/features/product/models/supplier_categories_response_model.dart';
+import 'package:tzwad_mobile/features/product/models/supplier_fields_response_model.dart';
 
 class ProductSupplierRepository {
   final ApiService apiService;
@@ -13,19 +15,39 @@ class ProductSupplierRepository {
   ProductSupplierRepository({
     required this.apiService,
   });
-  Future<Result<Failure, List<SupplierCategories>>> getSupplierCategories() async {
+
+  // Future<Result<Failure, List<SupplierCategories>>> getSupplierCategories() async {
+  //   try {
+  //     final response = await apiService.get<List<SupplierCategories>>(
+  //       url: ConstantsApi.getCategoriesUrl,
+  //       fromJsonListT: (jsonList) =>
+  //           jsonList.map((e) => SupplierCategories.fromJson(e)).toList(),
+  //     );
+  //
+  //     if (response.data != null) {
+  //       return Right(response.data!);
+  //     } else {
+  //       return Left(Failure(code: 0, message: 'No categories found'));
+  //     }
+  //   } catch (error) {
+  //     return Left(ErrorHandler.handle(error).failure);
+  //   }
+  // }
+
+  Future<Result<Failure, PageModel<SupplierCategories>>> getSupplierCategories({
+    int page = 1,}) async {
     try {
       final response = await apiService.get<List<SupplierCategories>>(
         url: ConstantsApi.getCategoriesUrl,
-        fromJsonListT: (jsonList) =>
-            jsonList.map((e) => SupplierCategories.fromJson(e)).toList(),
+        params: {'page': page,},
+        fromJsonListT: SupplierCategories.fromJsonList,
       );
-
-      if (response.data != null) {
-        return Right(response.data!);
-      } else {
-        return Left(Failure(code: 0, message: 'No categories found'));
-      }
+      return Right(
+        PageModel<SupplierCategories>(
+          data: response.data ?? [],
+          hasMore: response.hasMore,
+        ),
+      );
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
     }
@@ -96,10 +118,28 @@ class ProductSupplierRepository {
       if (response.data != null) {
         return Right(response.data!);
       } else {
+        return Left(Failure(code: 0, message: ''));
+      }
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Result<Failure, List<SupplierFieldsData>>> getSupplierFields() async {
+    try {
+      final response = await apiService.get<List<SupplierFieldsData>>(
+        url: ConstantsApi.getSupplierFields,
+        fromJsonListT: (jsonList) =>
+            jsonList.map((e) => SupplierFieldsData.fromJson(e)).toList(),
+      );
+      if (response.data != null) {
+        return Right(response.data!);
+      } else {
         return Left(Failure(code: 0, message: 'No categories found'));
       }
     } catch (error) {
       return Left(ErrorHandler.handle(error).failure);
     }
   }
+
 }

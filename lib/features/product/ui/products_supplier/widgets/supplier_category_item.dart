@@ -63,66 +63,68 @@ class SupplierCategoryItem extends StatelessWidget {
         ),
         minVerticalPadding: 0,
         contentPadding: const EdgeInsets.only(left: 10, right: 10),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            InkWell(
-              onTap: () async {
-                ref.read(isInitializedProvider.notifier).state = false;
-                ref.read(pickedFileProvider.notifier).reset();
+        trailing: Padding(
+          padding: const EdgeInsets.only(top:20),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                onTap: () async {
+                  ref.read(isInitializedProvider.notifier).state = false;
+                  ref.read(pickedFileProvider.notifier).reset();
+                  print('idd>>'+( category.field?.id ?? 0).toString());
+                  final request = AddSupplierProductRequestModel(
+                    id: category.id ?? 0,
+                    nameAr: category.name ?? '',
+                    nameEn: category.name ?? '',
+                    fieldId: category.field?.id ?? 0,
+                    imageUrl: category.image ?? '',
+                    isEdit: true,
+                  );
 
-                final request = AddSupplierProductRequestModel(
-                  id: category.id ?? 0,
-                  nameAr: category.name ?? '',
-                  nameEn: category.name ?? '',
-                  fieldId: category.field?.id ?? 0,
-                  imageUrl: category.image ?? '',
-                  isEdit: true,
-                );
+                  final result = await context.push(
+                    AppRoutes.addProductSupplierView,
+                    extra: request,
+                  );
 
-                final result = await context.push(
-                  AppRoutes.addProductSupplierView,
-                  extra: request,
-                );
-
-                if (result == true) {
-                  ref.read(productSupplierControllerProvider.notifier)
-                      .getSupplierCategory();
-                }
-              },
-              child: Container(
-                height: 40,
-                width: 45,
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: ColorManager.colorSecondary,
-                  borderRadius: BorderRadius.circular(10),
+                  if (result == true) {
+                    ref.read(productSupplierControllerProvider.notifier)
+                        .getSupplierCategory();
+                  }
+                },
+                child: Container(
+                  height:36,width: 36,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: ColorManager.colorSecondary,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(Icons.edit, color: Colors.white,size:20,),
                 ),
-                child: const Icon(Icons.edit, color: Colors.white),
               ),
-            ),
-            const SizedBox(width: 10),
-            InkWell(
-              onTap: () {
-                final notifier = ref.read(productSupplierControllerProvider.notifier);
-                final future = notifier.deleteSupplierCategory(category.id ?? 0);
-                future.then((_) {
-                  ref.read(productSupplierControllerProvider.notifier)
-                      .getSupplierCategory();
-                });
-              },
-              child: Container(
-                height: 40,
-                width: 45,
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: ColorManager.colorPrimary,
-                  borderRadius: BorderRadius.circular(10),
+              const SizedBox(width: 10),
+              InkWell(
+                onTap: () {
+                  final notifier = ref.read(productSupplierControllerProvider.notifier);
+                  final future = notifier.deleteSupplierCategory(category.id ?? 0);
+                  future.then((_) {
+                    ref.read(productSupplierControllerProvider.notifier)
+                        .getSupplierCategory();
+                  });
+                },
+                child: Container(
+                  height:36,width: 36,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: ColorManager.colorPrimary,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(Icons.delete, color: Colors.white,
+                  size:20,),
                 ),
-                child: const Icon(Icons.delete, color: Colors.white),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

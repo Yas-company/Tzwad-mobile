@@ -11,10 +11,6 @@ import 'package:tzwad_mobile/features/auth/ui/otp/view/otp_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/register_buyer/view/register_buyer_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/register_supplier/view/register_supplier_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/reset_password/view/reset_password_view.dart';
-import 'package:tzwad_mobile/features/buyer/cart/ui/cart/view/cart_view.dart';
-import 'package:tzwad_mobile/features/buyer/home/view/home_buyer_view.dart';
-import 'package:tzwad_mobile/features/buyer/supplier/ui/supplier_details/view/supplier_details_view.dart';
-import 'package:tzwad_mobile/features/buyer/supplier/ui/suppliers/view/suppliers_view.dart';
 import 'package:tzwad_mobile/features/category/ui/categories_supplier/view/categories_supplier_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/more/view/more_buyer_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/more/view/more_supplier_view.dart';
@@ -22,6 +18,7 @@ import 'package:tzwad_mobile/features/generic/ui/under_develop_view.dart';
 import 'package:tzwad_mobile/features/home/ui/home_supplier/view/home_supplier_view.dart';
 import 'package:tzwad_mobile/features/nav_bar/view/nav_bar_view.dart';
 import 'package:tzwad_mobile/features/order/ui/order_details/view/order_details_view.dart';
+import 'package:tzwad_mobile/features/order/ui/order_supplier/view/order_supplier_details_view.dart';
 import 'package:tzwad_mobile/features/order/ui/order_supplier/view/orders_supplier_view.dart';
 import 'package:tzwad_mobile/features/order/ui/orders_buyer/view/orders_buyer_view.dart';
 import 'package:tzwad_mobile/features/product/models/add_supplier_product_request_model.dart';
@@ -97,6 +94,10 @@ class RouterManager {
       AppRouter(
         route: AppRoutes.orderDetailsRoute,
         screen: const OrderDetailsView(),
+      ),
+      AppRouter(
+        route: AppRoutes.orderSupplierDetailsView,
+        screen: const OrderSupplierDetailsView(),
       ),
       AppRouter(
         route: AppRoutes.cartRoute,
