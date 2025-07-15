@@ -51,6 +51,7 @@ class SupplierRepository {
         0,
         SupplierCategoryModel(
           id: -1,
+          supplierId: supplierId,
           name: 'الكل',
           isSelected: true,
         ),
