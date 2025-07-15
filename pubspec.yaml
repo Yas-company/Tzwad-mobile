@@ -84,7 +84,7 @@ flutter_native_splash:
 
 flutter_icons:
   #  image_path_android: "assets/images/img_logo_with_background.png"
-  image_path_ios: "assets/images/img_logo_with_background.png"
+  image_path_ios: "assets/images/img_logo_with_background.jpg"
   android: false
   ios: true
   remove_alpha_ios: true
