@@ -67,6 +67,18 @@ abstract class StyleManager {
       color,
     );
   }
+  static TextStyle getSemiBoldUnderlineStyle({
+    double fontSize = FontSize.s14,
+    required Color color,
+  }) {
+    return _getTextStyle(
+      fontSize,
+      FontWeightManager.semiBold,
+      color,
+    ).copyWith(
+      decoration: TextDecoration.underline,
+    );
+  }
 
   static TextStyle getBoldStyle({
     double fontSize = FontSize.s14,

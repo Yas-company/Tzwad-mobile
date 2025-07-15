@@ -37,6 +37,10 @@
   "connection_error": "We are facing connection issues. Please try again later",
   "default_error": "Something went wrong. Try again later",
   "cache_error": "Cache error. Try again later",
+  "accept": "I accept all",
+  "terms": "terms",
+  "conditions": "and conditions",
+
   "location_denied": "Please allow location access to find the nearest service providers",
   "no_internet_error": "Please check your internet connection"
 }

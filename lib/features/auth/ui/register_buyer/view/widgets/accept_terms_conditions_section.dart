@@ -7,6 +7,7 @@ import 'package:tzwad_mobile/core/resource/language_manager.dart';
 import 'package:tzwad_mobile/core/resource/string_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
+import 'package:flutter/gestures.dart';
 import 'package:tzwad_mobile/features/auth/ui/register_buyer/providers/register_controller_provider.dart';
 
 class AcceptTermsConditionsSection extends ConsumerWidget {
@@ -25,7 +26,9 @@ class AcceptTermsConditionsSection extends ConsumerWidget {
           child: AppRippleWidget(
             radius: AppSize.s4,
             onTap: () {
-              ref.read(registerBuyerControllerProvider.notifier).changeAcceptTerms();
+              ref
+                  .read(registerBuyerControllerProvider.notifier)
+                  .changeAcceptTerms();
             },
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -35,7 +38,9 @@ class AcceptTermsConditionsSection extends ConsumerWidget {
                   height: AppSize.s24,
                   decoration: BoxDecoration(
                     color: isAccept ? ColorManager.colorPrimary : null,
-                    border: isAccept ? null : Border.all(color: ColorManager.greyBorder),
+                    border: isAccept
+                        ? null
+                        : Border.all(color: ColorManager.greyBorder),
                     borderRadius: BorderRadius.circular(AppSize.s8),
                   ),
                   alignment: Alignment.center,
@@ -48,17 +53,48 @@ class AcceptTermsConditionsSection extends ConsumerWidget {
                 const Gap(
                   AppPadding.p4,
                 ),
-                Text(
-                  AppStrings.strAcceptTermsConditions.tr(context),
-                  style: StyleManager.getSemiBoldStyle(
-                    color: ColorManager.greyParagraph,
+                Expanded(
+                  child: RichText(
+                    text: TextSpan(
+                      style: StyleManager.getSemiBoldStyle(
+                        color: ColorManager.greyParagraph,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: AppStrings.strAccept.tr(context) + ' ',
+                          style: StyleManager.getSemiBoldStyle(
+                            color: ColorManager.greyParagraph,
+                          ),
+                        ),
+                        TextSpan(
+                          text: AppStrings.strTerms.tr(context),
+                          style: StyleManager.getSemiBoldUnderlineStyle(
+                            color: Colors.blue,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              debugPrint("Navigate to Terms Screen");
+                            },
+                        ),
+                        const TextSpan(text: ' '),
+                        TextSpan(
+                          text: AppStrings.strConditions.tr(context),
+                          style: StyleManager.getSemiBoldUnderlineStyle(
+                            color: Colors.blue,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              debugPrint("Navigate to Conditions Screen");
+                            },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
         ),
-
       ],
     );
   }

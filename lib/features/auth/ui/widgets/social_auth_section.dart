@@ -16,71 +16,97 @@ class SocialAuthSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (Platform.isAndroid) ...{
-          buttonSocialMedia(
-            label: 'تسجيل الدخول عبر حساب جوجل',
-            assetName: AssetsManager.icGoogle,
-          )
-        },
-        if (Platform.isIOS) ...{
-          buttonSocialMedia(
-            label: 'تسجيل الدخول عبر حساب ابل',
-            assetName: AssetsManager.icApple,
-          ),
-        },
-      ],
+    return Center(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (Platform.isAndroid) ...{
+            buttonSocialMedia(
+              // label: 'حساب جوجل',
+              assetName: AssetsManager.icGoogle,
+
+            ),
+            // const SizedBox(width: AppPadding.p20),
+            // buttonSocialMedia(
+            //   // label: 'تسجيل الدخول عبر حساب ابل',
+            //   assetName: AssetsManager.icApple,
+            // ),
+          },
+          if (Platform.isIOS) ...{
+            buttonSocialMedia(
+              // label: 'حساب جوجل',
+              assetName: AssetsManager.icGoogle,
+            ),
+            const SizedBox(width: AppPadding.p12),
+            buttonSocialMedia(
+              // label: 'تسجيل الدخول عبر حساب ابل',
+              assetName: AssetsManager.icApple,
+            ),
+          },
+        ],
+      ),
     );
   }
 
   Widget buttonSocialMedia({
-    required String label,
+    // required String label,
     required String assetName,
   }) {
     return SizedBox(
-      height: AppSize.s44,
+      width: AppSize.s80,
+      height: AppSize.s80,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () {},
-          borderRadius: BorderRadius.circular(AppSize.s10),
+          onTap: () {
+
+          },
+          borderRadius: BorderRadius.circular(AppSize.s20),
           child: Ink(
             decoration: BoxDecoration(
               color: ColorManager.colorPureWhite,
-              borderRadius: BorderRadius.circular(AppSize.s10),
+              borderRadius: BorderRadius.circular(AppSize.s20),
               border: Border.all(
                 color: ColorManager.colorWhite3,
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AppSvgPictureWidget(
-                  assetName: assetName,
-                  width: AppSize.s24,
-                  height: AppSize.s24,
-                ).marginOnly(
-                  end: AppPadding.p4,
-                ),
-                Flexible(
-                  child: Text(
-                    label,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: StyleManager.getMediumStyle(
-                      color: ColorManager.colorWhite2,
-                      fontSize: FontSize.s14,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ).marginSymmetric(
-              horizontal: AppPadding.p16,
+            child: AppSvgPictureWidget(
+              assetName: assetName,
+              width: AppSize.s60,
+              height: AppSize.s60,
+            ).marginOnly(
+              end: AppPadding.p4,
             ),
+
+
+            /*
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AppSvgPictureWidget(
+                assetName: assetName,
+                width: AppSize.s60,
+                height: AppSize.s60,
+              ).marginOnly(
+                end: AppPadding.p4,
+              ),
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: StyleManager.getMediumStyle(
+                    color: ColorManager.colorWhite2,
+                    fontSize: FontSize.s14,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
           ),
+          */
+          ).marginAll(AppPadding.p6),
         ),
       ),
     );

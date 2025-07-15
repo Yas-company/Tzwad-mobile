@@ -21,6 +21,9 @@ class AppStrings {
   static const String strAlreadyHaveAccount = "already_have_account";
   static const String strSubscribe = "subscribe";
   static const String strAcceptTermsConditions = "accept_terms_conditions";
+  static const String strAccept = "accept";
+  static const String strTerms = "terms";
+  static const String strConditions = "conditions";
   static const String strName = "name";
   static const String strHintName = "hint_name";
   static const String strCompanyName = "company_name";
