@@ -83,4 +83,12 @@ class ConstantsApi {
   static String removeFromCart(int id) => "cart/$id";
 
   static String get clearCart => "cart/clear";
+
+  static String get getProductsSupplierUrl=>"products";
+
+  static String get addProductSupplierUrl => "products";
+
+  static String removeProductSupplierUrl(String id) => "/products/$id";
+
+  static String editProductSupplierUrl(String id) => "/products/$id";
 }

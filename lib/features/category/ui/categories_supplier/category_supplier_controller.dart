@@ -3,7 +3,10 @@ import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/category/ui/categories_supplier/category_supplier_state.dart';
 import 'package:tzwad_mobile/features/product/models/add_supplier_product_request_model.dart';
 import 'package:tzwad_mobile/features/product/models/supplier_categories_response_model.dart';
+import 'package:tzwad_mobile/features/product/models/supplier_fields_response_model.dart';
 import 'package:tzwad_mobile/features/product/providers/supplier_categories_provider.dart';
+
+List<SupplierFieldsData> fieldsData = [];
 
 class CategorySupplierController extends AutoDisposeNotifier<CategorySupplierState> {
   @override
@@ -146,6 +149,7 @@ class CategorySupplierController extends AutoDisposeNotifier<CategorySupplierSta
           hasMore: false,
         );
       } else {
+        fieldsData = r;
         state = state.copyWith(
           supplierFieldsState: DataState.success,
           fields: r

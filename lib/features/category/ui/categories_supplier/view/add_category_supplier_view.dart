@@ -38,7 +38,7 @@ class AddCategorySupplierView extends ConsumerWidget {
     final isInitialized = ref.watch(isInitializedProvider);
 
     if (!isInitialized && model != null && fields.isNotEmpty) {
-      Future.microtask(() {
+      Future.microtask((){
         // print('selectedItem>>'+selectedId.toString());
         final match = fields.firstWhereOrNull((e) => e.id == (model?.fieldId??0));
         ref.read(selectedSupplierFieldIdProvider.notifier).set(match?.id ?? 0);

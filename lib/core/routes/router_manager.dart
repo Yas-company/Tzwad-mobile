@@ -32,6 +32,7 @@ import 'package:tzwad_mobile/features/generic/ui/onboarding/view/onboarding_view
 import 'package:tzwad_mobile/features/generic/ui/splash/view/splash_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/trems_conditions/view/trems_conditions_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/undefined_route/view/undefined_route_view.dart';
+import 'package:tzwad_mobile/features/product/ui/products_supplier/view/products_supplier_view.dart';
 
 
 class RouterManager {
@@ -152,7 +153,7 @@ class RouterManager {
           ),
           AppRouter(
             route: AppRoutes.productsSupplierRoute,
-            screen: const CategoriesSupplierView(),
+            screen: const ProductsSupplierView(),
           ),
           AppRouter(
             route: AppRoutes.addProductSupplierView,
