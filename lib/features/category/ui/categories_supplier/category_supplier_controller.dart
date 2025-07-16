@@ -1,21 +1,24 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
+import 'package:tzwad_mobile/features/category/ui/categories_supplier/category_supplier_state.dart';
 import 'package:tzwad_mobile/features/product/models/add_supplier_product_request_model.dart';
 import 'package:tzwad_mobile/features/product/models/supplier_categories_response_model.dart';
+import 'package:tzwad_mobile/features/product/models/supplier_fields_response_model.dart';
 import 'package:tzwad_mobile/features/product/providers/supplier_categories_provider.dart';
-import 'package:tzwad_mobile/features/product/ui/products_supplier/product_supplier_state.dart';
 
-class ProductSupplierController extends AutoDisposeNotifier<ProductSupplierState> {
+List<SupplierFieldsData> fieldsData = [];
+
+class CategorySupplierController extends AutoDisposeNotifier<CategorySupplierState> {
   @override
-  ProductSupplierState build() {
+  CategorySupplierState build() {
     state = _onInit();
     return state;
   }
 
-  ProductSupplierState _onInit() => ProductSupplierState();
+  CategorySupplierState _onInit() => CategorySupplierState();
 
   void getSupplierCategory() async {
-    final repository = ref.read(productSupplierRepositoryProvider);
+    final repository = ref.read(categorySupplierRepositoryProvider);
     state = state.copyWith(
       getProductsByCategoryDataState: DataState.loading,
     );
@@ -44,7 +47,7 @@ class ProductSupplierController extends AutoDisposeNotifier<ProductSupplierState
 
   void getMoreData() async {
     if (state.hasMore && !state.isLoadingMore) {
-      final repository = ref.read(productSupplierRepositoryProvider);
+      final repository = ref.read(categorySupplierRepositoryProvider);
       state = state.copyWith(
         isLoadingMore: true,
       );
@@ -71,8 +74,8 @@ class ProductSupplierController extends AutoDisposeNotifier<ProductSupplierState
 
 
 
-  Future<void> addSupplierCategory(AddSupplierProductRequestModel request) async {
-    final repository = ref.read(productSupplierRepositoryProvider);
+  Future<void> addSupplierCategory(AddSupplierCategoryRequestModel request) async {
+    final repository = ref.read(categorySupplierRepositoryProvider);
     state = state.copyWith(createCategoryState: DataState.loading);
     final result = await repository.createCategory(request);
     result.fold((failure) {
@@ -90,8 +93,8 @@ class ProductSupplierController extends AutoDisposeNotifier<ProductSupplierState
     );
   }
 
-  Future<void> updateSupplierCategory(int id,AddSupplierProductRequestModel request) async {
-    final repository = ref.read(productSupplierRepositoryProvider);
+  Future<void> updateSupplierCategory(int id,AddSupplierCategoryRequestModel request) async {
+    final repository = ref.read(categorySupplierRepositoryProvider);
     state = state.copyWith(createCategoryState: DataState.loading);
     final result = await repository.updateSupplierCategory(id,request);
     result.fold((failure) {
@@ -110,7 +113,7 @@ class ProductSupplierController extends AutoDisposeNotifier<ProductSupplierState
   }
 
   Future<void> deleteSupplierCategory(int id) async {
-    final repository = ref.read(productSupplierRepositoryProvider);
+    final repository = ref.read(categorySupplierRepositoryProvider);
     state = state.copyWith(deleteCategoryState: DataState.loading);
     final result = await repository.deleteSupplierCategory(id);
     result.fold((failure) {
@@ -130,7 +133,7 @@ class ProductSupplierController extends AutoDisposeNotifier<ProductSupplierState
 
 
   void getSupplierFields() async {
-    final repository = ref.read(productSupplierRepositoryProvider);
+    final repository = ref.read(categorySupplierRepositoryProvider);
     state = state.copyWith(
       supplierFieldsState: DataState.loading,
     );
@@ -146,6 +149,7 @@ class ProductSupplierController extends AutoDisposeNotifier<ProductSupplierState
           hasMore: false,
         );
       } else {
+        fieldsData = r;
         state = state.copyWith(
           supplierFieldsState: DataState.success,
           fields: r

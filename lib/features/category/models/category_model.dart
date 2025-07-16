@@ -5,12 +5,13 @@ class CategoryModel {
   String? name;
   String? image;
   bool? isActive;
-
+  Field? fieldModel;
   CategoryModel({
     this.id,
     this.name,
     this.image,
     this.isActive,
+    this.fieldModel,
   });
 
   CategoryModel.fromJson(Map<String, dynamic> json) {
@@ -18,7 +19,9 @@ class CategoryModel {
     name = json['name'];
     image = json['image'];
     isActive = json['is_active'];
+    fieldModel = json['field'] != null ? Field.fromJson(json['field']) : null;
   }
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -26,6 +29,7 @@ class CategoryModel {
     data['name'] = name;
     data['image'] = image;
     data['is_active'] = isActive;
+    data['field'] = fieldModel?.toJson();
     return data;
   }
 
@@ -46,7 +50,34 @@ class CategoryModel {
   static List<CategoryModel> generateFakeList({int count = 10}) {
     return List.generate(
       count,
-      (index) => CategoryModel.fake(id: index),
+          (index) => CategoryModel.fake(id: index),
     );
+  }
+}
+
+
+class Field {
+  int? id;
+  String? name;
+  String? image;
+
+  Field({
+    this.id,
+    this.name,
+    this.image,
+  });
+
+  Field.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    image = json['image'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['image'] = image;
+    return data;
   }
 }

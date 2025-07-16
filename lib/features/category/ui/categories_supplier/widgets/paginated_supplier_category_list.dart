@@ -3,10 +3,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tzwad_mobile/core/network/failure.dart';
 import 'package:tzwad_mobile/core/resource/values_manager.dart';
+import 'package:tzwad_mobile/features/category/ui/categories_supplier/widgets/loading_supplier_category.dart';
+import 'package:tzwad_mobile/features/category/ui/categories_supplier/widgets/supplier_category_item.dart';
 import 'package:tzwad_mobile/features/product/models/supplier_categories_response_model.dart';
 import 'package:tzwad_mobile/features/product/ui/products/hooks/products_scroll_controller_hook.dart';
-import 'package:tzwad_mobile/features/product/ui/products_supplier/widgets/loading_supplier_category.dart';
-import 'package:tzwad_mobile/features/product/ui/products_supplier/widgets/supplier_category_item.dart';
 
 class PaginatedSupplierCategoryList extends HookConsumerWidget {
   const PaginatedSupplierCategoryList({

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
 import 'package:tzwad_mobile/core/file_upload/picked_file_controller.dart';
-import 'package:tzwad_mobile/core/resource/assets_manager.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
+import 'package:tzwad_mobile/core/resource/font_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/routes/app_routes.dart';
 import 'package:tzwad_mobile/features/product/models/add_supplier_product_request_model.dart';
@@ -53,13 +52,16 @@ class SupplierHeaderSection extends ConsumerWidget {
                       !isSearchVisible;
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(8),
+                      width: 40,
+                      height: 40,
                       decoration: BoxDecoration(
-                        color: ColorManager.colorPrimary3,
-                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Icon(
-                        isSearchVisible ? Icons.clear : Icons.search,
+                      child: isSearchVisible
+                          ? const Icon(Icons.clear, color: Colors.white)
+                          : Image.asset(
+                        "assets/icons/ic_search.png",
                         color: Colors.white,
                       ),
                     ),
@@ -130,32 +132,74 @@ class SupplierHeaderSection extends ConsumerWidget {
                       ),
                     ),
                     const Spacer(),
-                    SizedBox(
-                      width: 90,
-                      height: 44,
-                      child: AppButtonWidget(
-                        backgroundColor: ColorManager.colorSecondary,
-                        label: 'إضافة',
-                        onPressed: () async {
-                          ref.read(isInitializedProvider.notifier).state = false;
-                          ref.read(pickedFileProvider.notifier).reset();
-                          ref.read(selectedSupplierFieldIdProvider.notifier).resetTo(0);
-                          final request =
-                          AddSupplierProductRequestModel(isEdit: false);
-                          final result = await context.push(
-                            AppRoutes.addProductSupplierView,
-                            extra: request,
-                          );
+                    InkWell(
+                      onTap: () async {
+                        ref.read(isInitializedProvider.notifier).state = false;
+                        ref.read(pickedFileProvider.notifier).reset();
+                        ref.read(selectedSupplierFieldIdProvider.notifier).resetTo(0);
+                        final request =
+                        AddSupplierCategoryRequestModel(isEdit: false);
+                        final result = await context.push(
+                          AppRoutes.addProductSupplierView,
+                          extra: request,
+                        );
 
-                          if (result == true) {
-                            ref.read(productSupplierControllerProvider.notifier)
-                                .getSupplierCategory();
-                          }
-                        },
-                        assetsIcon: AssetsManager.icAdd,
-                        assetColor: Colors.white,
+                        if (result == true) {
+                          ref.read(categorySupplierControllerProvider.notifier)
+                              .getSupplierCategory();
+                        }
+                      },
+                      child: Container(
+                        width: 86, height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: ColorManager.colorSecondary,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/icons/ic_add.png',
+                            ),
+                            const SizedBox(
+                              width: 2,
+                            ),
+                            Text(
+                              "اضافة",
+                              style: StyleManager.getMediumStyle(
+                                  color: ColorManager.colorPureWhite,
+                                  fontSize: FontSize.s14),
+                            ),
+                          ],
+                        ),
                       ),
-                    )
+                    ),
+                    // SizedBox(
+                    //   width: 90,
+                    //   height: 44,
+                    //   child: AppButtonWidget(
+                    //     backgroundColor: ColorManager.colorSecondary,
+                    //     label: 'إضافة',
+                    //     onPressed: () async {
+                    //       ref.read(isInitializedProvider.notifier).state = false;
+                    //       ref.read(pickedFileProvider.notifier).reset();
+                    //       ref.read(selectedSupplierFieldIdProvider.notifier).resetTo(0);
+                    //       final request =
+                    //       AddSupplierCategoryRequestModel(isEdit: false);
+                    //       final result = await context.push(
+                    //         AppRoutes.addProductSupplierView,
+                    //         extra: request,
+                    //       );
+                    //
+                    //       if (result == true) {
+                    //         ref.read(categorySupplierControllerProvider.notifier)
+                    //             .getSupplierCategory();
+                    //       }
+                    //     },
+                    //     assetsIcon: AssetsManager.icAdd,
+                    //     assetColor: Colors.white,
+                    //   ),
+                    // )
                   ],
                 ),
               ),

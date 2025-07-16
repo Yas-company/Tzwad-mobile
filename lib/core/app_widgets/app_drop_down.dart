@@ -53,7 +53,17 @@ class _AppDropDownState<T> extends State<AppDropDown<T>> {
     selectedValue = widget.initialValue;
     super.initState();
   }
+  @override
+  void didUpdateWidget(covariant AppDropDown<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
 
+    if (widget.initialValue != oldWidget.initialValue && widget.initialValue != selectedValue) {
+      // Only update if initialValue changes and is different from selectedValue
+      setState(() {
+        selectedValue = widget.initialValue;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final labelStyle = StyleManager.getRegularStyle(

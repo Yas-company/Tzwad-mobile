@@ -1,6 +1,6 @@
 import 'dart:io';
 
-class AddSupplierProductRequestModel {
+class AddSupplierCategoryRequestModel {
   bool? isEdit;
   String? nameEn;
   String? nameAr;
@@ -9,7 +9,7 @@ class AddSupplierProductRequestModel {
   File? image;
   String? imageUrl;
 
-  AddSupplierProductRequestModel({
+  AddSupplierCategoryRequestModel({
     this.nameEn,
     this.isEdit,
     this.nameAr,
