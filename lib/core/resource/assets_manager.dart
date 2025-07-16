@@ -39,6 +39,7 @@ class AssetsManager {
   static const imgCartEmpty = 'assets/images/img_cart_empty.png';
   static const icMinus = 'assets/icons/minus.svg';
   static const icAdd = 'assets/icons/ic_add.svg';
+  static const icFilter = 'assets/icons/ic_filter.svg';
 
   // Settings
   static const icOrders = 'assets/icons/ic_tab_orders.svg';

@@ -1,11 +1,12 @@
 import 'package:tzwad_mobile/core/network/failure.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
+import 'package:tzwad_mobile/features/order/models/supplier_orders_response_model.dart';
 import 'package:tzwad_mobile/features/product/models/supplier_categories_response_model.dart';
 
 class SupplierOrderState {
   final DataState getProductsByCategoryDataState;
   final bool isLoadingMore;
-  final List<SupplierCategories> products;
+  final List<SupplierOrdersData> products;
   final int pageNumber;
   final bool hasMore;
   final Failure? failure;
@@ -30,7 +31,7 @@ class SupplierOrderState {
   SupplierOrderState copyWith({
     DataState? getProductsByCategoryDataState,
     bool? isLoadingMore,
-    List<SupplierCategories>? products,
+    List<SupplierOrdersData>? products,
     int? pageNumber,
     bool? hasMore,
     Failure? failure,
