@@ -1,13 +1,9 @@
 import 'package:tzwad_mobile/core/network/failure.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
 import 'package:tzwad_mobile/features/product/models/supplier_categories_response_model.dart';
-
-import 'package:tzwad_mobile/core/network/failure.dart';
-import 'package:tzwad_mobile/core/util/data_state.dart';
-import 'package:tzwad_mobile/features/product/models/supplier_categories_response_model.dart';
 import 'package:tzwad_mobile/features/product/models/supplier_fields_response_model.dart';
 
-class ProductSupplierState {
+class CategorySupplierState {
   final DataState getProductsByCategoryDataState;
   final bool isLoadingMore;
   final List<SupplierCategories> products;
@@ -22,7 +18,7 @@ class ProductSupplierState {
   final DataState deleteCategoryState;
   final bool isCategoryCreated;
 
-  ProductSupplierState({
+  CategorySupplierState({
     this.getProductsByCategoryDataState = DataState.initial,
     this.isLoadingMore = false,
     this.products = const [],
@@ -36,7 +32,7 @@ class ProductSupplierState {
     this.isCategoryCreated = false,
   });
 
-  ProductSupplierState copyWith({
+  CategorySupplierState copyWith({
     DataState? getProductsByCategoryDataState,
     bool? isLoadingMore,
     List<SupplierCategories>? products,
@@ -51,7 +47,7 @@ class ProductSupplierState {
     DataState? deleteCategoryState,
     bool? isCategoryCreated,
   }) {
-    return ProductSupplierState(
+    return CategorySupplierState(
       getProductsByCategoryDataState: getProductsByCategoryDataState ?? this.getProductsByCategoryDataState,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       products: products ?? this.products,

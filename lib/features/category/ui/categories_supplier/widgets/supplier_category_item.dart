@@ -73,7 +73,7 @@ class SupplierCategoryItem extends StatelessWidget {
                   ref.read(isInitializedProvider.notifier).state = false;
                   ref.read(pickedFileProvider.notifier).reset();
                   print('idd>>'+( category.field?.id ?? 0).toString());
-                  final request = AddSupplierProductRequestModel(
+                  final request = AddSupplierCategoryRequestModel(
                     id: category.id ?? 0,
                     nameAr: category.name ?? '',
                     nameEn: category.name ?? '',
@@ -88,7 +88,7 @@ class SupplierCategoryItem extends StatelessWidget {
                   );
 
                   if (result == true) {
-                    ref.read(productSupplierControllerProvider.notifier)
+                    ref.read(categorySupplierControllerProvider.notifier)
                         .getSupplierCategory();
                   }
                 },
@@ -105,10 +105,10 @@ class SupplierCategoryItem extends StatelessWidget {
               const SizedBox(width: 10),
               InkWell(
                 onTap: () {
-                  final notifier = ref.read(productSupplierControllerProvider.notifier);
+                  final notifier = ref.read(categorySupplierControllerProvider.notifier);
                   final future = notifier.deleteSupplierCategory(category.id ?? 0);
                   future.then((_) {
-                    ref.read(productSupplierControllerProvider.notifier)
+                    ref.read(categorySupplierControllerProvider.notifier)
                         .getSupplierCategory();
                   });
                 },

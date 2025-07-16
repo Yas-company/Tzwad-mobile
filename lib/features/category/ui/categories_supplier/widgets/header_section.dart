@@ -141,14 +141,14 @@ class SupplierHeaderSection extends ConsumerWidget {
                           ref.read(pickedFileProvider.notifier).reset();
                           ref.read(selectedSupplierFieldIdProvider.notifier).resetTo(0);
                           final request =
-                          AddSupplierProductRequestModel(isEdit: false);
+                          AddSupplierCategoryRequestModel(isEdit: false);
                           final result = await context.push(
                             AppRoutes.addProductSupplierView,
                             extra: request,
                           );
 
                           if (result == true) {
-                            ref.read(productSupplierControllerProvider.notifier)
+                            ref.read(categorySupplierControllerProvider.notifier)
                                 .getSupplierCategory();
                           }
                         },

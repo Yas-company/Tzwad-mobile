@@ -15,6 +15,7 @@ import 'package:tzwad_mobile/features/buyer/cart/ui/cart/view/cart_view.dart';
 import 'package:tzwad_mobile/features/buyer/home/view/home_buyer_view.dart';
 import 'package:tzwad_mobile/features/buyer/supplier/ui/supplier_details/view/supplier_details_view.dart';
 import 'package:tzwad_mobile/features/buyer/supplier/ui/suppliers/view/suppliers_view.dart';
+import 'package:tzwad_mobile/features/category/ui/categories_supplier/view/add_category_supplier_view.dart';
 import 'package:tzwad_mobile/features/category/ui/categories_supplier/view/categories_supplier_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/more/view/more_buyer_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/more/view/more_supplier_view.dart';
@@ -31,8 +32,7 @@ import 'package:tzwad_mobile/features/generic/ui/onboarding/view/onboarding_view
 import 'package:tzwad_mobile/features/generic/ui/splash/view/splash_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/trems_conditions/view/trems_conditions_view.dart';
 import 'package:tzwad_mobile/features/generic/ui/undefined_route/view/undefined_route_view.dart';
-import 'package:tzwad_mobile/features/product/ui/products_supplier/view/add_product_supplier_view.dart';
-import 'package:tzwad_mobile/features/product/ui/products_supplier/view/products_supplier_view.dart';
+
 
 class RouterManager {
   static final GoRouter router = GoRouter(
@@ -152,16 +152,16 @@ class RouterManager {
           ),
           AppRouter(
             route: AppRoutes.productsSupplierRoute,
-            screen: const ProductsSupplierView(),
+            screen: const CategoriesSupplierView(),
           ),
           AppRouter(
             route: AppRoutes.addProductSupplierView,
             builder: (context, state) {
               if(state.extra==null){
-                return const AddProductSupplierView();
+                return const AddCategorySupplierView();
               }
-              final model = state.extra as AddSupplierProductRequestModel;
-              return AddProductSupplierView(model: model);
+              final model = state.extra as AddSupplierCategoryRequestModel;
+              return AddCategorySupplierView(model: model);
             },
           ),
 

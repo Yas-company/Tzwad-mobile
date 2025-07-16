@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_drop_down.dart';
@@ -9,28 +10,28 @@ import 'package:tzwad_mobile/core/file_upload/select_image_bottom_sheet.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
 import 'package:tzwad_mobile/core/resource/style_manager.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
+import 'package:tzwad_mobile/features/category/ui/categories_supplier/widgets/dotted_border_container.dart';
 import 'package:tzwad_mobile/features/product/models/add_supplier_product_request_model.dart';
 import 'package:tzwad_mobile/features/product/models/supplier_fields_response_model.dart';
 import 'package:tzwad_mobile/features/product/providers/supplier_categories_provider.dart';
-import 'package:tzwad_mobile/features/product/ui/products_supplier/widgets/dotted_border_container.dart';
-import 'package:collection/collection.dart';
 
-class AddProductSupplierView extends ConsumerWidget {
-  final AddSupplierProductRequestModel? model;
-  const AddProductSupplierView({super.key,this.model});
+
+class AddCategorySupplierView extends ConsumerWidget {
+  final AddSupplierCategoryRequestModel? model;
+  const AddCategorySupplierView({super.key,this.model});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final arabicController = ref.watch(arabicNameControllerProvider);
     final englishController = ref.watch(englishNameControllerProvider);
     final fields = ref.watch(
-      productSupplierControllerProvider.select((state) => state.fields),
+      categorySupplierControllerProvider.select((state) => state.fields),
     );
     // final selectedId = ref.watch(selectedSupplierFieldIdProvider);
     // final selectedItem = fields.firstWhereOrNull((e) => e.id == (model?.fieldId??0));
 
     final isLoading = ref.watch(
-      productSupplierControllerProvider.select(
+      categorySupplierControllerProvider.select(
             (state) => state.createCategoryState == DataState.loading,
       ),
     );
@@ -223,13 +224,13 @@ class AddProductSupplierView extends ConsumerWidget {
                                   .text.trim();
                               final imageFile = ref.read(pickedFileProvider);
 
-                              final request = AddSupplierProductRequestModel(
+                              final request = AddSupplierCategoryRequestModel(
                                 nameAr: arabicName,
                                 nameEn: englishName,
                                 fieldId: ref.watch(selectedSupplierFieldIdProvider)??0,
                                 image: imageFile ?? File(''),
                               );
-                              final notifier = ref.read(productSupplierControllerProvider.notifier);
+                              final notifier = ref.read(categorySupplierControllerProvider.notifier);
                               final future = isEdit
                                   ? notifier.updateSupplierCategory(model?.id??0, request)
                                   : notifier.addSupplierCategory(request);

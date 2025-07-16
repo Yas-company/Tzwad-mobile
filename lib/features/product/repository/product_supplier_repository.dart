@@ -9,10 +9,10 @@ import 'package:tzwad_mobile/features/product/models/add_supplier_product_reques
 import 'package:tzwad_mobile/features/product/models/supplier_categories_response_model.dart';
 import 'package:tzwad_mobile/features/product/models/supplier_fields_response_model.dart';
 
-class ProductSupplierRepository {
+class CategorySupplierRepository {
   final ApiService apiService;
 
-  ProductSupplierRepository({
+  CategorySupplierRepository({
     required this.apiService,
   });
 
@@ -53,7 +53,7 @@ class ProductSupplierRepository {
     }
   }
 
-  Future<Result<Failure, bool>> createCategory(AddSupplierProductRequestModel request) async {
+  Future<Result<Failure, bool>> createCategory(AddSupplierCategoryRequestModel request) async {
     try {
       final formData = FormData.fromMap({
         'name[en]': request.nameEn,
@@ -82,7 +82,7 @@ class ProductSupplierRepository {
     }
   }
 
-  Future<Result<Failure, bool>> updateSupplierCategory(int id,AddSupplierProductRequestModel request) async {
+  Future<Result<Failure, bool>> updateSupplierCategory(int id,AddSupplierCategoryRequestModel request) async {
     try {
       final formData = FormData.fromMap({
         'name[en]': request.nameEn,
