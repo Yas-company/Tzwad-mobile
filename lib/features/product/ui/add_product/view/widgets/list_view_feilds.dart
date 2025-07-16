@@ -273,10 +273,17 @@ class ListViewFeilds extends HookConsumerWidget {
                 context.showMessage(message: failure.message);
               }, (_) {
                 Navigator.pop(context, true);
-                context.showMessage(
-                  message: 'تم اضافة عنصر بنجاح',
-                  messageType: MessageType.success,
-                );
+                if(state.isEditMode){
+                  context.showMessage(
+                    message: 'تم تعديل عنصر بنجاح',
+                    messageType: MessageType.success,
+                  );
+                }else{
+                  context.showMessage(
+                    message: 'تم اضافة عنصر بنجاح',
+                    messageType: MessageType.success,
+                  );
+                }
               },
             );
             // if(result is Left<Failure, Unit>){
