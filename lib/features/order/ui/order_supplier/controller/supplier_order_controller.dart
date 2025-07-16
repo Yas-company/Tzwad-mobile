@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/util/data_state.dart';
+import 'package:tzwad_mobile/features/order/models/supplier_orders_response_model.dart';
 import 'package:tzwad_mobile/features/order/ui/order_supplier/controller/supplier_order_state.dart';
 import 'package:tzwad_mobile/features/order/ui/order_supplier/provider/supplier_order_provider.dart';
-import 'package:tzwad_mobile/features/product/models/supplier_categories_response_model.dart';
 
 class SupplierOrderController extends AutoDisposeNotifier<SupplierOrderState> {
   @override
@@ -54,7 +54,7 @@ class SupplierOrderController extends AutoDisposeNotifier<SupplierOrderState> {
           isLoadingMore: false,
           failure: l,
         ), (r) {
-        final items = List<SupplierCategories>.from(state.products)..addAll(r.data);
+        final items = List<SupplierOrdersData>.from(state.products)..addAll(r.data);
         state = state.copyWith(
           isLoadingMore: false,
           products: items,
@@ -65,7 +65,6 @@ class SupplierOrderController extends AutoDisposeNotifier<SupplierOrderState> {
       );
     }
   }
-
 }
 
 

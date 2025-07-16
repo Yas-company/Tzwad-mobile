@@ -1,54 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tzwad_mobile/core/app_widgets/app_button_widget.dart';
+import 'package:tzwad_mobile/core/app_widgets/app_failure_widget.dart';
 import 'package:tzwad_mobile/core/resource/color_manager.dart';
+import 'package:tzwad_mobile/core/resource/style_manager.dart';
+import 'package:tzwad_mobile/core/resource/values_manager.dart';
+import 'package:tzwad_mobile/core/routes/app_args.dart';
+import 'package:tzwad_mobile/features/order/models/supplier_order_details_response_model.dart';
+import 'package:tzwad_mobile/features/order/ui/order_supplier/provider/supplier_order_provider.dart';
+import 'package:tzwad_mobile/features/order/ui/order_supplier/widgets/supplier_order_details_content_widget.dart';
+import 'package:tzwad_mobile/core/util/data_state.dart';
 
-class OrderSupplierDetailsView extends StatelessWidget {
+class OrderSupplierDetailsView extends ConsumerStatefulWidget {
   const OrderSupplierDetailsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final items = [
-      {'title': 'اسواق بن داوود', 'quantity': 2, 'price': 102.5, 'image': 'https://cdn-icons-png.flaticon.com/512/1046/1046784.png'},
-      {'title': 'اسواق بن داوود', 'quantity': 1, 'price': 85.0, 'image': 'https://cdn-icons-png.flaticon.com/512/1046/1046784.png'},
-      {'title': 'اسواق بن داوود', 'quantity': 6, 'price': 119.9, 'image': 'https://cdn-icons-png.flaticon.com/512/1046/1046784.png'},
-      {'title': 'اسواق بن داوود', 'quantity': 2, 'price': 102.5, 'image': 'https://cdn-icons-png.flaticon.com/512/1046/1046784.png'},
-      {'title': 'اسواق بن داوود', 'quantity': 1, 'price': 32.7, 'image': 'https://cdn-icons-png.flaticon.com/512/1046/1046784.png'},
-      {'title': 'اسواق بن داوود', 'quantity': 2, 'price': 420.6, 'image': 'https://cdn-icons-png.flaticon.com/512/1046/1046784.png'},
-    ];
+  ConsumerState<OrderSupplierDetailsView> createState() => OrderSupplierDetailsViewState();
+}
 
+class OrderSupplierDetailsViewState extends ConsumerState<OrderSupplierDetailsView> {
+  var id = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    id = appArgs['supplier_order_id'];
+    Future.microtask(() {
+        final controller = ref.read(supplierOrderDetailsControllerProvider.notifier);
+        controller.showSupplierOrder(id);
+      },
+    );
+  }
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('تفاصيل الطلب',), centerTitle: false,
+        title:Text("تفاصيل الطلب",style:StyleManager.getBoldStyle(color:ColorManager.colorBlack1,
+            fontSize:AppSize.s18),),centerTitle: false,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeaderSection(),
-            const SizedBox(height: 16),
-            _buildUserInfo(),
-            const SizedBox(height: 16),
-            _buildAddressSection(),
-            const SizedBox(height: 16),
-            const Divider(),
-            const Text(
-              'تفاصيل الطلب',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            ...items.map((item) => _buildOrderItem(item)),
-            const Divider(),
-            const Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                'السعر النهائي  464.55 ر.س',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.teal),
-              ),
-            ),
-          ],
-        ),
-      ),
+      body:const OrderSupplierDetailsViewBody(),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -59,89 +49,62 @@ class OrderSupplierDetailsView extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: AppButtonWidget(label:'المساعدة', onPressed:() {
-              
+
               },backgroundColor:Colors.white,textColor:ColorManager.colorPrimary,
-              borderColor:ColorManager.colorPrimary,),
+                borderColor:ColorManager.colorPrimary,),
             ),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildHeaderSection() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Text('5 أغسطس 2025'),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          decoration: BoxDecoration(
-            color: Colors.teal[100],
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: const Text('جاهزة للشحن', style: TextStyle(color: Colors.teal)),
-        )
-      ],
-    );
-  }
 
-  Widget _buildUserInfo() {
-    return const Row(
-      children: [
-        CircleAvatar(
-          backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=3'),
-        ),
-        SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('محمد عبدالرحمن', style: TextStyle(fontWeight: FontWeight.bold)),
-            Text('منتج 13 | #1029181', style: TextStyle(color: Colors.grey)),
-          ],
-        )
-      ],
-    );
-  }
 
-  Widget _buildAddressSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'العنوان',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 6),
-        const Text(
-          'الرياض - حي العزيزية - شارع الملك عبدالعزيز، متفرع من شارع الملك فهد، فيلا 2172 - الدور 3',
-          textDirection: TextDirection.rtl,
-        ),
-        TextButton(
-          onPressed: () {},
-          child: const Text('الخريطة', style: TextStyle(color: Colors.teal)),
-        )
-      ],
-    );
-  }
+class OrderSupplierDetailsViewBody extends ConsumerWidget {
+  const OrderSupplierDetailsViewBody({super.key});
 
-  Widget _buildOrderItem(Map<String, dynamic> item) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        children: [
-          Image.network(
-            item['image'],
-            width: 40,
-            height: 40,
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text('${item['quantity']} x ${item['title']}'),
-          ),
-          Text('${item['price']} ر.س'),
-        ],
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(
+      supplierOrderDetailsControllerProvider.select(
+            (value) => value.getSupplierOrderDetailsDataState,
       ),
     );
+
+    final failure = ref.watch(
+      supplierOrderDetailsControllerProvider.select(
+            (value) => value.failure,
+      ),
+    );
+
+    final order = ref.watch(
+      supplierOrderDetailsControllerProvider.select(
+            (value) => value.order,
+      ),
+    );
+    // print('order>>'+order!.id.toString());
+    switch (state) {
+      case DataState.loading:
+        // return CircularProgressIndicator();
+        return SupplierOrderDetailsContentWidget(
+          order: SupplierOrder.fake(),
+          isLoading: true,
+        );
+
+      case DataState.success:
+        return SupplierOrderDetailsContentWidget(
+          order: order,
+        );
+      case DataState.failure:
+        return Center(
+          child: AppFailureWidget(
+            failure: failure,
+          ),
+        );
+      default:
+        return const SizedBox();
+    }
   }
 }

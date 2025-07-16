@@ -7,11 +7,13 @@ abstract class StyleManager {
     double fontSize,
     FontWeight fontWeight,
     color,
+  {TextDecoration? decoration,}
   ) {
     return TextStyle(
       fontSize: fontSize,
       fontWeight: fontWeight,
       color: color,
+      decoration:decoration,
       height: 1.4,
       // letterSpacing: 0.4,
     );
@@ -37,12 +39,12 @@ abstract class StyleManager {
 
   static TextStyle getRegularStyle({
     double fontSize = FontSize.s14,
-    required Color color,
+    required Color color, TextDecoration? decoration,
   }) {
     return _getTextStyle(
       fontSize,
       FontWeightManager.regular,
-      color,
+      color,decoration: decoration
     );
   }
 
