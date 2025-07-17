@@ -208,6 +208,11 @@ class CartSummaryInfoContent extends StatelessWidget {
   }
 
   _onPressedCheckoutButton(BuildContext context) {
-    context.pushNamed(AppRoutes.underDevelopmentRoute);
+    context.pushNamed(
+      AppRoutes.checkoutRoute,
+      extra: {
+        'cartInfo': cartInfo,
+      },
+    );
   }
 }

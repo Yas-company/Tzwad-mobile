@@ -32,6 +32,7 @@ class AppTextFieldWidget extends StatelessWidget {
     this.enabled = true,
     this.autofillHints,
     this.textAlign = TextAlign.start,
+    this.decoration,
   });
 
   final String hintText;
@@ -58,6 +59,7 @@ class AppTextFieldWidget extends StatelessWidget {
   final bool enabled;
   final Iterable<String>? autofillHints;
   final TextAlign textAlign;
+  final InputDecoration? decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +72,7 @@ class AppTextFieldWidget extends StatelessWidget {
           letterSpacing: 1.5,
       ),
       inputFormatters: inputFormatters,
-      decoration: InputDecoration(
+      decoration: decoration ?? InputDecoration(
         hintText: hintText,
         fillColor: fillColor,
         prefix: prefix,

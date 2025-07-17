@@ -6,8 +6,9 @@ class ColorManager {
   static const Color colorPrimary = Color(0xff009196);
   static const Color colorPrimary1 = Color(0x42009196);
   static const Color colorSecondary = Color(0XFFF9A51A);
-  static const Color colorDisable = Color(0X7F1CC9BC);
+  static const Color colorDisable = Color(0xffEFEFEF);
   static const Color colorBackground = Color(0XFFFFFFFF);
+
 
   // Color Black
   static const Color colorBlack1 = Color(0xff030303); // Primary Text
@@ -21,8 +22,9 @@ class ColorManager {
   static const Color colorWhite5 = Color(0xffF3F3F3);
 
   // Color Grey
-  // static const Color colorGrey1 = Color(0xffF5F5F5);
-  // static const Color colorGrey2 = Color(0xff7F7F7F);
+  static const Color colorGrey1 = Color(0XFFB8B8B8);
+  static const Color colorGrey2 = Color(0xffEFEFEF);
+  static const Color colorGrey3 = Color(0xffE0E0E0);
 
   static const Color colorTitleTexts = Color(0xff333333);
 
@@ -57,7 +59,6 @@ class ColorManager {
   static const Color rose = Color(0xFFF43F5E);
 
   // Color Grey
-  static const Color colorGrey1 = Color(0XFFB8B8B8);
 
   static const Color colorRed = Color(0xffff0000);
 

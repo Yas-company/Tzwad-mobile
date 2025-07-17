@@ -23,6 +23,7 @@ class AppRoutes {
   static const String ordersBuyerRoute = "/orders_buyer";
   static const String ordersSupplier = "/orders_supplier";
   static const String cartRoute = "/cart";
+  static const String checkoutRoute = "/checkout";
   static const String suppliersRoute = "/suppliers";
   static const String supplierDetailsRoute = "/supplier_details";
   static const String productsRoute = "/products";

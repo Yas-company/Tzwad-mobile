@@ -24,7 +24,6 @@ class AssetsManager {
   static const icTabProducts = 'assets/icons/ic_tab_products.svg';
   static const icTabMore = 'assets/icons/ic_tab_more.svg';
 
-
   // Home
   static const imgTopographic = 'assets/images/img_topographic.png';
   static const icSearch = 'assets/icons/ic_search.svg';
@@ -50,11 +49,13 @@ class AssetsManager {
   // Search
   static const imgSearch = 'assets/images/img_search.svg';
 
-
   static const icStar = 'assets/icons/ic_star.svg';
   static const icList = 'assets/icons/ic_list.svg';
   static const icGrid = 'assets/icons/ic_grid.svg';
   static const icCurrency = 'assets/icons/ic_currency.svg';
   static const icDiscount = 'assets/icons/ic_discount.svg';
   static const isAlterCircle = 'assets/icons/ic_alert_circle.svg';
+  static const isSelectedRadioButton = 'assets/icons/ic_selected_radio_button.svg';
+  static const icUnselectedRadioButton = 'assets/icons/ic_unselected_radio_button.svg';
+  static const icCoupon = 'assets/icons/ic_coupon.svg';
 }
