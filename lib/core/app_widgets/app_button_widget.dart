@@ -55,8 +55,8 @@ class AppButtonWidget extends StatelessWidget {
     return SizedBox(
       height: mHeight,
       child: Material(
-        shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(borderRadius??0),
-        side:BorderSide(color:mBorderColor )),
+        // shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(borderRadius??0),
+        // side:BorderSide(color:mBorderColor )),
         color: Colors.transparent,
         child: InkWell(
           onTap: isLoading ? null : onPressed,

@@ -59,7 +59,7 @@ class ConstantsApi {
 
   static String updateProductQuantityUrl(int id) => "buyer/cart/items/$id/quantity";
 
-  static String get checkoutUrl => "buyer/orders_buyer/checkout";
+  static String get checkoutUrl => "cart/checkout";
 
   // Orders
   static String get getOrdersUrl => "buyer/orders_buyer";
@@ -86,11 +86,19 @@ class ConstantsApi {
 
   static String get clearCart => "cart/clear";
 
-  static String get getProductsSupplierUrl=>"products";
+  static String get getProductsSupplierUrl => "products";
 
   static String get addProductSupplierUrl => "products";
 
   static String removeProductSupplierUrl(String id) => "/products/$id";
 
   static String editProductSupplierUrl(String id) => "/products/$id";
+
+  static String get getAddressesUrl => "addresses";
+
+  static String get addAddressUrl => "addresses";
+
+  static String updateAddressUrl(int id) => "addresses/$id";
+
+  static String deleteAddressUrl(int id) => "addresses/$id";
 }

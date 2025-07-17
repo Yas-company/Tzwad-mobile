@@ -5,6 +5,8 @@ import 'package:tzwad_mobile/core/network/failure.dart';
 import 'package:tzwad_mobile/core/util/state_render/result.dart';
 import 'package:tzwad_mobile/core/util/unit.dart';
 import 'package:tzwad_mobile/features/buyer/cart/models/cart_info_model.dart';
+import 'package:tzwad_mobile/features/buyer/cart/models/payment_method_enum.dart';
+import 'package:tzwad_mobile/features/buyer/cart/models/shipping_method_enum.dart';
 import 'package:tzwad_mobile/features/generic/local_data/setting_local_data.dart';
 
 class CartRepository {
@@ -63,6 +65,28 @@ class CartRepository {
     try {
       await apiService.put<Unit>(
         url: ConstantsApi.clearCart,
+      );
+      return const Right(unit);
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
+
+  Future<Result<Failure, Unit>> checkout({
+    required addressId,
+    required PaymentMethodEnum paymentMethod,
+    required ShippingMethodEnum shippingMethod,
+    String? notes,
+  }) async {
+    try {
+      await apiService.post<Unit>(
+        url: ConstantsApi.checkoutUrl,
+        data: {
+          'shipping_address_id': addressId,
+          'payment_method': paymentMethod.value,
+          'shipping_method': shippingMethod.value,
+          'notes': 'test',
+        },
       );
       return const Right(unit);
     } catch (error) {

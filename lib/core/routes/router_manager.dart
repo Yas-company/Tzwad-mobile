@@ -12,6 +12,7 @@ import 'package:tzwad_mobile/features/auth/ui/register_buyer/view/register_buyer
 import 'package:tzwad_mobile/features/auth/ui/register_supplier/view/register_supplier_view.dart';
 import 'package:tzwad_mobile/features/auth/ui/reset_password/view/reset_password_view.dart';
 import 'package:tzwad_mobile/features/buyer/cart/ui/cart/view/cart_view.dart';
+import 'package:tzwad_mobile/features/buyer/cart/ui/checkout/view/checkout_view.dart';
 import 'package:tzwad_mobile/features/buyer/home/view/home_buyer_view.dart';
 import 'package:tzwad_mobile/features/buyer/supplier/ui/supplier_details/view/supplier_details_view.dart';
 import 'package:tzwad_mobile/features/buyer/supplier/ui/suppliers/view/suppliers_view.dart';
@@ -107,6 +108,10 @@ class RouterManager {
       AppRouter(
         route: AppRoutes.cartRoute,
         screen: const CartView(),
+      ),
+      AppRouter(
+        route: AppRoutes.checkoutRoute,
+        screen: const CheckoutView(),
       ),
       ShellRoute(
         builder: (context, state, child) => NavBarView(
